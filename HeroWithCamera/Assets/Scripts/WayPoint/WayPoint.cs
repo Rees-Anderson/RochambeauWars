@@ -9,10 +9,12 @@ public class WayPoint : MonoBehaviour
     private const int kHitLimit = 3;
     private const float kRepositionRange = 15f; // +- this value
     private Color mNormalColor = Color.white;
+    public GameObject waypointCam = null;
     
     // Start is called before the first frame update
     void Start()
     {
+        waypointCam.SetActive(false);
         mInitPosition = transform.position;
     }
 
@@ -34,11 +36,68 @@ public class WayPoint : MonoBehaviour
             mHitCount++;
             Color c = mNormalColor * (float)(kHitLimit - mHitCount + 1) / (float)(kHitLimit + 1);
             GetComponent<SpriteRenderer>().color = c;
+            
             if (mHitCount > kHitLimit)
             {
                 mHitCount = 0;
                 Reposition();
             }
+            else
+            {
+                //Focus camera on this waypoint
+                Vector3 pos = transform.position;
+                pos.z = -10;
+                waypointCam.transform.position = pos;
+
+                
+                if (mHitCount == 1)
+                {
+                    CallShake(1);
+                    
+                }
+                if (mHitCount == 2)
+                {
+                    CallShake(2);
+                    
+                }
+                if (mHitCount == 3)
+                {
+                    CallShake(3);
+                    
+                }
+                
+                //Turn Camera off
+
+            }
         }
+    }
+
+    public void CallShake(float duration)
+    {
+        StartCoroutine(Shake(duration));
+    }
+
+    public IEnumerator Shake(float duration)
+    {
+        waypointCam.SetActive(true);
+        Vector3 originalPos = transform.position;
+
+        float elapsed = 0.0f;
+
+        while (elapsed < duration)
+        {
+            float x = Random.Range((originalPos.x - 1f), (originalPos.x + 1f));
+            float y = Random.Range((originalPos.y - 1f), (originalPos.y + 1f));
+
+            transform.position = new Vector3(x, y, originalPos.z);
+            //originalPos = transform.position;
+
+            elapsed += Time.deltaTime;
+
+            yield return null;
+        }
+
+        transform.position = originalPos;
+        waypointCam.SetActive(false);
     }
 }

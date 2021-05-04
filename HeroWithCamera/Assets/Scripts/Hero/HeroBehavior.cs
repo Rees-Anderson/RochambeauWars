@@ -8,7 +8,8 @@ public class HeroBehavior : MonoBehaviour {
     private const float kHeroRotateSpeed = 90f/2f; // 90-degrees in 2 seconds
     private const float kHeroSpeed = 20f;  // 20-units in a second
     private float mHeroSpeed = kHeroSpeed;
-    
+    public GameObject heroCam = null;
+
     private bool mMouseDrive = true;
     //  Hero state
     private int mHeroTouchedEnemy = 0;
@@ -33,6 +34,14 @@ public class HeroBehavior : MonoBehaviour {
 	void Update () {
         UpdateMotion();
         ProcessEggSpwan();
+        MoveCamera();
+    }
+
+    public void MoveCamera()
+    {
+        Vector3 pos = transform.position;
+        pos.z = -10;
+        heroCam.transform.position = pos;
     }
 
     private int EggsOnScreen() { return mEggSystem.GetEggCount();  }
@@ -61,7 +70,7 @@ public class HeroBehavior : MonoBehaviour {
     {
         if (mEggSystem.CanSpawn())
         {
-            if (Input.GetKey("space"))
+            if (Input.GetKey("space") || Input.GetKey(KeyCode.Mouse0))
                 mEggSystem.SpawnAnEgg(transform.position, transform.up);
         }
     }
