@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 545972959}
   m_Layer: 0
   m_Name: WayPointA
-  m_TagString: Untagged
+  m_TagString: Waypoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -742,7 +742,7 @@ GameObject:
   - component: {fileID: 976188317}
   m_Layer: 0
   m_Name: WayPointE
-  m_TagString: Untagged
+  m_TagString: Waypoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -880,6 +880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22eef748736a7e0479c40ee221438bd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mPointsInSequence: 1
 --- !u!4 &1058981848
 Transform:
   m_ObjectHideFlags: 0
@@ -914,7 +915,7 @@ GameObject:
   - component: {fileID: 1076982044}
   m_Layer: 0
   m_Name: WayPointC
-  m_TagString: Untagged
+  m_TagString: Waypoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1120,7 +1121,7 @@ GameObject:
   - component: {fileID: 1146441508}
   m_Layer: 0
   m_Name: WayPointB
-  m_TagString: Untagged
+  m_TagString: Waypoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1283,7 +1284,7 @@ Camera:
   field of view: 60
   orthographic: 1
   orthographic size: 1
-  m_Depth: 0
+  m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1326,7 +1327,7 @@ GameObject:
   - component: {fileID: 1495363878}
   m_Layer: 0
   m_Name: WayPointD
-  m_TagString: Untagged
+  m_TagString: Waypoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1449,7 +1450,7 @@ GameObject:
   - component: {fileID: 1620649638}
   m_Layer: 0
   m_Name: WayPointF
-  m_TagString: Untagged
+  m_TagString: Waypoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1574,7 +1575,7 @@ GameObject:
   - component: {fileID: 1660550323}
   m_Layer: 0
   m_Name: Hero
-  m_TagString: Untagged
+  m_TagString: Hero
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
