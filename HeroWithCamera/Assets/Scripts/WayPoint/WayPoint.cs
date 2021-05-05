@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WayPoint : MonoBehaviour
 {
+    public Text waypointCamText = null;
+
     private Vector3 mInitPosition = Vector3.zero;
     private int mHitCount = 0;
     private const int kHitLimit = 3;
@@ -85,6 +88,7 @@ public class WayPoint : MonoBehaviour
         if (theManager.readyToShake)
         {
             waypointCam.SetActive(true);
+            waypointCamText.text = "Waypoint Cam: On";
             theManager.readyToShake = false;
         }
         Vector3 originalPos = transform.position;
@@ -107,6 +111,7 @@ public class WayPoint : MonoBehaviour
         transform.position = originalPos;
 
         waypointCam.SetActive(false);
+        waypointCamText.text = "Waypoint Cam: Off";
         theManager.readyToShake = true;
     }
 }

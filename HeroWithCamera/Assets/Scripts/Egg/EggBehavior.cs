@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EggBehavior : MonoBehaviour
 {
+    public HeroBehavior hero = null;
+
     // All instance of EggBehavior share this one EggSystem
     private static EggSpawnSystem sEggSystem = null;
     public static void InitializeEggSystem(EggSpawnSystem e) { sEggSystem = e; }
@@ -12,6 +14,7 @@ public class EggBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        hero = GameObject.FindObjectOfType<HeroBehavior>();
     }
 
     // Update is called once per frame
@@ -23,6 +26,7 @@ public class EggBehavior : MonoBehaviour
         bool outside = GameManager.sTheGlobalBehavior.CollideWorldBound(GetComponent<Renderer>().bounds) == CameraSupport.WorldBoundStatus.Outside;
         if (outside)
         {
+            hero.decrementEggsOnScreen();
             DestroyThisEgg("Self");
         }
     }
@@ -31,8 +35,11 @@ public class EggBehavior : MonoBehaviour
     {
         // Debug.Log("Egg OnTriggerEnter");
         // Collision with hero (especially when first spawned) does not count
-        if (collision.gameObject.name != "Hero") 
+        if (collision.gameObject.name != "Hero")
+        {
+            hero.decrementEggsOnScreen();
             DestroyThisEgg(collision.gameObject.name);
+        }
     }
 
     private void DestroyThisEgg(string name)

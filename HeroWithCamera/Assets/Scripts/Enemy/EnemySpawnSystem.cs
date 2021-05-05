@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class EnemySpawnSystem
 {
+    public GameManager theManager = GameObject.FindObjectOfType<GameManager>();
+
     private const int kMaxEnemy = 10;
 
-    private int mTotalEnemy = 0;
+    public int mTotalEnemy = 0;
     private GameObject mEnemyTemplate = null;
     private Vector2 mSpawnRegionMin, mSpawnRegionMax;
 
@@ -30,10 +32,25 @@ public class EnemySpawnSystem
             float y = Random.Range(mSpawnRegionMin.y, mSpawnRegionMax.y);
             p.transform.position = new Vector3(x, y, 0f);
             mTotalEnemy++;
+            theManager.updateEnemyCount(mTotalEnemy);
         }
     }
 
-    public void OneEnemyDestroyed() { mEnemyDestroyed++;  ReplaceOneEnemy(); }
-    public void ReplaceOneEnemy() { mTotalEnemy--; GenerateEnemy(); }
-    public string GetEnemyState() { return "  ENEMY: Count(" + mTotalEnemy + ") Destroyed(" + mEnemyDestroyed + ")"; }
+    public void OneEnemyDestroyed() 
+    { 
+        mEnemyDestroyed++;  
+        ReplaceOneEnemy(); 
+    }
+
+    public void ReplaceOneEnemy() 
+    { 
+        mTotalEnemy--;
+        theManager.updateEnemyCount(mTotalEnemy);
+        GenerateEnemy(); 
+    }
+
+    public string GetEnemyState() 
+    { 
+        return "  ENEMY: Count(" + mTotalEnemy + ") Destroyed(" + mEnemyDestroyed + ")"; 
+    }
 }

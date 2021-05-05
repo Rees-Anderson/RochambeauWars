@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public partial class EnemyBehavior : MonoBehaviour 
 {
@@ -376,6 +377,7 @@ public partial class EnemyBehavior : MonoBehaviour
         {
             //gc.numEnemies--;
             sEnemySystem.OneEnemyDestroyed(); //Pisan
+            hero.incrementTimesHit();
             Destroy(gameObject);
         }
         if (collision.tag == "Egg")
@@ -404,6 +406,7 @@ public partial class EnemyBehavior : MonoBehaviour
             {
                 //gc.numEnemies--;
                 sEnemySystem.OneEnemyDestroyed(); //Pisan
+                hero.incrementEnemiesDestroyed();
                 Destroy(gameObject);
             }
 

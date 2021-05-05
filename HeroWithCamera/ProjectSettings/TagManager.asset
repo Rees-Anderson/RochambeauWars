@@ -9,6 +9,7 @@ TagManager:
   - Egg
   - Useless
   - ChaseCam
+  - EnemiesText
   layers:
   - Default
   - TransparentFX

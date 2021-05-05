@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WayPointSystem : MonoBehaviour
 {
+    public GameManager theManager = null;
+
     private string[] kWayPointNames = {
             "WayPointA", "WayPointB", "WayPointC",
             "WayPointD", "WayPointE", "WayPointF"};
@@ -11,10 +13,13 @@ public class WayPointSystem : MonoBehaviour
     private const int kNumWayPoints = 6;
     private const float kWayPointTouchDistance = 25f;
     public bool mPointsInSequence = true;
+    public bool mWaypointsVisible = true;
 
     // Start is called before the first frame update
     void Awake()
     {
+        theManager = GameObject.FindObjectOfType<GameManager>();
+
         mWayPoints = new GameObject[kWayPointNames.Length];
         int i = 0;
         foreach (string s in kWayPointNames)
@@ -30,16 +35,19 @@ public class WayPointSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             ToggleVisibility();
+            theManager.updateWaypointVisText(mWaypointsVisible);
         }
 
         if (Input.GetKeyDown(KeyCode.J))
         {
             ToggleSequenceOrder();
+            theManager.updateWaypointOrderText(mPointsInSequence);
         }
     }
 
     private void ToggleVisibility()
     {
+        mWaypointsVisible = !mWaypointsVisible;
         foreach (GameObject g in mWayPoints)
             g.SetActive(!g.activeSelf);
     }

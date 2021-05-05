@@ -5,11 +5,45 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour 
 {
+    public Text waypointHiddenText = null;
+    public Text waypointSettingText = null;
+    public Text enemyCountText = null;
+
+
     public bool readyToShake = true;
     public bool readyToChase = true;
     public Camera chaseCam = null;
     public HeroBehavior hero = null;
     EnemyBehavior[] allEnemies;
+
+    public void updateEnemyCount(int count)
+    {
+        enemyCountText.text = "Enemies on Screen: " + count;
+    }
+
+    public void updateWaypointVisText(bool visible)
+    {
+        if (visible)
+        {
+            waypointHiddenText.text = "Waypoints: Visible";
+        }
+        else
+        {
+            waypointHiddenText.text = "Waypoints: Hidden";
+        }
+    }
+
+    public void updateWaypointOrderText(bool ordered)
+    {
+        if (ordered)
+        {
+            waypointSettingText.text = "Waypoints: Ordered";
+        }
+        else
+        {
+            waypointSettingText.text = "Waypoints: Random";
+        }
+    }
 
     public void setChaseCamSize()
     {
