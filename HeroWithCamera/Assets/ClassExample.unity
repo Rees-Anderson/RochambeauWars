@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 358654686}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -269,6 +269,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5087ea1a22a06b249bb22cf7a68d05c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  readyToShake: 1
+  readyToChase: 1
+  chaseCam: {fileID: 691113825}
+  hero: {fileID: 1660550320}
   mGameStateEcho: {fileID: 381550214}
   mHero: {fileID: 1660550320}
   mWayPoints: {fileID: 1058981847}
@@ -502,6 +506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypointCam: {fileID: 1864635092}
+  theManager: {fileID: 358654686}
 --- !u!212 &545972958
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -592,7 +597,7 @@ GameObject:
   - component: {fileID: 691113824}
   m_Layer: 0
   m_Name: ChaseCamera
-  m_TagString: Untagged
+  m_TagString: ChaseCam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -786,6 +791,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypointCam: {fileID: 1864635092}
+  theManager: {fileID: 358654686}
 --- !u!212 &976188319
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -880,6 +886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22eef748736a7e0479c40ee221438bd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mWayPoints: []
   mPointsInSequence: 1
 --- !u!4 &1058981848
 Transform:
@@ -959,6 +966,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypointCam: {fileID: 1864635092}
+  theManager: {fileID: 358654686}
 --- !u!212 &1076982046
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1165,6 +1173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypointCam: {fileID: 1864635092}
+  theManager: {fileID: 358654686}
 --- !u!212 &1146441510
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1371,6 +1380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypointCam: {fileID: 1864635092}
+  theManager: {fileID: 358654686}
 --- !u!212 &1495363880
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1494,6 +1504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypointCam: {fileID: 1864635092}
+  theManager: {fileID: 358654686}
 --- !u!212 &1620649640
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1657,6 +1668,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c1172f88695e8c4d8bab3c268767293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chaseCam: {fileID: 691113823}
+  theManager: {fileID: 358654686}
+  beingChased: 0
   mEggSystem: {fileID: 1660550323}
   heroCam: {fileID: 1101989492}
 --- !u!61 &1660550321

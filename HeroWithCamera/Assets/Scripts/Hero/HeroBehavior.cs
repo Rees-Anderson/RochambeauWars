@@ -2,8 +2,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class HeroBehavior : MonoBehaviour {
-    
+public class HeroBehavior : MonoBehaviour 
+{
+    public GameObject chaseCam = null;
+    public GameManager theManager = null;
+    public bool beingChased = false;
+
     public EggSpawnSystem mEggSystem = null;
     private const float kHeroRotateSpeed = 90f/2f; // 90-degrees in 2 seconds
     private const float kHeroSpeed = 20f;  // 20-units in a second
@@ -27,14 +31,31 @@ public class HeroBehavior : MonoBehaviour {
     }
 
     void Start ()
-    { 
+    {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+    {
         UpdateMotion();
         ProcessEggSpwan();
         MoveCamera();
+
+        
+        if (beingChased)
+        {
+            chaseCam.SetActive(true);
+            //theManager.readyToChase = false;
+            theManager.setChaseCamSize();
+        }
+
+        if (!beingChased)
+        {
+            theManager.resetChaseCam();
+            chaseCam.SetActive(false);
+            //theManager.readyToChase = true;
+        }
+        
     }
 
     public void MoveCamera()
@@ -79,6 +100,11 @@ public class HeroBehavior : MonoBehaviour {
     {
         Debug.Log("Hero touched");
         if (collision.gameObject.name == "Enemy(Clone)")
+        {
             TouchedEnemy();
+
+            theManager.readyToChase = false;
+            //chaseCam.SetActive(true);
+        }
     }
 }

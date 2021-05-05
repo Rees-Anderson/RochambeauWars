@@ -8,6 +8,7 @@ TagManager:
   - Waypoint
   - Egg
   - Useless
+  - ChaseCam
   layers:
   - Default
   - TransparentFX

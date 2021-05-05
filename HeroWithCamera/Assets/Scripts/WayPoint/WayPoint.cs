@@ -10,6 +10,7 @@ public class WayPoint : MonoBehaviour
     private const float kRepositionRange = 15f; // +- this value
     private Color mNormalColor = Color.white;
     public GameObject waypointCam = null;
+    public GameManager theManager = null;
     
     // Start is called before the first frame update
     void Start()
@@ -44,25 +45,27 @@ public class WayPoint : MonoBehaviour
             }
             else
             {
-                //Focus camera on this waypoint
-                Vector3 pos = transform.position;
-                pos.z = -10;
-                waypointCam.transform.position = pos;
-
+                if (theManager.readyToShake)
+                {
+                    //Focus camera on this waypoint
+                    Vector3 pos = transform.position;
+                    pos.z = -10;
+                    waypointCam.transform.position = pos;
+                }
                 
                 if (mHitCount == 1)
                 {
-                    CallShake(1);
+                    CallShake(1, 1);
                     
                 }
                 if (mHitCount == 2)
                 {
-                    CallShake(2);
+                    CallShake(2, 2);
                     
                 }
                 if (mHitCount == 3)
                 {
-                    CallShake(3);
+                    CallShake(3, 3);
                     
                 }
                 
@@ -72,22 +75,26 @@ public class WayPoint : MonoBehaviour
         }
     }
 
-    public void CallShake(float duration)
+    public void CallShake(float duration, float magnitude)
     {
-        StartCoroutine(Shake(duration));
+        StartCoroutine(Shake(duration, magnitude));
     }
 
-    public IEnumerator Shake(float duration)
+    public IEnumerator Shake(float duration, float magnitude)
     {
-        waypointCam.SetActive(true);
+        if (theManager.readyToShake)
+        {
+            waypointCam.SetActive(true);
+            theManager.readyToShake = false;
+        }
         Vector3 originalPos = transform.position;
 
         float elapsed = 0.0f;
 
         while (elapsed < duration)
         {
-            float x = Random.Range((originalPos.x - 1f), (originalPos.x + 1f));
-            float y = Random.Range((originalPos.y - 1f), (originalPos.y + 1f));
+            float x = Random.Range((originalPos.x - (1f * magnitude)), (originalPos.x + (1f * magnitude)));
+            float y = Random.Range((originalPos.y - (1f * magnitude)), (originalPos.y + (1f * magnitude)));
 
             transform.position = new Vector3(x, y, originalPos.z);
             //originalPos = transform.position;
@@ -98,6 +105,8 @@ public class WayPoint : MonoBehaviour
         }
 
         transform.position = originalPos;
+
         waypointCam.SetActive(false);
+        theManager.readyToShake = true;
     }
 }

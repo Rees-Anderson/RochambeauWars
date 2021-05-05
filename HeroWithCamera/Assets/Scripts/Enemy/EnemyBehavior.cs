@@ -1,7 +1,13 @@
 using UnityEngine;
 using System.Collections;
 
-public partial class EnemyBehavior : MonoBehaviour {
+public partial class EnemyBehavior : MonoBehaviour 
+{
+    public GameObject chaseCam = null;
+    public GameManager theManager = null;
+    private HeroBehavior hero = null;
+    public bool theOneTrueEnemy = false; //Part of the system for focusing the chase camera (only one enemy can be the focus)
+
     //ANTOINETTE'S VARIABLES
     //GameController gc;
     GameObject[] waypoints;
@@ -18,6 +24,7 @@ public partial class EnemyBehavior : MonoBehaviour {
     int index = 0;
     public SpriteRenderer SpriteRenderer;
     public Sprite eggSprite;
+    public Sprite stunnedSprite; //ADDED
     float rotationSpeed = 90f / 60f;
     int sizeFrames = 60;
     float scaleRate = 2f / 60f;
@@ -28,9 +35,9 @@ public partial class EnemyBehavior : MonoBehaviour {
     bool isEgg = false;
     bool aggro = false;
     bool touched = false;
-    private EnemyState state = EnemyState.defaultState;
+    public EnemyState state = EnemyState.defaultState;
     // Start is called before the first frame update
-    private enum EnemyState
+    public enum EnemyState
     {
         defaultState,
         ccwState,
@@ -61,6 +68,15 @@ public partial class EnemyBehavior : MonoBehaviour {
 
         //ANTOINETTE
         waypoints = sWayPoints.mWayPoints;
+
+        //REES 
+        hero = GameObject.FindObjectOfType<HeroBehavior>();
+        theManager = GameObject.FindObjectOfType<GameManager>();
+        chaseCam = GameObject.FindWithTag("ChaseCam");
+        /*
+        theManager = GameObject.FindObjectOfType<GameManager>();
+        chaseCam.SetActive(false);
+        */
     }
 	
 	// Update is called once per frame
@@ -72,9 +88,22 @@ public partial class EnemyBehavior : MonoBehaviour {
         */
 
         //ANTOINETTE 
-        heroPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        heroPos = hero.transform.position;
         UpdateFSM();
-        
+
+        //REES
+        /*
+        if (hero.beingChased && !theManager.readyToChase)
+        {
+            theManager.setChaseCamSize(transform.position);
+        }
+
+        /*
+        if (theManager.readyToChase == false && state == EnemyState.chaseState) //I believe this should only be true for the 1st chasing enemy
+        {
+            theManager.setChaseCamSize(transform.position);
+        }
+        */
     }
 
     private void PointAtPosition(Vector3 p, float r)
@@ -159,10 +188,12 @@ public partial class EnemyBehavior : MonoBehaviour {
     private void Patrol()
     {
         currentPos = transform.position;
+        /*
         if (Vector3.Distance(transform.position, heroPos) <= 40f)
         {
             state = EnemyState.chaseState;
         }
+        */
 
         if (sWayPoints.mPointsInSequence)
         {
@@ -238,7 +269,7 @@ public partial class EnemyBehavior : MonoBehaviour {
             frameTick++;
             //begin rotation
             Vector3 angle = transform.rotation.eulerAngles;
-            angle.z -= rotationSpeed;
+            angle.z += rotationSpeed;
             transform.rotation = Quaternion.Euler(0, 0, angle.z);
         }
     }
@@ -258,12 +289,18 @@ public partial class EnemyBehavior : MonoBehaviour {
             frameTick++;
             //begin rotation
             Vector3 angle = transform.rotation.eulerAngles;
-            angle.z += rotationSpeed;
+            angle.z -= rotationSpeed;
             transform.rotation = Quaternion.Euler(0, 0, angle.z);
         }
+        state = EnemyState.chaseState; // ADDED
     }
     private void ChaseState()
     {
+        if (!theManager.isThereATrueEnemy())
+        {
+            //Mark as one true enemy
+            theManager.setTrueEnemy(this.GetInstanceID());
+        }
         aggro = true;
         transform.position = Vector3.MoveTowards(transform.position,
         heroPos, speed * Time.deltaTime);
@@ -271,7 +308,12 @@ public partial class EnemyBehavior : MonoBehaviour {
         if (Vector3.Distance(transform.position, heroPos) > 40f)
         {
             aggro = false;
-            state = EnemyState.defaultState;
+            touched = false;
+            if (theManager.getOneTrueEnemy().GetInstanceID() == this.GetInstanceID())
+            {
+                theManager.clearTrueEnemy();
+            }
+            state = EnemyState.growState;
         }
     }
     private void GrowState()
@@ -301,8 +343,17 @@ public partial class EnemyBehavior : MonoBehaviour {
     }
     private void StunnedState()
     {
-        SpriteRenderer.color = Color.Lerp(SpriteRenderer.color, Color.magenta, 1f);
+        
+
+        //SpriteRenderer.color = Color.Lerp(SpriteRenderer.color, Color.magenta, 1f);
+        SpriteRenderer.color = Color.Lerp(SpriteRenderer.color, Color.white, 1f);
         Spin();
+        SpriteRenderer.sprite = stunnedSprite;
+
+        if (theManager.getOneTrueEnemy().GetInstanceID() == this.GetInstanceID())
+        {
+            theManager.clearTrueEnemy();
+        }
     }
     private void UselessState()
     {
