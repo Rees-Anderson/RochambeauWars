@@ -14,6 +14,22 @@ public class CentralGameLogic : MonoBehaviour
     public string state;
     public string currentPlayer = "Blue";
 
+    public RiverScript[] riverTiles;
+    public GrassScript[] grassTiles;
+    public ForestScript[] forestTiles;
+    public SmallMountainScript[] smallMountainTiles;
+    public LargeMountainScript[] largeMountainTiles;
+    public CityScript[] cityTiles;
+    public HeadQuartersScript[] headQuartersTiles;
+
+    public TankScript[] blueTanks;
+    public InfantryScript[] blueInfantry;
+    public AntiTankScript[] blueAntiTanks;
+
+    public TankScript[] redTanks;
+    public InfantryScript[] redInfantry;
+    public AntiTankScript[] redAntiTanks;
+
     // Start is called before the first frame update
     void Start()
     {

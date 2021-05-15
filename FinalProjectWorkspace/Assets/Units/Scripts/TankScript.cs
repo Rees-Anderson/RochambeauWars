@@ -251,7 +251,7 @@ public class TankScript : MonoBehaviour
             fuelLevel--;
         }
 
-        //If the current terrain tile is a city, replenish 2 health, all ammo, all fuel
+        //If the current terrain tile is a city, replenish 2 health, all ammo, all fuel + show suppling UI for a second
         
     }
 
