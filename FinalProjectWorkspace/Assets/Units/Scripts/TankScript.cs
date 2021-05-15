@@ -12,10 +12,9 @@ public class TankScript : MonoBehaviour
 {
     public const int maxFuelLevel = 25;
     public const int maxAmmoCount = 10;
-    public const int maxMovementPoints = 12;
+    public const int maxMovementPoints = 9;
     public const int maxHealth = 10;
-    public const int minAttackRoll = 1; //Min damage before taking into account type match-up and terrain defense modifiers
-    public const int maxAttackRoll = 5; //Max damage before taking into account type match-up and terrain defense modifiers
+    public const int attackRoll = 5; //Damage dealt before taking into account type match-up and terrain defense modifiers
     public const int team = 1;
 
     //Fuel warnings, Ammo warnings, Health visualization are likely going to need variables and connected objects -- add those here
@@ -62,6 +61,24 @@ public class TankScript : MonoBehaviour
         }
 
         //Constantly reposition fuel, ammo, and health indicators to follow the unit's position - check out making them children of the unit (not sure if this can be done with a prefab)
+        
+        if (!active)
+        {
+            //Be grey
+        }
+        else
+        {
+            //Be team color
+        }
+
+        if (selected)
+        {
+            //Play Movement Animation
+        }
+        else
+        {
+            //Play Idle Animation
+        }
 
         if (selected && Input.GetKeyDown(KeyCode.W)) //Add controller support later
         {
@@ -223,7 +240,7 @@ public class TankScript : MonoBehaviour
         //Set unit inactive
         active = false;
 
-        //Dim Unit slightly
+        //Turn Unit Grey
 
         //Replenish MovementPoints
         movementPoints = maxMovementPoints;

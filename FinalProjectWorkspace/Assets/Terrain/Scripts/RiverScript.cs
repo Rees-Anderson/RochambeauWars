@@ -10,12 +10,12 @@ using UnityEngine;
 
 public class RiverScript : MonoBehaviour
 {
-    public const int movementCost = 1000;
+    public const int movementCost = 3;
     public const int defenseModifier = 0;
-    public const bool passable = false; //Other values have been set to extremes as no unit should be on this tile
+    public const bool passableByTank = false;
     public const bool capturable = false;
 
-    public bool occupied = true;
+    public bool occupied = false;
 
     // Start is called before the first frame update
     void Start()

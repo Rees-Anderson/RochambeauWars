@@ -12,7 +12,7 @@ public class ForestScript : MonoBehaviour
 {
     public const int movementCost = 3;
     public const int defenseModifier = 2;
-    public const bool passable = true;
+    public const bool passableByTank = true;
     public const bool capturable = false;
 
     public bool occupied = false;

@@ -4,15 +4,15 @@ using UnityEngine;
 
 /*
  * Author: Rees Anderson
- * 5.9.21
+ * 5.14.21
  * Game Design Project
  */
 
 public class GrassScript : MonoBehaviour
 {
-    public const int movementCost = 2;
+    public const int movementCost = 1;
     public const int defenseModifier = 1;
-    public const bool passable = true;
+    public const bool passableByTank = true;
     public const bool capturable = false;
 
     public bool occupied = false;
