@@ -6,7 +6,13 @@ public class TurnUIScript : MonoBehaviour
 {
     public CentralGameLogic centralGameLogic;
     public SpriteRenderer spriteRenderer;
-    public Sprite[] sprites;
+
+    public Sprite[] blueOrRedFrame;
+    public Sprite[] integers;
+
+    public SpriteRenderer hundredsPlaceSprite;
+    public SpriteRenderer tensPlaceSprite;
+    public SpriteRenderer onesPlaceSprite;
 
     private float r;
     private float g;
@@ -35,7 +41,20 @@ public class TurnUIScript : MonoBehaviour
             transform.position = leftSidePosition;
         }
 
-        spriteRenderer.sprite = sprites[centralGameLogic.day - 1];
+        if (centralGameLogic.currentPlayer == "Blue")
+        {
+            spriteRenderer.sprite = blueOrRedFrame[0];
+        }
+        else
+        {
+            spriteRenderer.sprite = blueOrRedFrame[1];
+        }
+
+        hundredsPlaceSprite.sprite = integers[centralGameLogic.day / 100];
+        tensPlaceSprite.sprite = integers[(centralGameLogic.day % 100) / 10];
+        onesPlaceSprite.sprite = integers[((centralGameLogic.day % 100) % 10)];
+
+        //spriteRenderer.sprite = sprites[centralGameLogic.day - 1];
     }
 
     public void dissappear()
