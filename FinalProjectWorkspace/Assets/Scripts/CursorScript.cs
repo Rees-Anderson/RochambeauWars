@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Author: Rees Anderson
+ * 5.15.21
+ * Game Design Project
+ */
+
 public class CursorScript : MonoBehaviour
 {
     // Start is called before the first frame update

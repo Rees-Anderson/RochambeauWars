@@ -15,6 +15,10 @@ public class CentralGameLogic : MonoBehaviour
     public string currentPlayer = "Blue";
     public int day = 1;
 
+    public TerrainUIScript terrainUI;
+    public TurnUIScript turnUI;
+    public UnitUIScript unitUI;
+
     public GameObject[] defaultUIElements;
     public GameObject[] selectedUnoccupiedUIElements;
     public GameObject[] onlyWaitUIElements;

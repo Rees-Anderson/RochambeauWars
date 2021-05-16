@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Author: Rees Anderson
+ * 5.15.21
+ * Game Design Project
+ */
+
 public class TurnUIScript : MonoBehaviour
 {
     public CentralGameLogic centralGameLogic;
@@ -9,6 +15,10 @@ public class TurnUIScript : MonoBehaviour
 
     public Sprite[] blueOrRedFrame;
     public Sprite[] integers;
+
+    public Turn1sPlace onesPlace;
+    public Turn10sPlace tensPlace;
+    public Turn100sPlace hundredsPlace;
 
     public SpriteRenderer hundredsPlaceSprite;
     public SpriteRenderer tensPlaceSprite;
@@ -60,10 +70,16 @@ public class TurnUIScript : MonoBehaviour
     public void dissappear()
     {
         GetComponent<Renderer>().material.color = new Color(r, g, b, 0);
+        onesPlace.dissappear();
+        tensPlace.dissappear();
+        hundredsPlace.dissappear();
     }
 
     public void reappear()
     {
         GetComponent<Renderer>().material.color = new Color(r, g, b, defaultAlpha);
+        onesPlace.reappear();
+        tensPlace.reappear();
+        hundredsPlace.reappear();
     }
 }

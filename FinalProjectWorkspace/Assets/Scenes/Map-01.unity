@@ -730,6 +730,7 @@ GameObject:
   m_Component:
   - component: {fileID: 94915816}
   - component: {fileID: 94915817}
+  - component: {fileID: 94915818}
   m_Layer: 0
   m_Name: Turn0nesPlace
   m_TagString: Untagged
@@ -802,6 +803,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &94915818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94915815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfdcbaea2d5bbe1408523fc03ffaa507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &105103625
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1844,6 +1857,7 @@ GameObject:
   m_Component:
   - component: {fileID: 203688426}
   - component: {fileID: 203688427}
+  - component: {fileID: 203688428}
   m_Layer: 0
   m_Name: TurnTensPlace
   m_TagString: Untagged
@@ -1916,6 +1930,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &203688428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203688425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaa7eab42dbd76c4fbae4c1fbef00fe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &210091731 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4059861742366780687, guid: 7877897fe989aeb4c88a6e10106fe8b3, type: 3}
@@ -3402,6 +3428,7 @@ GameObject:
   m_Component:
   - component: {fileID: 344336678}
   - component: {fileID: 344336677}
+  - component: {fileID: 344336679}
   m_Layer: 0
   m_Name: TerrainUI
   m_TagString: Untagged
@@ -3478,6 +3505,44 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &344336679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344336676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5814b261eb59c347bdebd770c06030b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  centralGameLogic: {fileID: 1246326038}
+  defenseSprites:
+  - {fileID: 21300000, guid: 8fdc8ca64452e40498f2cf9e76f30cb3, type: 3}
+  - {fileID: 21300000, guid: 3293f9198466c384cbca3ea5ea647ccd, type: 3}
+  - {fileID: 21300000, guid: 05faa1e3228b8a849b477923811d9f49, type: 3}
+  - {fileID: 21300000, guid: 6c233c2febe52c4428c27011db97bcce, type: 3}
+  - {fileID: 21300000, guid: 03e50a93f0796ad408205bb9a7dff2e7, type: 3}
+  - {fileID: 21300000, guid: f5eeecf9751896d43a994baeae006b82, type: 3}
+  movementSprites:
+  - {fileID: 21300000, guid: a3a34d624366f8d4d9fceb53463585da, type: 3}
+  - {fileID: 21300000, guid: 2efcf09530cc9c148801f331030b7790, type: 3}
+  - {fileID: 21300000, guid: e43abdfff1cb44b42b2b674871ee6929, type: 3}
+  - {fileID: 21300000, guid: 8475c92a4dfeb4749b1059d2651bcbd3, type: 3}
+  - {fileID: 21300000, guid: 1fcdfd696b040364aa7aec3480f93cb4, type: 3}
+  terrainTypeSprites:
+  - {fileID: 21300000, guid: 9053063581088c84cb1c94daa50cc9ba, type: 3}
+  - {fileID: 21300000, guid: dfc1b341ae5af404d8c61d389a60ebad, type: 3}
+  - {fileID: 21300000, guid: 2152564fe0b6e8d478fbb9b8628c4edc, type: 3}
+  - {fileID: 21300000, guid: d6cab453948a9c74a9142ae2ad9f0819, type: 3}
+  - {fileID: 21300000, guid: 7567bbc11253f1b41ab4f2ff8d99692b, type: 3}
+  - {fileID: 21300000, guid: 260cb1ac3918f3940bee1172f46d0d84, type: 3}
+  - {fileID: 21300000, guid: 9153dde4a15984544907710827d68ec8, type: 3}
+  terrainTypeVisualSprites: []
+  terrainSprite: {fileID: 1691380894}
+  DefenseValue: {fileID: 1882344042}
+  MovementCost: {fileID: 1260985471}
 --- !u!1001 &356471061
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10945,6 +11010,9 @@ MonoBehaviour:
   state: 
   currentPlayer: Blue
   day: 1
+  terrainUI: {fileID: 344336679}
+  turnUI: {fileID: 1427484172}
+  unitUI: {fileID: 1467080189}
   defaultUIElements: []
   selectedUnoccupiedUIElements: []
   onlyWaitUIElements: []
@@ -12417,6 +12485,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 92de6af702c478941856fc66069dd1d3, type: 3}
   - {fileID: 21300000, guid: 8c0e8448e11827a42a87d52df9fa9ab6, type: 3}
   - {fileID: 21300000, guid: 41c185d6a4ee3c249a211d8d46ce7ad8, type: 3}
+  onesPlace: {fileID: 94915818}
+  tensPlace: {fileID: 203688428}
+  hundredsPlace: {fileID: 1893832643}
   hundredsPlaceSprite: {fileID: 1893832642}
   tensPlaceSprite: {fileID: 203688427}
   onesPlaceSprite: {fileID: 94915817}
@@ -12673,6 +12744,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1467080188}
   - component: {fileID: 1467080187}
+  - component: {fileID: 1467080189}
   m_Layer: 0
   m_Name: UnitUI
   m_TagString: Untagged
@@ -12759,6 +12831,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1467080189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467080186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61b39840871e9b645b16863a7a075576, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  centralGameLogic: {fileID: 1246326038}
 --- !u!1 &1477719040
 GameObject:
   m_ObjectHideFlags: 0
@@ -15929,6 +16014,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1893832641}
   - component: {fileID: 1893832642}
+  - component: {fileID: 1893832643}
   m_Layer: 0
   m_Name: TurnHundredsPlace
   m_TagString: Untagged
@@ -16001,6 +16087,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1893832643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893832640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca07efd84746a7e46b4395c8cc2efd88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1898432256
 PrefabInstance:
   m_ObjectHideFlags: 0
