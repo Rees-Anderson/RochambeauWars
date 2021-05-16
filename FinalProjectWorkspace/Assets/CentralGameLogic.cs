@@ -4,15 +4,21 @@ using UnityEngine;
 
 /*
  * Author: Rees Anderson
- * 5.14.21
+ * 5.15.21
  * Game Design Project
  */
 
 public class CentralGameLogic : MonoBehaviour
 {
-    public GameObject cursor;
+    public CursorScript cursor;
     public string state;
     public string currentPlayer = "Blue";
+    public int day = 1;
+
+    public GameObject[] defaultUIElements;
+    public GameObject[] selectedUnoccupiedUIElements;
+    public GameObject[] onlyWaitUIElements;
+    public GameObject[] attackOrWaitUIElements;
 
     public RiverScript[] riverTiles;
     public GrassScript[] grassTiles;
@@ -48,11 +54,30 @@ public class CentralGameLogic : MonoBehaviour
             //Show what day it is and whose turn in the top right
 
             //Can move cursor around with WASD (Control Stick on controller)
+            if (Input.GetKeyDown(KeyCode.W)) //Add controller support later
+            {
+                cursor.moveUp();
+            }
+
+            if (Input.GetKeyDown(KeyCode.A)) //Add controller support later
+            {
+                cursor.moveLeft();
+            }
+
+            if (Input.GetKeyDown(KeyCode.S)) //Add controller support later
+            {
+                cursor.moveDown();
+            }
+
+            if (Input.GetKeyDown(KeyCode.D)) //Add controller support later
+            {
+                cursor.moveRight();
+            }
 
             //Hitting E (A on controller)
-                //On unoccupied tile sends controller into selectedUnoccupied state
-                //On occupied tile with unit of same color sends controller into selectedUnit state
-                //On occupied tile with unit of different color plays an error sound
+            //On unoccupied tile sends controller into selectedUnoccupied state
+            //On occupied tile with unit of same color sends controller into selectedUnit state
+            //On occupied tile with unit of different color plays an error sound
 
             //Hitting F does nothing
 
