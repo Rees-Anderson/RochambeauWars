@@ -12,10 +12,10 @@ public class CityScript : MonoBehaviour
 {
     public CentralGameLogic centralGameLogic;
 
-    public const int movementCost = 1;
-    public const int defenseModifier = 4;
-    public const bool passableByTank = true;
-    public const bool capturable = true;
+    public int movementCost = 1;
+    public int defenseModifier = 4;
+    public bool passableByTank = true;
+    public bool capturable = true;
 
     public bool occupied = false;
 

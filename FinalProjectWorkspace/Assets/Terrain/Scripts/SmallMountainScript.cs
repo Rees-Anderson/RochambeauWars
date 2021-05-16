@@ -12,10 +12,10 @@ public class SmallMountainScript : MonoBehaviour
 {
     public CentralGameLogic centralGameLogic;
 
-    public const int movementCost = 4;
-    public const int defenseModifier = 3;
-    public const bool passableByTank = true;
-    public const bool capturable = false;
+    public int movementCost = 4;
+    public int defenseModifier = 3;
+    public bool passableByTank = true;
+    public bool capturable = false;
 
     public bool occupied = false;
 

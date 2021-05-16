@@ -17,9 +17,15 @@ public class TerrainUIScript : MonoBehaviour
     public Sprite[] terrainTypeSprites;
     public Sprite[] terrainTypeVisualSprites;
 
+    public SpriteRenderer terrainText;
     public SpriteRenderer terrainSprite;
     public SpriteRenderer DefenseValue;
     public SpriteRenderer MovementCost;
+
+    public GenericDisappearReappearScript text;
+    public GenericDisappearReappearScript visual;
+    public GenericDisappearReappearScript defense;
+    public GenericDisappearReappearScript movement;
 
     private float r;
     private float g;
@@ -48,17 +54,115 @@ public class TerrainUIScript : MonoBehaviour
         {
             transform.position = leftSidePosition;
         }
+
+        updateTerrainImageAndText();
     }
 
     public void dissappear()
     {
         GetComponent<Renderer>().material.color = new Color(r, g, b, 0);
+        text.dissappear();
+        visual.dissappear();
+        defense.dissappear();
+        movement.dissappear();
     }
 
     public void reappear()
     {
         GetComponent<Renderer>().material.color = new Color(r, g, b, defaultAlpha);
+        text.reappear();
+        visual.reappear();
+        defense.reappear();
+        movement.reappear();
     }
 
+    public void updateTerrainImageAndText()
+    {
+        if (centralGameLogic.currentRiverTile != null)
+        {
+            terrainText.sprite = terrainTypeSprites[0];
+            terrainSprite.sprite = terrainTypeVisualSprites[0];
+            DefenseValue.sprite = defenseSprites[centralGameLogic.currentRiverTile.defenseModifier];
+            MovementCost.sprite = movementSprites[centralGameLogic.currentRiverTile.movementCost - 1];
 
+        } else if (centralGameLogic.currentGrassTile != null)
+        {
+            if (centralGameLogic.currentGrassTile.tag == "Bridge")
+            {
+                terrainText.sprite = terrainTypeSprites[8];
+                terrainSprite.sprite = terrainTypeVisualSprites[9];
+                DefenseValue.sprite = defenseSprites[centralGameLogic.currentGrassTile.defenseModifier];
+                MovementCost.sprite = movementSprites[centralGameLogic.currentGrassTile.movementCost - 1];
+            }
+            else
+            {
+                terrainText.sprite = terrainTypeSprites[1];
+                terrainSprite.sprite = terrainTypeVisualSprites[1];
+                DefenseValue.sprite = defenseSprites[centralGameLogic.currentGrassTile.defenseModifier];
+                MovementCost.sprite = movementSprites[centralGameLogic.currentGrassTile.movementCost - 1];
+            }
+
+        } else if (centralGameLogic.currentForestTile != null)
+        {
+            terrainText.sprite = terrainTypeSprites[2];
+            terrainSprite.sprite = terrainTypeVisualSprites[2];
+            DefenseValue.sprite = defenseSprites[centralGameLogic.currentForestTile.defenseModifier];
+            MovementCost.sprite = movementSprites[centralGameLogic.currentForestTile.movementCost - 1];
+
+        } else if (centralGameLogic.currentSmallMountainTile != null)
+        {
+            terrainText.sprite = terrainTypeSprites[3];
+            terrainSprite.sprite = terrainTypeVisualSprites[3];
+            DefenseValue.sprite = defenseSprites[centralGameLogic.currentSmallMountainTile.defenseModifier];
+            MovementCost.sprite = movementSprites[centralGameLogic.currentSmallMountainTile.movementCost - 1];
+
+        } else if (centralGameLogic.currentLargeMountainTile != null)
+        {
+            terrainText.sprite = terrainTypeSprites[4];
+            terrainSprite.sprite = terrainTypeVisualSprites[4];
+            DefenseValue.sprite = defenseSprites[centralGameLogic.currentLargeMountainTile.defenseModifier];
+            MovementCost.sprite = movementSprites[centralGameLogic.currentLargeMountainTile.movementCost - 1];
+
+        } else if (centralGameLogic.currentCityTile != null)
+        {
+            if (centralGameLogic.currentCityTile.tag == "Red")
+            {
+                terrainText.sprite = terrainTypeSprites[5];
+                terrainSprite.sprite = terrainTypeVisualSprites[5];
+                DefenseValue.sprite = defenseSprites[centralGameLogic.currentCityTile.defenseModifier];
+                MovementCost.sprite = movementSprites[centralGameLogic.currentCityTile.movementCost - 1];
+            }
+            else
+            {
+                terrainText.sprite = terrainTypeSprites[5];
+                terrainSprite.sprite = terrainTypeVisualSprites[6];
+                DefenseValue.sprite = defenseSprites[centralGameLogic.currentCityTile.defenseModifier];
+                MovementCost.sprite = movementSprites[centralGameLogic.currentCityTile.movementCost - 1];
+            }
+
+        } else if (centralGameLogic.currentHeadQuartersTile != null)
+        {
+            if (centralGameLogic.currentHeadQuartersTile.tag == "Red")
+            {
+                terrainText.sprite = terrainTypeSprites[6];
+                terrainSprite.sprite = terrainTypeVisualSprites[7];
+                DefenseValue.sprite = defenseSprites[centralGameLogic.currentHeadQuartersTile.defenseModifier];
+                MovementCost.sprite = movementSprites[centralGameLogic.currentHeadQuartersTile.movementCost - 1];
+            }
+            else
+            {
+                terrainText.sprite = terrainTypeSprites[6];
+                terrainSprite.sprite = terrainTypeVisualSprites[8];
+                DefenseValue.sprite = defenseSprites[centralGameLogic.currentHeadQuartersTile.defenseModifier];
+                MovementCost.sprite = movementSprites[centralGameLogic.currentHeadQuartersTile.movementCost - 1];
+            }
+
+        } else
+        {
+            terrainText.sprite = terrainTypeSprites[7];
+            terrainSprite.sprite = terrainTypeVisualSprites[10];
+            DefenseValue.sprite = defenseSprites[0];
+            MovementCost.sprite = movementSprites[0];
+        }
+    }
 }

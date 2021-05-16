@@ -10,10 +10,18 @@ using UnityEngine;
 
 public class CursorScript : MonoBehaviour
 {
+    private float r;
+    private float g;
+    private float b;
+    private float defaultAlpha;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        r = GetComponent<Renderer>().material.color.r;
+        g = GetComponent<Renderer>().material.color.g;
+        b = GetComponent<Renderer>().material.color.b;
+        defaultAlpha = GetComponent<Renderer>().material.color.a;
     }
 
     // Update is called once per frame
@@ -24,29 +32,51 @@ public class CursorScript : MonoBehaviour
 
     public void moveLeft()
     {
-        Vector3 pos = transform.position;
-        pos.x = pos.x - 1;
-        transform.position = pos;
+        if (transform.position.x > -6.5)
+        {
+            Vector3 pos = transform.position;
+            pos.x = pos.x - 1;
+            transform.position = pos;
+        }
     }
 
     public void moveRight()
     {
-        Vector3 pos = transform.position;
-        pos.x = pos.x + 1;
-        transform.position = pos;
+        if (transform.position.x < 7.5)
+        {
+            Vector3 pos = transform.position;
+            pos.x = pos.x + 1;
+            transform.position = pos;
+        }
     }
 
     public void moveUp()
     {
-        Vector3 pos = transform.position;
-        pos.y = pos.y + 1;
-        transform.position = pos;
+        if (transform.position.y < 4.5)
+        {
+            Vector3 pos = transform.position;
+            pos.y = pos.y + 1;
+            transform.position = pos;
+        }
     }
 
     public void moveDown()
     {
-        Vector3 pos = transform.position;
-        pos.y = pos.y - 1;
-        transform.position = pos;
+        if (transform.position.y > -4.5)
+        {
+            Vector3 pos = transform.position;
+            pos.y = pos.y - 1;
+            transform.position = pos;
+        }
+    }
+
+    public void dissappear()
+    {
+        GetComponent<Renderer>().material.color = new Color(r, g, b, 0);
+    }
+
+    public void reappear()
+    {
+        GetComponent<Renderer>().material.color = new Color(r, g, b, defaultAlpha);
     }
 }

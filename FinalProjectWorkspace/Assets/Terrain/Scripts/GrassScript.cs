@@ -12,10 +12,10 @@ public class GrassScript : MonoBehaviour
 {
     public CentralGameLogic centralGameLogic;
 
-    public const int movementCost = 1;
-    public const int defenseModifier = 1;
-    public const bool passableByTank = true;
-    public const bool capturable = false;
+    public int movementCost = 1;
+    public int defenseModifier = 1;
+    public bool passableByTank = true;
+    public bool capturable = false;
 
     public bool occupied = false;
 

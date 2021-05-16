@@ -19,10 +19,17 @@ public class CentralGameLogic : MonoBehaviour
     public TurnUIScript turnUI;
     public UnitUIScript unitUI;
 
-    public GameObject[] defaultUIElements;
-    public GameObject[] selectedUnoccupiedUIElements;
-    public GameObject[] onlyWaitUIElements;
-    public GameObject[] attackOrWaitUIElements;
+    public RiverScript currentRiverTile; //null if not on a river tile
+    public GrassScript currentGrassTile; //null if not on a grass tile
+    public ForestScript currentForestTile; //null if not on a forest tile
+    public SmallMountainScript currentSmallMountainTile; //null if not on a small mountain tile
+    public LargeMountainScript currentLargeMountainTile; //null if not on a large mountain tile
+    public CityScript currentCityTile; //null if not on a city tile
+    public HeadQuartersScript currentHeadQuartersTile; //null if not on a headquarters tile
+
+    public InfantryScript currentInfantry; //null if not on an infantry unit
+    public AntiTankScript currentAntiTank; //null if not on an AT unit
+    public TankScript currentTank; //null if not on a tank unit
 
     public RiverScript[] riverTiles;
     public GrassScript[] grassTiles;
@@ -44,6 +51,8 @@ public class CentralGameLogic : MonoBehaviour
     void Start()
     {
         state = "default";
+        storeTileAtCursorPosition();
+        storeUnitAtCursorPosition();
     }
 
     // Update is called once per frame
@@ -61,21 +70,29 @@ public class CentralGameLogic : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.W)) //Add controller support later
             {
                 cursor.moveUp();
+                storeTileAtCursorPosition();
+                storeUnitAtCursorPosition();
             }
 
             if (Input.GetKeyDown(KeyCode.A)) //Add controller support later
             {
                 cursor.moveLeft();
+                storeTileAtCursorPosition();
+                storeUnitAtCursorPosition();
             }
 
             if (Input.GetKeyDown(KeyCode.S)) //Add controller support later
             {
                 cursor.moveDown();
+                storeTileAtCursorPosition();
+                storeUnitAtCursorPosition();
             }
 
             if (Input.GetKeyDown(KeyCode.D)) //Add controller support later
             {
                 cursor.moveRight();
+                storeTileAtCursorPosition();
+                storeUnitAtCursorPosition();
             }
 
             //Hitting E (A on controller)
@@ -196,6 +213,193 @@ public class CentralGameLogic : MonoBehaviour
                 //Stop drawing current UI stuff
                 //Return to default state
 
+        }
+    }
+
+    public void storeTileAtCursorPosition()
+    {
+        currentRiverTile = null;
+        currentGrassTile = null;
+        currentForestTile = null;
+        currentSmallMountainTile = null;
+        currentLargeMountainTile = null;
+        currentCityTile = null;
+        currentHeadQuartersTile = null;
+
+        for (int i = 0; i < riverTiles.Length; i++)
+        {
+            if (riverTiles[i].transform.position == cursor.transform.position)
+            {
+                currentRiverTile = riverTiles[i];
+            }
+        }
+
+        if (currentRiverTile != null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < grassTiles.Length; i++)
+        {
+            if (grassTiles[i].transform.position == cursor.transform.position)
+            {
+                currentGrassTile = grassTiles[i];
+            }
+        }
+
+        if (currentGrassTile != null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < forestTiles.Length; i++)
+        {
+            if (forestTiles[i].transform.position == cursor.transform.position)
+            {
+                currentForestTile = forestTiles[i];
+            }
+        }
+
+        if (currentForestTile != null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < smallMountainTiles.Length; i++)
+        {
+            if (smallMountainTiles[i].transform.position == cursor.transform.position)
+            {
+                currentSmallMountainTile = smallMountainTiles[i];
+            }
+        }
+
+        if (currentSmallMountainTile != null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < largeMountainTiles.Length; i++)
+        {
+            if (largeMountainTiles[i].transform.position == cursor.transform.position)
+            {
+                currentLargeMountainTile = largeMountainTiles[i];
+            }
+        }
+
+        if (currentLargeMountainTile != null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < cityTiles.Length; i++)
+        {
+            if (cityTiles[i].transform.position == cursor.transform.position)
+            {
+                currentCityTile = cityTiles[i];
+            }
+        }
+
+        if (currentCityTile != null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < headQuartersTiles.Length; i++)
+        {
+            if (headQuartersTiles[i].transform.position == cursor.transform.position)
+            {
+                currentHeadQuartersTile = headQuartersTiles[i];
+            }
+        }
+
+        if (currentHeadQuartersTile != null)
+        {
+            return;
+        }
+    }
+
+    public void storeUnitAtCursorPosition()
+    {
+        currentAntiTank = null;
+        currentTank = null;
+        currentInfantry = null;
+
+        for (int i = 0; i < blueTanks.Length; i++)
+        {
+            if (blueTanks[i].transform.position == cursor.transform.position)
+            {
+                currentTank = blueTanks[i];
+            }
+        }
+
+        if (currentTank != null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < blueInfantry.Length; i++)
+        {
+            if (blueInfantry[i].transform.position == cursor.transform.position)
+            {
+                currentInfantry = blueInfantry[i];
+            }
+        }
+
+        if (currentInfantry != null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < blueAntiTanks.Length; i++)
+        {
+            if (blueAntiTanks[i].transform.position == cursor.transform.position)
+            {
+                currentAntiTank = blueAntiTanks[i];
+            }
+        }
+
+        if (currentAntiTank != null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < redTanks.Length; i++)
+        {
+            if (redTanks[i].transform.position == cursor.transform.position)
+            {
+                currentTank = redTanks[i];
+            }
+        }
+
+        if (currentTank != null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < redInfantry.Length; i++)
+        {
+            if (redInfantry[i].transform.position == cursor.transform.position)
+            {
+                currentInfantry = redInfantry[i];
+            }
+        }
+
+        if (currentInfantry != null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < redAntiTanks.Length; i++)
+        {
+            if (redAntiTanks[i].transform.position == cursor.transform.position)
+            {
+                currentAntiTank = redAntiTanks[i];
+            }
+        }
+
+        if (currentAntiTank != null)
+        {
+            return;
         }
     }
 }

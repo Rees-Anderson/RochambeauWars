@@ -12,10 +12,10 @@ public class ForestScript : MonoBehaviour
 {
     public CentralGameLogic centralGameLogic;
 
-    public const int movementCost = 3;
-    public const int defenseModifier = 2;
-    public const bool passableByTank = true;
-    public const bool capturable = false;
+    public int movementCost = 3;
+    public int defenseModifier = 2;
+    public bool passableByTank = true;
+    public bool capturable = false;
 
     public bool occupied = false;
 

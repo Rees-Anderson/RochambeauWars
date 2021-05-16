@@ -12,10 +12,10 @@ public class HeadQuartersScript : MonoBehaviour
 {
     public CentralGameLogic centralGameLogic;
 
-    public const int movementCost = 1;
-    public const int defenseModifier = 5;
-    public const bool passableByTank = true;
-    public const bool capturable = true;
+    public int movementCost = 1;
+    public int defenseModifier = 5;
+    public bool passableByTank = true;
+    public bool capturable = true;
 
     public bool occupied = false;
 

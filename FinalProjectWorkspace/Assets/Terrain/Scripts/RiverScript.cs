@@ -12,10 +12,10 @@ public class RiverScript : MonoBehaviour
 {
     public CentralGameLogic centralGameLogic;
 
-    public const int movementCost = 3;
-    public const int defenseModifier = 0;
-    public const bool passableByTank = false;
-    public const bool capturable = false;
+    public int movementCost = 3;
+    public int defenseModifier = 0;
+    public bool passableByTank = false;
+    public bool capturable = false;
 
     public bool occupied = false;
 
