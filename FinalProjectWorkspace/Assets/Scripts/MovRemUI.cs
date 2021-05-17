@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Author: Rees Anderson
+ * 5.16.21
+ * Game Design Project
+ */
+
 public class MovRemUI : MonoBehaviour
 {
     public CentralGameLogic centralGameLogic;
