@@ -20,6 +20,8 @@ public class CentralGameLogic : MonoBehaviour
     public TurnUIScript turnUI;
     public UnitUIScript unitUI;
     public EndTurnUIScript endTurnUI;
+    public MovRemUI movementRemainingUI;
+    public WaitMenuScript waitMenuUI;
 
     public RiverScript currentRiverTile; //null if not on a river tile
     public GrassScript currentGrassTile; //null if not on a grass tile
@@ -69,6 +71,8 @@ public class CentralGameLogic : MonoBehaviour
         {
             //Hide all menus but the turn counter, terrain UI, and unit UI
             endTurnUI.dissappear();
+            movementRemainingUI.dissappear();
+            waitMenuUI.dissappear();
 
             //Make the default menus reappear
             turnUI.reappear();
@@ -120,7 +124,7 @@ public class CentralGameLogic : MonoBehaviour
                 {
                     if (currentInfantry != null)
                     {
-                        if (currentInfantry.tag == currentPlayer)
+                        if (currentInfantry.tag == currentPlayer && currentInfantry.active)
                         {
                             state = "selectedUnit";
                         }
@@ -131,7 +135,7 @@ public class CentralGameLogic : MonoBehaviour
                     } 
                     else if (currentAntiTank != null)
                     {
-                        if (currentAntiTank.tag == currentPlayer)
+                        if (currentAntiTank.tag == currentPlayer && currentAntiTank.active)
                         {
                             state = "selectedUnit";
                         }
@@ -142,7 +146,7 @@ public class CentralGameLogic : MonoBehaviour
                     } 
                     else if (currentTank != null)
                     {
-                        if (currentTank.tag == currentPlayer)
+                        if (currentTank.tag == currentPlayer && currentTank.active)
                         {
                             state = "selectedUnit";
                         }
@@ -181,9 +185,6 @@ public class CentralGameLogic : MonoBehaviour
             }
 
             //Pressing E (A on controller)
-            //When at Pos 1 - Ends your turn - swaps current player to Red if currently Blue, and vice versa
-            //When at Pos 2 - Restarts Map
-            //When at Pos 3 - Returns to Main Menu
             if (Input.GetKeyDown(KeyCode.E)) //Add controller support later
             {
                 if (endTurnUI.menuArrow.currentPosition == 0)
@@ -209,63 +210,125 @@ public class CentralGameLogic : MonoBehaviour
             }
 
             //Pressing F (B on controller)
-            //Hides Menu in top right
-            //Returns state to default
+            if (Input.GetKeyDown(KeyCode.F)) //Add controller support later
+            {
+                state = "default";
+            }
 
         } else if (state == "selectedUnit")
         {
-            //Hide defaultUI
+            //Hides Cursor and defaultUI
+            turnUI.dissappear();
+            terrainUI.dissappear();
+            unitUI.allowedToReappear = false;
+            unitUI.dissappear();
+            cursor.dissappear();
+
+            //terrainUI should auto pop up due to its own listener
 
             //Find Selected Unit and set as selected
+            if (currentInfantry != null)
+            {
+                currentInfantry.selected = true;
+            }
+            else if (currentAntiTank != null)
+            {
+                currentAntiTank.selected = true;
+            }
+            else if (currentTank != null)
+            {
+                currentTank.selected = true;
+            }
 
-            //Store unit's original position
+            //Store unit's original position - if allowing for F button - TODO
 
             //In the top left show selected unit's movement points remaining
-
-            //Show terrain movement costs on all tiles
-
-            //Pressing W (Up on controller) - calls the selected unit's and cursor's move up method
-
-            //Pressing A (Left on controller) - calls the selected unit's and cursor's move left method
-
-            //Pressing S (Down on controller) - calls the selected unit's and cursor's move down method
-
-            //Pressing D (Right on controller) - calls the selected unit's and cursor's move right method
+            movementRemainingUI.reappear();
 
             //Pressing E (A on controller)
-                //Hide terrain movement costs
+            //Hide top left movement points window
+            //Send into determineStrikeCapability state
+            if (Input.GetKeyDown(KeyCode.E)) //Add controller support later
+            {
+                //Update Cursor Pos
+                Vector3 whereToMoveCursor;
+                if (currentInfantry != null)
+                {
+                    whereToMoveCursor = currentInfantry.transform.position;
+                    whereToMoveCursor.y -= 0.1f;
+                }
+                else if (currentAntiTank != null)
+                {
+                    whereToMoveCursor = currentAntiTank.transform.position;
+                    whereToMoveCursor.y -= 0.1f;
+                }
+                else if (currentTank != null)
+                {
+                    whereToMoveCursor = currentTank.transform.position;
+                    whereToMoveCursor.y -= 0.1f;
+                } else
+                {
+                    whereToMoveCursor = new Vector3(-1.5f, -1.5f, 0);
+                }
+                cursor.transform.position = whereToMoveCursor;
+
                 //Hide top left movement points window
-                //Send into determineStrikeCapability state
+                movementRemainingUI.dissappear();
 
-            //Pressing F (B on controller)
-                //Return unit to original position
-                //Restore unit's max movement points
-                //Set unit as not selected
-                //Hide terrain movement costs
-                //Hide top left movement points window
-                //Unhide defaultUI
-                //Return state to default
+                //Find and store all valid targets in a list
 
-
-        } else if (state == "determineStrikeCapability")
-        {
-            //Find and store all valid targets in a list
-
-            //If valid targets is empty
+                //If valid targets is empty
                 //Send into wait only state
 
-            //Else
+                //Else
                 //Send into attackOrWait state
+
+                //This would normally split into either wait or attackORwait, but attacking isn't implemented so you can only wait :)
+                state = "onlyWait";
+            }
+
+            //Pressing F (B on controller) - TODO
+            //Return unit to original position
+            //Restore unit's max movement points
+            //Set unit as not selected
+            //Hide terrain movement costs
+            //Hide top left movement points window
+            //Unhide defaultUI
+            //Return state to default
+
 
         } else if (state == "onlyWait")
         {
             //Draw wait only window in the top right
+            waitMenuUI.reappear();
 
             //Pressing E (A on controller)
-                //Set Unit as not selected
-                //Call unit's wait method
-                //Stop drawing wait only window
-                //Return to default state
+            //Set Unit as not selected
+            //Call unit's wait method
+            //Stop drawing wait only window
+            //Return to default state
+            if (Input.GetKeyDown(KeyCode.E)) //Add controller support later
+            {
+                if (currentInfantry != null)
+                {
+                    currentInfantry.selected = false;
+                    currentInfantry.wait();
+                }
+                else if (currentAntiTank != null)
+                {
+                    currentAntiTank.selected = false;
+                    currentAntiTank.wait();
+                }
+                else if (currentTank != null)
+                {
+                    currentTank.selected = false;
+                    currentTank.wait();
+                }
+
+                state = "default";
+            }
+
+            //Should there be a Pressing F option, to keep moving? - TODO
 
         } else if (state == "attackOrWait")
         {
