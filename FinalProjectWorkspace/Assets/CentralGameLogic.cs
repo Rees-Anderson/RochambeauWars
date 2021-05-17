@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  * Author: Rees Anderson
- * 5.15.21
+ * 5.16.21
  * Game Design Project
  */
 
@@ -60,11 +60,6 @@ public class CentralGameLogic : MonoBehaviour
     {
         if (state == "default")
         {
-            //If Cursor is on right side of screen have terrain/unit UI move to left side, else terrain/unit UI is on the right
-
-            //If hovering over an occupied tile show the details of the unit and tile in the UI, else only show tile info
-
-            //Show what day it is and whose turn in the top right
 
             //Can move cursor around with WASD (Control Stick on controller)
             if (Input.GetKeyDown(KeyCode.W)) //Add controller support later
@@ -99,18 +94,66 @@ public class CentralGameLogic : MonoBehaviour
             //On unoccupied tile sends controller into selectedUnoccupied state
             //On occupied tile with unit of same color sends controller into selectedUnit state
             //On occupied tile with unit of different color plays an error sound
+            if (Input.GetKeyDown(KeyCode.E)) //Add controller support later
+            {
+                if (!isCurrentTileOccupied())
+                {
+                    state = "selectedUnoccupied";
+                } 
+                else
+                {
+                    if (currentInfantry != null)
+                    {
+                        if (currentInfantry.tag == currentPlayer)
+                        {
+                            state = "selectedUnit";
+                        }
+                        else
+                        {
+                            //Play error sound
+                        }
+                    } 
+                    else if (currentAntiTank != null)
+                    {
+                        if (currentAntiTank.tag == currentPlayer)
+                        {
+                            state = "selectedUnit";
+                        }
+                        else
+                        {
+                            //Play error sound
+                        }
+                    } 
+                    else if (currentTank != null)
+                    {
+                        if (currentTank.tag == currentPlayer)
+                        {
+                            state = "selectedUnit";
+                        }
+                        else
+                        {
+                            //Play error sound
+                        }
+                    }
+                }
+            }
 
             //Hitting F does nothing
 
         } else if (state == "selectedUnoccupied")
         {
             //Hides Cursor and defaultUI
+            turnUI.dissappear();
+            terrainUI.dissappear();
+            unitUI.allowedToReappear = false;
+            unitUI.dissappear();
+            cursor.dissappear();
 
-            //Pulls up a menu in the top right where you can manually end your turn (Pos 1), restart (Pos 2), or return to main menu (Pos 3)
+            //Pulls up a menu in the top right where you can manually end your turn (Pos 1), restart (Pos 2), return to main menu (Pos 3), quit (Pos 4)
 
-            //Pressing W (Up on controller) when at Pos 1 does nothing, at Pos 2 moves hand to Pos 1, at Pos 3 moves hand to Pos 2
+            //Pressing W (Up on controller) when at Pos 1 does nothing, at Pos 2 moves hand to Pos 1, at Pos 3 moves hand to Pos 2, etc
 
-            //Pressing S (Down on controller) when at Pos 1 moves to Pos 2, Pos 2 moves to Pos 3, Pos 3 does nothing
+            //Pressing S (Down on controller) when at Pos 1 moves to Pos 2, Pos 2 moves to Pos 3, Pos 3 does nothing, etc
 
             //Pressing E (A on controller)
                 //When at Pos 1 - Ends your turn - swaps current player to Red if currently Blue, and vice versa
@@ -401,5 +444,10 @@ public class CentralGameLogic : MonoBehaviour
         {
             return;
         }
+    }
+
+    public bool isCurrentTileOccupied()
+    {
+        return (currentInfantry != null || currentAntiTank != null || currentTank != null);
     }
 }
