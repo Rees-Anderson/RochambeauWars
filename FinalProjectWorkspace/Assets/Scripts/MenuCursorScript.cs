@@ -10,7 +10,7 @@ public class MenuCursorScript : MonoBehaviour
     private float defaultAlpha;
 
     public int currentPosition = 0;
-    public Vector3[] positions = { new Vector3(-1.6f, 1.375f, 0f), new Vector3(-1.6f, 0.5f, 0f), new Vector3(-1.6f, -0.375f, 0f), new Vector3(-1.6f, -1.25f, 0f) };
+    public Vector3[] positions = { new Vector3(4.15f, 4.25f, 0f), new Vector3(4.15f, 3.35f, 0f), new Vector3(4.15f, 2.475f, 0f), new Vector3(4.15f, 1.575f, 0f) };
 
     // Start is called before the first frame update
     void Start()

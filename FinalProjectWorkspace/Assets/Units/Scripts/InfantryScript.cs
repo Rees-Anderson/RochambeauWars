@@ -12,10 +12,14 @@ public class InfantryScript : MonoBehaviour
 {
     public const int maxFuelLevel = 25;
     public const int maxAmmoCount = 10;
-    public const int maxMovementPoints = 9;
+    public const int maxMovementPoints = 5;
     public const int maxHealth = 10;
     public const int attackRoll = 5; //Damage dealt before taking into account type match-up and terrain defense modifiers
     public const int team = 1;
+
+    public Sprite[] healthSprites;
+    public Sprite[] ammoSprites;
+    public Sprite[] fuelSprites;
 
     //Fuel warnings, Ammo warnings, Health visualization are likely going to need variables and connected objects -- add those here
 

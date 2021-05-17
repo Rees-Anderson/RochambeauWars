@@ -31,6 +31,7 @@ public class EndTurnUIScript : MonoBehaviour
     public void dissappear()
     {
         GetComponent<Renderer>().material.color = new Color(r, g, b, 0);
+        menuArrow.dissappear();
         for (int i = 0; i < thingsToMakeDissappear.Length; i++)
         {
             thingsToMakeDissappear[i].dissappear();
@@ -40,6 +41,7 @@ public class EndTurnUIScript : MonoBehaviour
     public void reappear()
     {
         GetComponent<Renderer>().material.color = new Color(r, g, b, defaultAlpha);
+        menuArrow.reappear();
         for (int i = 0; i < thingsToMakeDissappear.Length; i++)
         {
             thingsToMakeDissappear[i].reappear();

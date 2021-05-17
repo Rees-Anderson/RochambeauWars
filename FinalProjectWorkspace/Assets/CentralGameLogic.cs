@@ -462,9 +462,13 @@ public class CentralGameLogic : MonoBehaviour
         currentTank = null;
         currentInfantry = null;
 
+        //Set up actual position to compare due to units being offset by a y value of +0.1
+        Vector3 positionToCompare = cursor.transform.position;
+        positionToCompare.y += 0.1f;
+
         for (int i = 0; i < blueTanks.Length; i++)
         {
-            if (blueTanks[i].transform.position == cursor.transform.position)
+            if (blueTanks[i].transform.position == positionToCompare)
             {
                 currentTank = blueTanks[i];
             }
@@ -477,7 +481,7 @@ public class CentralGameLogic : MonoBehaviour
 
         for (int i = 0; i < blueInfantry.Length; i++)
         {
-            if (blueInfantry[i].transform.position == cursor.transform.position)
+            if (blueInfantry[i].transform.position == positionToCompare)
             {
                 currentInfantry = blueInfantry[i];
             }
@@ -490,7 +494,7 @@ public class CentralGameLogic : MonoBehaviour
 
         for (int i = 0; i < blueAntiTanks.Length; i++)
         {
-            if (blueAntiTanks[i].transform.position == cursor.transform.position)
+            if (blueAntiTanks[i].transform.position == positionToCompare)
             {
                 currentAntiTank = blueAntiTanks[i];
             }
@@ -503,7 +507,7 @@ public class CentralGameLogic : MonoBehaviour
 
         for (int i = 0; i < redTanks.Length; i++)
         {
-            if (redTanks[i].transform.position == cursor.transform.position)
+            if (redTanks[i].transform.position == positionToCompare)
             {
                 currentTank = redTanks[i];
             }
@@ -516,7 +520,7 @@ public class CentralGameLogic : MonoBehaviour
 
         for (int i = 0; i < redInfantry.Length; i++)
         {
-            if (redInfantry[i].transform.position == cursor.transform.position)
+            if (redInfantry[i].transform.position == positionToCompare)
             {
                 currentInfantry = redInfantry[i];
             }
@@ -529,7 +533,7 @@ public class CentralGameLogic : MonoBehaviour
 
         for (int i = 0; i < redAntiTanks.Length; i++)
         {
-            if (redAntiTanks[i].transform.position == cursor.transform.position)
+            if (redAntiTanks[i].transform.position == positionToCompare)
             {
                 currentAntiTank = redAntiTanks[i];
             }
