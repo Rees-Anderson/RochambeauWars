@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /*
  * Author: Rees Anderson
@@ -18,6 +19,7 @@ public class CentralGameLogic : MonoBehaviour
     public TerrainUIScript terrainUI;
     public TurnUIScript turnUI;
     public UnitUIScript unitUI;
+    public EndTurnUIScript endTurnUI;
 
     public RiverScript currentRiverTile; //null if not on a river tile
     public GrassScript currentGrassTile; //null if not on a grass tile
@@ -58,8 +60,22 @@ public class CentralGameLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if ((Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetKeyDown(KeyCode.RightAlt)) && Input.GetKeyDown(KeyCode.F4)) //Add controller support later
+        {
+            Application.Quit();
+        }
+
         if (state == "default")
         {
+            //Hide all menus but the turn counter, terrain UI, and unit UI
+            endTurnUI.dissappear();
+
+            //Make the default menus reappear
+            turnUI.reappear();
+            unitUI.allowedToReappear = true;
+            unitUI.reappear();
+            terrainUI.reappear();
+            cursor.reappear();
 
             //Can move cursor around with WASD (Control Stick on controller)
             if (Input.GetKeyDown(KeyCode.W)) //Add controller support later
@@ -150,19 +166,51 @@ public class CentralGameLogic : MonoBehaviour
             cursor.dissappear();
 
             //Pulls up a menu in the top right where you can manually end your turn (Pos 1), restart (Pos 2), return to main menu (Pos 3), quit (Pos 4)
+            endTurnUI.reappear();
 
             //Pressing W (Up on controller) when at Pos 1 does nothing, at Pos 2 moves hand to Pos 1, at Pos 3 moves hand to Pos 2, etc
+            if (Input.GetKeyDown(KeyCode.W) && endTurnUI.menuArrow.currentPosition > 0) //Add controller support later
+            {
+                endTurnUI.menuArrow.currentPosition--;
+            }
 
             //Pressing S (Down on controller) when at Pos 1 moves to Pos 2, Pos 2 moves to Pos 3, Pos 3 does nothing, etc
+            if (Input.GetKeyDown(KeyCode.S) && endTurnUI.menuArrow.currentPosition < 3) //Add controller support later
+            {
+                endTurnUI.menuArrow.currentPosition++;
+            }
 
             //Pressing E (A on controller)
-                //When at Pos 1 - Ends your turn - swaps current player to Red if currently Blue, and vice versa
-                //When at Pos 2 - Restarts Map
-                //When at Pos 3 - Returns to Main Menu
+            //When at Pos 1 - Ends your turn - swaps current player to Red if currently Blue, and vice versa
+            //When at Pos 2 - Restarts Map
+            //When at Pos 3 - Returns to Main Menu
+            if (Input.GetKeyDown(KeyCode.E)) //Add controller support later
+            {
+                if (endTurnUI.menuArrow.currentPosition == 0)
+                {
+                    //EndTurn
+                    endTurn();
+                    state = "default";
+                } 
+                else if (endTurnUI.menuArrow.currentPosition == 1)
+                {
+                    //Reload Level
+                    SceneManager.LoadScene("Map-01");
+                } 
+                else if (endTurnUI.menuArrow.currentPosition == 2)
+                {
+                    //Go to main menu (main menu does not currently exist)
+                } 
+                else if (endTurnUI.menuArrow.currentPosition == 3)
+                {
+                    //Quit game
+                    Application.Quit();
+                }
+            }
 
             //Pressing F (B on controller)
-                //Hides Menu in top right
-                //Returns state to default
+            //Hides Menu in top right
+            //Returns state to default
 
         } else if (state == "selectedUnit")
         {
@@ -257,6 +305,53 @@ public class CentralGameLogic : MonoBehaviour
                 //Return to default state
 
         }
+    }
+
+    public void endTurn()
+    {
+        if (currentPlayer == "Blue")
+        {
+            currentPlayer = "Red";
+        }
+        else
+        {
+            currentPlayer = "Blue";
+        }
+
+        day++;
+
+        for (int i = 0; i < blueTanks.Length; i++)
+        {
+            blueTanks[i].readyUnitForNewTurn();
+        }
+
+        for (int i = 0; i < blueInfantry.Length; i++)
+        {
+            blueInfantry[i].readyUnitForNewTurn();
+        }
+
+        for (int i = 0; i < blueAntiTanks.Length; i++)
+        {
+            blueAntiTanks[i].readyUnitForNewTurn();
+        }
+
+        for (int i = 0; i < redAntiTanks.Length; i++)
+        {
+            redAntiTanks[i].readyUnitForNewTurn();
+        }
+
+        for (int i = 0; i < redInfantry.Length; i++)
+        {
+            redInfantry[i].readyUnitForNewTurn();
+        }
+
+        for (int i = 0; i < redTanks.Length; i++)
+        {
+            redTanks[i].readyUnitForNewTurn();
+        }
+
+        //Maybe show a visual turn change animation here?
+
     }
 
     public void storeTileAtCursorPosition()

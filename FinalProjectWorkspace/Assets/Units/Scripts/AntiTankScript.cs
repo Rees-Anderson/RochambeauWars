@@ -102,6 +102,14 @@ public class AntiTankScript : MonoBehaviour
 
     }
 
+    public void readyUnitForNewTurn()
+    {
+        active = true;
+
+        //Make colorful again
+
+    }
+
     //A note on movement: Units assume they start at a 0.5 increment added to or subtracted from their inital x and y position for grid movement to work properly.
     public void moveLeft()
     {

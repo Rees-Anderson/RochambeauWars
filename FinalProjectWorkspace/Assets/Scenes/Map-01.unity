@@ -13169,6 +13169,7 @@ MonoBehaviour:
   terrainUI: {fileID: 344336679}
   turnUI: {fileID: 1427484172}
   unitUI: {fileID: 1467080189}
+  endTurnUI: {fileID: 2102196284}
   currentRiverTile: {fileID: 0}
   currentGrassTile: {fileID: 0}
   currentForestTile: {fileID: 0}
@@ -17397,7 +17398,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1757961197}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5999999, y: 1.3750122, z: 0}
+  m_LocalPosition: {x: -1.5999999, y: 1.375, z: 0}
   m_LocalScale: {x: 1, y: 0.98921746, z: 1}
   m_Children: []
   m_Father: {fileID: 2102196283}
@@ -17466,6 +17467,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3b12894dc6af5f4089ff50ed1b8c742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentPosition: 0
+  positions:
+  - {x: -1.6, y: 1.375, z: 0}
+  - {x: -1.6, y: 0.5, z: 0}
+  - {x: -1.6, y: -0.375, z: 0}
+  - {x: -1.6, y: -1.25, z: 0}
 --- !u!1001 &1758535339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20415,6 +20422,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 818bc69b05843464ba4bb06ee027e0d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuArrow: {fileID: 1757961200}
+  thingsToMakeDissappear:
+  - {fileID: 225542111}
+  - {fileID: 660493236}
+  - {fileID: 188913440}
+  - {fileID: 1275827893}
+  - {fileID: 1796660925}
+  - {fileID: 1602279150}
+  - {fileID: 1603199350}
+  - {fileID: 983692930}
+  - {fileID: 843587408}
+  - {fileID: 767810628}
+  - {fileID: 419645941}
+  - {fileID: 1270315781}
+  - {fileID: 498205122}
+  - {fileID: 1773523348}
+  - {fileID: 468029902}
+  - {fileID: 942091670}
+  - {fileID: 1230732454}
+  - {fileID: 725350907}
+  - {fileID: 836658201}
+  - {fileID: 700504196}
+  - {fileID: 694544359}
+  - {fileID: 445575106}
+  - {fileID: 1742895995}
+  - {fileID: 237696269}
 --- !u!1001 &2102686514
 PrefabInstance:
   m_ObjectHideFlags: 0

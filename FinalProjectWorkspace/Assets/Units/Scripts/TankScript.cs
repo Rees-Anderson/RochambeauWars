@@ -255,6 +255,14 @@ public class TankScript : MonoBehaviour
         
     }
 
+    public void readyUnitForNewTurn()
+    {
+        active = true;
+
+        //Make colorful again
+
+    }
+
     public void fireWeaponOffensive()
     {
         //Play firing animation

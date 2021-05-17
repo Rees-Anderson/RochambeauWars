@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EndTurnUIScript : MonoBehaviour
 {
+    public MenuCursorScript menuArrow;
+
+    public GenericDisappearReappearScript[] thingsToMakeDissappear;
+
     private float r;
     private float g;
     private float b;
@@ -27,10 +31,18 @@ public class EndTurnUIScript : MonoBehaviour
     public void dissappear()
     {
         GetComponent<Renderer>().material.color = new Color(r, g, b, 0);
+        for (int i = 0; i < thingsToMakeDissappear.Length; i++)
+        {
+            thingsToMakeDissappear[i].dissappear();
+        }
     }
 
     public void reappear()
     {
         GetComponent<Renderer>().material.color = new Color(r, g, b, defaultAlpha);
+        for (int i = 0; i < thingsToMakeDissappear.Length; i++)
+        {
+            thingsToMakeDissappear[i].reappear();
+        }
     }
 }

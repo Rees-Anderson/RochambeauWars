@@ -15,6 +15,8 @@ public class CursorScript : MonoBehaviour
     private float b;
     private float defaultAlpha;
 
+    public Vector3 defaultPos = new Vector3(-1.5f, -1.5f, 0);
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,11 @@ public class CursorScript : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void goToDefaultPosition()
+    {
+        transform.position = defaultPos;
     }
 
     public void moveLeft()

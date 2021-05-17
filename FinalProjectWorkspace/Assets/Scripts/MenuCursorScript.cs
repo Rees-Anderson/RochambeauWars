@@ -9,6 +9,9 @@ public class MenuCursorScript : MonoBehaviour
     private float b;
     private float defaultAlpha;
 
+    public int currentPosition = 0;
+    public Vector3[] positions = { new Vector3(-1.6f, 1.375f, 0f), new Vector3(-1.6f, 0.5f, 0f), new Vector3(-1.6f, -0.375f, 0f), new Vector3(-1.6f, -1.25f, 0f) };
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +24,7 @@ public class MenuCursorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position = positions[currentPosition];
     }
 
     public void dissappear()
@@ -33,4 +36,5 @@ public class MenuCursorScript : MonoBehaviour
     {
         GetComponent<Renderer>().material.color = new Color(r, g, b, defaultAlpha);
     }
+
 }
