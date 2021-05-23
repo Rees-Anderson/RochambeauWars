@@ -27,6 +27,8 @@ public class TankScript : MonoBehaviour
     public int health; //The amount of HP the unit has - at zero the unit dies
     public int currentDefenseModifier; //The defense modifier added to the unit due to the terrain it is on
 
+    public bool alive = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -281,7 +283,7 @@ public class TankScript : MonoBehaviour
 
     }
 
-    public void takeDamage()
+    public void takeDamage(int dmg)
     {
         //Play damage animation
 

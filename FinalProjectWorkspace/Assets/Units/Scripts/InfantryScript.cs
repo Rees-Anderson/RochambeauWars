@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  * Author: Rees Anderson
- * 5.16.21
+ * 5.22.21
  * Game Design Project
  */
 
@@ -12,12 +12,12 @@ public class InfantryScript : MonoBehaviour
 {
     public CentralGameLogic centralGameLogic;
 
-    public const int maxFuelLevel = 25;
+    public const int maxFuelLevel = 15;
     public const int maxAmmoCount = 10;
-    public const int maxMovementPoints = 6;
+    public const int maxMovementPoints = 4;
     public const int maxHealth = 10;
     public const int attackRoll = 5; //Damage dealt before taking into account type match-up and terrain defense modifiers
-    public const int team = 1;
+    //public const int team = 1;
 
     public Sprite[] healthSprites;
     public Sprite[] ammoSprites;
@@ -26,6 +26,7 @@ public class InfantryScript : MonoBehaviour
 
     public GenericDisappearReappearScript ammoDisappear;
     public GenericDisappearReappearScript fuelDisappear;
+    public GenericDisappearReappearScript healthDisappear;
 
     public SpriteRenderer healthSprite;
     public SpriteRenderer ammoSprite;
@@ -56,17 +57,25 @@ public class InfantryScript : MonoBehaviour
     public int health; //The amount of HP the unit has - at zero the unit dies
     public int currentDefenseModifier; //The defense modifier added to the unit due to the terrain it is on
 
+    public bool alive = true;
+    private float r;
+    private float g;
+    private float b;
+    private float defaultAlpha;
+
     // Start is called before the first frame update
     void Start()
     {
+        r = GetComponent<Renderer>().material.color.r;
+        g = GetComponent<Renderer>().material.color.g;
+        b = GetComponent<Renderer>().material.color.b;
+        defaultAlpha = GetComponent<Renderer>().material.color.a;
+
         fuelLevel = maxFuelLevel;
         ammoCount = maxAmmoCount;
         movementPoints = maxMovementPoints;
         health = maxHealth;
         currentDefenseModifier = 0;
-
-        ammoDisappear.dissappear();
-        fuelDisappear.dissappear();
 
         storeTileAtCurrentPosition();
     }
@@ -76,28 +85,43 @@ public class InfantryScript : MonoBehaviour
     {
         healthSprite.sprite = healthSprites[health];
 
-        if (fuelLevel <= 10 && fuelLevel > 0)
+        if (health <= 0)
+        {
+            die();
+        }
+
+        if (fuelLevel > 10)
+        {
+            fuelDisappear.dissappear();
+        }
+
+        if (fuelLevel <= 7 && fuelLevel > 0 && alive)
         {
             //Display Low Fuel Warning Symbol
             fuelSprite.sprite = fuelSprites[0];
             fuelDisappear.reappear();
         }
 
-        if (fuelLevel == 0)
+        if (fuelLevel == 0 && alive)
         {
             //Display Out of Fuel Symbol
             fuelSprite.sprite = fuelSprites[1];
             fuelDisappear.reappear();
         }
 
-        if (ammoCount <= 3)
+        if (ammoCount > 3)
+        {
+            ammoDisappear.dissappear();
+        }
+
+        if (ammoCount <= 3 && alive)
         {
             //Display Low Ammo Warning Symbol
             ammoSprite.sprite = ammoSprites[0];
             ammoDisappear.reappear();
         }
 
-        if (ammoCount == 0)
+        if (ammoCount == 0 && alive)
         {
             //Display Out of Ammo Symbol
             ammoSprite.sprite = ammoSprites[1];
@@ -148,7 +172,10 @@ public class InfantryScript : MonoBehaviour
 
     public void readyUnitForNewTurn()
     {
-        active = true;
+        if (alive)
+        {
+            active = true;
+        }
 
     }
 
@@ -183,7 +210,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextRiverTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentRiverTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextRiverTile.occupied = true;
@@ -212,7 +239,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextGrassTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentGrassTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextGrassTile.occupied = true;
@@ -241,7 +268,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextForestTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentForestTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextForestTile.occupied = true;
@@ -270,7 +297,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextSmallMountainTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentSmallMountainTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextSmallMountainTile.occupied = true;
@@ -299,7 +326,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextLargeMountainTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentLargeMountainTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextLargeMountainTile.occupied = true;
@@ -328,7 +355,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextCityTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentCityTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextCityTile.occupied = true;
@@ -357,7 +384,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextHeadQuartersTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentHeadQuartersTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextHeadQuartersTile.occupied = true;
@@ -403,7 +430,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextRiverTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentRiverTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextRiverTile.occupied = true;
@@ -432,7 +459,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextGrassTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentGrassTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextGrassTile.occupied = true;
@@ -461,7 +488,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextForestTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentForestTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextForestTile.occupied = true;
@@ -490,7 +517,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextSmallMountainTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentSmallMountainTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextSmallMountainTile.occupied = true;
@@ -519,7 +546,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextLargeMountainTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentLargeMountainTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextLargeMountainTile.occupied = true;
@@ -548,7 +575,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextCityTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentCityTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextCityTile.occupied = true;
@@ -577,7 +604,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextHeadQuartersTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentHeadQuartersTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextHeadQuartersTile.occupied = true;
@@ -623,7 +650,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextRiverTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentRiverTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextRiverTile.occupied = true;
@@ -652,7 +679,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextGrassTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentGrassTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextGrassTile.occupied = true;
@@ -681,7 +708,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextForestTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentForestTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextForestTile.occupied = true;
@@ -710,7 +737,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextSmallMountainTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentSmallMountainTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextSmallMountainTile.occupied = true;
@@ -739,7 +766,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextLargeMountainTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentLargeMountainTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextLargeMountainTile.occupied = true;
@@ -768,7 +795,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextCityTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentCityTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextCityTile.occupied = true;
@@ -797,7 +824,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextHeadQuartersTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentHeadQuartersTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextHeadQuartersTile.occupied = true;
@@ -842,7 +869,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextRiverTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentRiverTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextRiverTile.occupied = true;
@@ -871,7 +898,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextGrassTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentGrassTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextGrassTile.occupied = true;
@@ -900,7 +927,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextForestTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentForestTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextForestTile.occupied = true;
@@ -929,7 +956,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextSmallMountainTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentSmallMountainTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextSmallMountainTile.occupied = true;
@@ -958,7 +985,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextLargeMountainTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentLargeMountainTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextLargeMountainTile.occupied = true;
@@ -987,7 +1014,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextCityTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentCityTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextCityTile.occupied = true;
@@ -1016,7 +1043,7 @@ public class InfantryScript : MonoBehaviour
                 currentDefenseModifier = nextHeadQuartersTile.defenseModifier;
 
                 //Set current tile to unoccupied
-                currentHeadQuartersTile.occupied = false;
+                setCurrentTileToUnoccupied();
 
                 //Set new tile to occupied
                 nextHeadQuartersTile.occupied = true;
@@ -1039,25 +1066,54 @@ public class InfantryScript : MonoBehaviour
         //Replenish MovementPoints
         movementPoints = maxMovementPoints;
 
-        //Reduce FuelLevel
-        if (fuelLevel > 0)
-        {
-            fuelLevel--;
-        }
-
         //If the current terrain tile is a city, replenish 2 health, all ammo, all fuel + show suppling UI for a second
         if (currentCityTile != null)
         {
-            health += 2;
-            if (health > 10)
+            int temp = health;
+            temp += 2;
+            if (temp > 10)
             {
                 health = 10;
+            } else
+            {
+                health = temp;
             }
 
             ammoCount = maxAmmoCount;
             fuelLevel = maxFuelLevel;
 
             //Play Supplying UI for a second?
+
+        } 
+        else if (currentHeadQuartersTile != null)
+        {
+            int temp = health;
+            temp += 3;
+            if (temp > 10)
+            {
+                health = 10;
+            }
+            else
+            {
+                health = temp;
+            }
+
+            ammoCount = maxAmmoCount;
+            fuelLevel = maxFuelLevel;
+
+            //Play Supplying UI for a second?
+        }
+        else
+        {
+            //Reduce FuelLevel and if out of fuel take damage
+            if (fuelLevel > 0)
+            {
+                fuelLevel--;
+            }
+            else
+            {
+                health--;
+            }
         }
 
     }
@@ -1082,12 +1138,26 @@ public class InfantryScript : MonoBehaviour
 
     public void takeDamage(int dmg)
     {
+        if (dmg < 0)
+        {
+            dmg = 0; //Maybe make there be a minimum damage dealt at 1 for balancing - that would be done here
+        }
+
         //Play damage animation
 
         //Play damage sound effect
 
         //Reduce health by dmg amount
-        health -= dmg;
+        int temp = health;
+        temp -= dmg;
+        if (temp < 0)
+        {
+            health = 0;
+        }
+        else
+        {
+            health = temp;
+        }
 
     }
 
@@ -1097,8 +1167,13 @@ public class InfantryScript : MonoBehaviour
 
         //Play death sound effect
 
-        //Delete Unit
-        Destroy(gameObject);
+        //Unit dies
+        alive = false;
+        active = false;
+        setCurrentTileToUnoccupied();
+
+        //Unit becomes invisible
+        dissappear();
     }
 
     public void storeTileAtCurrentPosition()
@@ -1305,6 +1380,54 @@ public class InfantryScript : MonoBehaviour
         if (nextHeadQuartersTile != null)
         {
             return;
+        }
+    }
+
+    public void dissappear()
+    {
+        GetComponent<Renderer>().material.color = new Color(r, g, b, 0);
+        healthDisappear.dissappear();
+        fuelDisappear.dissappear();
+        ammoDisappear.dissappear();
+    }
+
+    public void reappear()
+    {
+        GetComponent<Renderer>().material.color = new Color(r, g, b, defaultAlpha);
+        healthDisappear.reappear();
+        fuelDisappear.reappear();
+        ammoDisappear.reappear();
+    }
+
+    public void setCurrentTileToUnoccupied()
+    {
+        if (currentRiverTile != null)
+        {
+            currentRiverTile.occupied = false;
+        }
+        else if (currentGrassTile != null)
+        {
+            currentGrassTile.occupied = false;
+        }
+        else if (currentForestTile != null)
+        {
+            currentForestTile.occupied = false;
+        }
+        else if (currentSmallMountainTile != null)
+        {
+            currentSmallMountainTile.occupied = false;
+        }
+        else if (currentLargeMountainTile != null)
+        {
+            currentLargeMountainTile.occupied = false;
+        }
+        else if (currentCityTile != null)
+        {
+            currentCityTile.occupied = false;
+        }
+        else if (currentHeadQuartersTile != null)
+        {
+            currentHeadQuartersTile.occupied = false;
         }
     }
 }
