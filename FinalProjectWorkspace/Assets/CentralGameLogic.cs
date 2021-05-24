@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 /*
  * Author: Rees Anderson
- * 5.22.21
+ * 5.23.21
  * Game Design Project
  */
 
@@ -61,6 +61,11 @@ public class CentralGameLogic : MonoBehaviour
     public List<AntiTankScript> currentAntiTankTargets = new List<AntiTankScript>();
 
     Vector3 tempCursorPosition;
+
+    //TO BE USED FOR TARGET CYCLING
+    public int infantryIndex = 0;
+    public int antiTankIndex = 0;
+    public int tankIndex = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -331,7 +336,7 @@ public class CentralGameLogic : MonoBehaviour
                     {
                         for (int i = 0; i < blueInfantry.Length; i++)
                         {
-                            if (blueInfantry[i].transform.position == north || blueInfantry[i].transform.position == south || blueInfantry[i].transform.position == west || blueInfantry[i].transform.position == east)
+                            if (blueInfantry[i].alive && (blueInfantry[i].transform.position == north || blueInfantry[i].transform.position == south || blueInfantry[i].transform.position == west || blueInfantry[i].transform.position == east))
                             {
                                 currentInfantryTargets.Add(blueInfantry[i]);
                             }
@@ -339,7 +344,7 @@ public class CentralGameLogic : MonoBehaviour
 
                         for (int i = 0; i < blueTanks.Length; i++)
                         {
-                            if (blueTanks[i].transform.position == north || blueTanks[i].transform.position == south || blueTanks[i].transform.position == west || blueTanks[i].transform.position == east)
+                            if (blueTanks[i].alive && (blueTanks[i].transform.position == north || blueTanks[i].transform.position == south || blueTanks[i].transform.position == west || blueTanks[i].transform.position == east))
                             {
                                 currentTankTargets.Add(blueTanks[i]);
                             }
@@ -347,7 +352,7 @@ public class CentralGameLogic : MonoBehaviour
 
                         for (int i = 0; i < blueAntiTanks.Length; i++)
                         {
-                            if (blueAntiTanks[i].transform.position == north || blueAntiTanks[i].transform.position == south || blueAntiTanks[i].transform.position == west || blueAntiTanks[i].transform.position == east)
+                            if (blueAntiTanks[i].alive && (blueAntiTanks[i].transform.position == north || blueAntiTanks[i].transform.position == south || blueAntiTanks[i].transform.position == west || blueAntiTanks[i].transform.position == east))
                             {
                                 currentAntiTankTargets.Add(blueAntiTanks[i]);
                             }
@@ -357,7 +362,7 @@ public class CentralGameLogic : MonoBehaviour
                     {
                         for (int i = 0; i < redInfantry.Length; i++)
                         {
-                            if (redInfantry[i].transform.position == north || redInfantry[i].transform.position == south || redInfantry[i].transform.position == west || redInfantry[i].transform.position == east)
+                            if (redInfantry[i].alive && (redInfantry[i].transform.position == north || redInfantry[i].transform.position == south || redInfantry[i].transform.position == west || redInfantry[i].transform.position == east))
                             {
                                 currentInfantryTargets.Add(redInfantry[i]);
                             }
@@ -365,7 +370,7 @@ public class CentralGameLogic : MonoBehaviour
 
                         for (int i = 0; i < redTanks.Length; i++)
                         {
-                            if (redTanks[i].transform.position == north || redTanks[i].transform.position == south || redTanks[i].transform.position == west || redTanks[i].transform.position == east)
+                            if (redTanks[i].alive && (redTanks[i].transform.position == north || redTanks[i].transform.position == south || redTanks[i].transform.position == west || redTanks[i].transform.position == east))
                             {
                                 currentTankTargets.Add(redTanks[i]);
                             }
@@ -373,7 +378,7 @@ public class CentralGameLogic : MonoBehaviour
 
                         for (int i = 0; i < redAntiTanks.Length; i++)
                         {
-                            if (redAntiTanks[i].transform.position == north || redAntiTanks[i].transform.position == south || redAntiTanks[i].transform.position == west || redAntiTanks[i].transform.position == east)
+                            if (redAntiTanks[i].alive && (redAntiTanks[i].transform.position == north || redAntiTanks[i].transform.position == south || redAntiTanks[i].transform.position == west || redAntiTanks[i].transform.position == east))
                             {
                                 currentAntiTankTargets.Add(redAntiTanks[i]);
                             }
@@ -399,7 +404,7 @@ public class CentralGameLogic : MonoBehaviour
                     {
                         for (int i = 0; i < blueInfantry.Length; i++)
                         {
-                            if (blueInfantry[i].transform.position == north || blueInfantry[i].transform.position == south || blueInfantry[i].transform.position == west || blueInfantry[i].transform.position == east)
+                            if (blueInfantry[i].alive && (blueInfantry[i].transform.position == north || blueInfantry[i].transform.position == south || blueInfantry[i].transform.position == west || blueInfantry[i].transform.position == east))
                             {
                                 currentInfantryTargets.Add(blueInfantry[i]);
                             }
@@ -407,7 +412,7 @@ public class CentralGameLogic : MonoBehaviour
 
                         for (int i = 0; i < blueTanks.Length; i++)
                         {
-                            if (blueTanks[i].transform.position == north || blueTanks[i].transform.position == south || blueTanks[i].transform.position == west || blueTanks[i].transform.position == east)
+                            if (blueTanks[i].alive && (blueTanks[i].transform.position == north || blueTanks[i].transform.position == south || blueTanks[i].transform.position == west || blueTanks[i].transform.position == east))
                             {
                                 currentTankTargets.Add(blueTanks[i]);
                             }
@@ -415,7 +420,7 @@ public class CentralGameLogic : MonoBehaviour
 
                         for (int i = 0; i < blueAntiTanks.Length; i++)
                         {
-                            if (blueAntiTanks[i].transform.position == north || blueAntiTanks[i].transform.position == south || blueAntiTanks[i].transform.position == west || blueAntiTanks[i].transform.position == east)
+                            if (blueAntiTanks[i].alive && (blueAntiTanks[i].transform.position == north || blueAntiTanks[i].transform.position == south || blueAntiTanks[i].transform.position == west || blueAntiTanks[i].transform.position == east))
                             {
                                 currentAntiTankTargets.Add(blueAntiTanks[i]);
                             }
@@ -425,7 +430,7 @@ public class CentralGameLogic : MonoBehaviour
                     {
                         for (int i = 0; i < redInfantry.Length; i++)
                         {
-                            if (redInfantry[i].transform.position == north || redInfantry[i].transform.position == south || redInfantry[i].transform.position == west || redInfantry[i].transform.position == east)
+                            if (redInfantry[i].alive && (redInfantry[i].transform.position == north || redInfantry[i].transform.position == south || redInfantry[i].transform.position == west || redInfantry[i].transform.position == east))
                             {
                                 currentInfantryTargets.Add(redInfantry[i]);
                             }
@@ -433,7 +438,7 @@ public class CentralGameLogic : MonoBehaviour
 
                         for (int i = 0; i < redTanks.Length; i++)
                         {
-                            if (redTanks[i].transform.position == north || redTanks[i].transform.position == south || redTanks[i].transform.position == west || redTanks[i].transform.position == east)
+                            if (redTanks[i].alive && (redTanks[i].transform.position == north || redTanks[i].transform.position == south || redTanks[i].transform.position == west || redTanks[i].transform.position == east))
                             {
                                 currentTankTargets.Add(redTanks[i]);
                             }
@@ -441,7 +446,7 @@ public class CentralGameLogic : MonoBehaviour
 
                         for (int i = 0; i < redAntiTanks.Length; i++)
                         {
-                            if (redAntiTanks[i].transform.position == north || redAntiTanks[i].transform.position == south || redAntiTanks[i].transform.position == west || redAntiTanks[i].transform.position == east)
+                            if (redAntiTanks[i].alive && (redAntiTanks[i].transform.position == north || redAntiTanks[i].transform.position == south || redAntiTanks[i].transform.position == west || redAntiTanks[i].transform.position == east))
                             {
                                 currentAntiTankTargets.Add(redAntiTanks[i]);
                             }
@@ -467,7 +472,7 @@ public class CentralGameLogic : MonoBehaviour
                     {
                         for (int i = 0; i < blueInfantry.Length; i++)
                         {
-                            if (blueInfantry[i].transform.position == north || blueInfantry[i].transform.position == south || blueInfantry[i].transform.position == west || blueInfantry[i].transform.position == east)
+                            if (blueInfantry[i].alive && (blueInfantry[i].transform.position == north || blueInfantry[i].transform.position == south || blueInfantry[i].transform.position == west || blueInfantry[i].transform.position == east))
                             {
                                 currentInfantryTargets.Add(blueInfantry[i]);
                             }
@@ -475,7 +480,7 @@ public class CentralGameLogic : MonoBehaviour
 
                         for (int i = 0; i < blueTanks.Length; i++)
                         {
-                            if (blueTanks[i].transform.position == north || blueTanks[i].transform.position == south || blueTanks[i].transform.position == west || blueTanks[i].transform.position == east)
+                            if (blueTanks[i].alive && (blueTanks[i].transform.position == north || blueTanks[i].transform.position == south || blueTanks[i].transform.position == west || blueTanks[i].transform.position == east))
                             {
                                 currentTankTargets.Add(blueTanks[i]);
                             }
@@ -483,7 +488,7 @@ public class CentralGameLogic : MonoBehaviour
 
                         for (int i = 0; i < blueAntiTanks.Length; i++)
                         {
-                            if (blueAntiTanks[i].transform.position == north || blueAntiTanks[i].transform.position == south || blueAntiTanks[i].transform.position == west || blueAntiTanks[i].transform.position == east)
+                            if (blueAntiTanks[i].alive && (blueAntiTanks[i].transform.position == north || blueAntiTanks[i].transform.position == south || blueAntiTanks[i].transform.position == west || blueAntiTanks[i].transform.position == east))
                             {
                                 currentAntiTankTargets.Add(blueAntiTanks[i]);
                             }
@@ -493,7 +498,7 @@ public class CentralGameLogic : MonoBehaviour
                     {
                         for (int i = 0; i < redInfantry.Length; i++)
                         {
-                            if (redInfantry[i].transform.position == north || redInfantry[i].transform.position == south || redInfantry[i].transform.position == west || redInfantry[i].transform.position == east)
+                            if (redInfantry[i].alive && (redInfantry[i].transform.position == north || redInfantry[i].transform.position == south || redInfantry[i].transform.position == west || redInfantry[i].transform.position == east))
                             {
                                 currentInfantryTargets.Add(redInfantry[i]);
                             }
@@ -501,7 +506,7 @@ public class CentralGameLogic : MonoBehaviour
 
                         for (int i = 0; i < redTanks.Length; i++)
                         {
-                            if (redTanks[i].transform.position == north || redTanks[i].transform.position == south || redTanks[i].transform.position == west || redTanks[i].transform.position == east)
+                            if (redTanks[i].alive && (redTanks[i].transform.position == north || redTanks[i].transform.position == south || redTanks[i].transform.position == west || redTanks[i].transform.position == east))
                             {
                                 currentTankTargets.Add(redTanks[i]);
                             }
@@ -509,7 +514,7 @@ public class CentralGameLogic : MonoBehaviour
 
                         for (int i = 0; i < redAntiTanks.Length; i++)
                         {
-                            if (redAntiTanks[i].transform.position == north || redAntiTanks[i].transform.position == south || redAntiTanks[i].transform.position == west || redAntiTanks[i].transform.position == east)
+                            if (redAntiTanks[i].alive && (redAntiTanks[i].transform.position == north || redAntiTanks[i].transform.position == south || redAntiTanks[i].transform.position == west || redAntiTanks[i].transform.position == east))
                             {
                                 currentAntiTankTargets.Add(redAntiTanks[i]);
                             }
@@ -625,6 +630,37 @@ public class CentralGameLogic : MonoBehaviour
                     }
                     attackOrWaitUI.menuArrow.currentPosition = 0;
                     tempCursorPosition = cursor.transform.position;
+
+                    //Snap cursor to the position of the first target
+                    if (currentInfantryTargets.Count > 0)
+                    {
+                        Vector3 target = currentInfantryTargets[0].transform.position;
+                        target.y -= 0.1f;
+                        cursor.transform.position = target;
+                        storeUnitAtCursorPosition();
+                        //infantryIndex++;
+                    }
+                    else if (currentAntiTankTargets.Count > 0)
+                    {
+                        Vector3 target = currentAntiTankTargets[0].transform.position;
+                        target.y -= 0.1f;
+                        cursor.transform.position = target;
+                        storeUnitAtCursorPosition();
+                        //antiTankIndex++;
+                    }
+                    else if (currentTankTargets.Count > 0)
+                    {
+                        Vector3 target = currentTankTargets[0].transform.position;
+                        target.y -= 0.1f;
+                        cursor.transform.position = target;
+                        storeUnitAtCursorPosition();
+                        //tankIndex++;
+                    }
+                    else
+                    {
+                        Debug.Log("Critical Error - Flow should not be here");
+                    }
+
                     state = "attack";
                 }
                 else if (attackOrWaitUI.menuArrow.currentPosition == 1)
@@ -654,66 +690,152 @@ public class CentralGameLogic : MonoBehaviour
             endTurnUI.dissappear();
             attackOrWaitUI.dissappear();
 
+            //Certain UI Elements Appear
+            unitUI.allowedToReappear = true;
+            unitUI.reappear();
+            terrainUI.reappear();
 
-            //Change Cursor to a crosshair
-
-
-            //TO BE USED FOR TARGET CYCLING
-            //int infantryIndex = 0;
-            //int antiTankIndex = 0;
-            //int tankIndex = 0;
-
-            //Snap cursor to the position of the first target
-            if (currentInfantryTargets.Count > 0)
-            {
-                Vector3 target = currentInfantryTargets[0].transform.position;
-                target.y -= 0.1f;
-                cursor.transform.position = target;
-                storeUnitAtCursorPosition();
-                cursor.reappear();
-                unitUI.allowedToReappear = true;
-                unitUI.reappear();
-                terrainUI.reappear();
-            }
-            else if (currentAntiTankTargets.Count > 0)
-            {
-                Vector3 target = currentAntiTankTargets[0].transform.position;
-                target.y -= 0.1f;
-                cursor.transform.position = target;
-                storeUnitAtCursorPosition();
-                cursor.reappear();
-                unitUI.allowedToReappear = true;
-                unitUI.reappear();
-                terrainUI.reappear();
-            }
-            else if (currentTankTargets.Count > 0)
-            {
-                Vector3 target = currentTankTargets[0].transform.position;
-                target.y -= 0.1f;
-                cursor.transform.position = target;
-                storeUnitAtCursorPosition();
-                cursor.reappear();
-                unitUI.allowedToReappear = true;
-                unitUI.reappear();
-                terrainUI.reappear();
-            }
-            else
-            {
-                Debug.Log("Critical Error - Flow should not be here");
-            }
+            //Change Cursor to a crosshair and appear
+            cursor.reappear();
 
             //Calculate damage to be done to current target and show estimated damage above the terrain/unit UI - much of the damage calculation done in the E button press section should likely be in a method that can be recalled so that the forcast UI can be constantly updated
 
             //Pressing A (Left on controller) - cycles to the previous unit (cycles around if at 0 index), move cursor, redo calculations
             if (Input.GetKeyDown(KeyCode.A)) //Add controller support later
             {
-                
+                if (tankIndex > 0)
+                {
+                    tankIndex--;
+                    Vector3 target = currentTankTargets[tankIndex].transform.position;
+                    target.y -= 0.1f;
+                    cursor.transform.position = target;
+                    storeUnitAtCursorPosition();
+                    //tankIndex--;
+                }
+                else if (antiTankIndex > 0)
+                {
+                    antiTankIndex--;
+                    Vector3 target = currentAntiTankTargets[antiTankIndex].transform.position;
+                    target.y -= 0.1f;
+                    cursor.transform.position = target;
+                    storeUnitAtCursorPosition();
+                    //antiTankIndex--;
+                }
+                else if (infantryIndex > 0)
+                {
+                    infantryIndex--;
+                    Vector3 target = currentInfantryTargets[infantryIndex].transform.position;
+                    target.y -= 0.1f;
+                    cursor.transform.position = target;
+                    storeUnitAtCursorPosition();
+                    //infantryIndex--;
+                }
+                else
+                {
+                    if (currentTankTargets.Count > 0)
+                    {
+                        tankIndex = currentTankTargets.Count;
+                    } 
+                    if (currentAntiTankTargets.Count > 0)
+                    {
+                        antiTankIndex = currentAntiTankTargets.Count;
+                    }
+                    if (currentInfantryTargets.Count > 0)
+                    {
+                        infantryIndex = currentInfantryTargets.Count;
+                    }
+
+                    if (currentTankTargets.Count > 0)
+                    {
+                        tankIndex--;
+                        Vector3 target = currentTankTargets[tankIndex].transform.position;
+                        target.y -= 0.1f;
+                        cursor.transform.position = target;
+                        storeUnitAtCursorPosition();
+                        //tankIndex--;
+                    } 
+                    else if (currentAntiTankTargets.Count > 0)
+                    {
+                        antiTankIndex--;
+                        Vector3 target = currentAntiTankTargets[antiTankIndex].transform.position;
+                        target.y -= 0.1f;
+                        cursor.transform.position = target;
+                        storeUnitAtCursorPosition();
+                        //antiTankIndex--;
+                    }
+                    else if (currentInfantryTargets.Count > 0)
+                    {
+                        infantryIndex--;
+                        Vector3 target = currentInfantryTargets[infantryIndex].transform.position;
+                        target.y -= 0.1f;
+                        cursor.transform.position = target;
+                        storeUnitAtCursorPosition();
+                        //infantryIndex--;
+                    }
+                }
             }
 
             //Pressing D (Right on controller) - cycles to the next unit (cycles around if at end index), move cursor, redo calculations
-            if (Input.GetKeyDown(KeyCode.A)) //Add controller support later
+            if (Input.GetKeyDown(KeyCode.D)) //Add controller support later
             {
+                if (infantryIndex < currentInfantryTargets.Count)
+                {
+                    Vector3 target = currentInfantryTargets[infantryIndex].transform.position;
+                    target.y -= 0.1f;
+                    cursor.transform.position = target;
+                    storeUnitAtCursorPosition();
+                    infantryIndex++;
 
+                } else if (antiTankIndex < currentAntiTankTargets.Count)
+                {
+                    Vector3 target = currentAntiTankTargets[antiTankIndex].transform.position;
+                    target.y -= 0.1f;
+                    cursor.transform.position = target;
+                    storeUnitAtCursorPosition();
+                    antiTankIndex++;
+                } else if (tankIndex < currentTankTargets.Count)
+                {
+                    Vector3 target = currentTankTargets[tankIndex].transform.position;
+                    target.y -= 0.1f;
+                    cursor.transform.position = target;
+                    storeUnitAtCursorPosition();
+                    tankIndex++;
+                } 
+                else
+                {
+                    infantryIndex = 0;
+                    antiTankIndex = 0;
+                    tankIndex = 0;
+
+                    if (currentInfantryTargets.Count > 0)
+                    {
+                        Vector3 target = currentInfantryTargets[infantryIndex].transform.position;
+                        target.y -= 0.1f;
+                        cursor.transform.position = target;
+                        storeUnitAtCursorPosition();
+                        //infantryIndex++;
+                    }
+                    else if (currentAntiTankTargets.Count > 0)
+                    {
+                        Vector3 target = currentAntiTankTargets[antiTankIndex].transform.position;
+                        target.y -= 0.1f;
+                        cursor.transform.position = target;
+                        storeUnitAtCursorPosition();
+                        //antiTankIndex++;
+                    }
+                    else if (currentTankTargets.Count > 0)
+                    {
+                        Vector3 target = currentTankTargets[tankIndex].transform.position;
+                        target.y -= 0.1f;
+                        cursor.transform.position = target;
+                        storeUnitAtCursorPosition();
+                        //tankIndex++;
+                    }
+                    else
+                    {
+                        Debug.Log("Critical Error - Flow should not be here");
+                    }
+                }
             }
 
             //Pressing E (A on controller)
