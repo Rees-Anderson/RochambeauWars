@@ -56,17 +56,10 @@ public class CentralGameLogic : MonoBehaviour
     public InfantryScript[] redInfantry;
     public AntiTankScript[] redAntiTanks;
 
-    public List<TankScript> currentTankTargets = new List<TankScript>();
-    public List<InfantryScript> currentInfantryTargets = new List<InfantryScript>();
-    public List<AntiTankScript> currentAntiTankTargets = new List<AntiTankScript>();
-
     Vector3 tempCursorPosition;
-
-    //TO BE USED FOR TARGET CYCLING
-    public int infantryIndex = 0;
-    public int antiTankIndex = 0;
-    public int tankIndex = 0;
-    public int currentlyAtDirection;
+    
+    public List<Vector3> directions = new List<Vector3>();
+    public int directionIterator = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -274,6 +267,45 @@ public class CentralGameLogic : MonoBehaviour
             //Pressing E (A on controller)
             if (Input.GetKeyDown(KeyCode.E)) //Add controller support later
             {
+                //Update Cursor Pos
+                Vector3 whereToMoveCursor;
+                if (currentInfantry != null)
+                {
+                    whereToMoveCursor = currentInfantry.transform.position;
+                    whereToMoveCursor.y -= 0.1f;
+                }
+                else if (currentAntiTank != null)
+                {
+                    whereToMoveCursor = currentAntiTank.transform.position;
+                    whereToMoveCursor.y -= 0.1f;
+                }
+                else if (currentTank != null)
+                {
+                    whereToMoveCursor = currentTank.transform.position;
+                    whereToMoveCursor.y -= 0.1f;
+                }
+                else
+                {
+                    whereToMoveCursor = new Vector3(-1.5f, -1.5f, 0);
+                }
+                cursor.transform.position = whereToMoveCursor;
+
+                //Hide top left movement points window
+                movementRemainingUI.dissappear();
+
+                if (currentInfantry != null)
+                {
+                    currentInfantry.selected = false;
+                }
+                else if (currentAntiTank != null)
+                {
+                    currentAntiTank.selected = false;
+                }
+                else if (currentTank != null)
+                {
+                    currentTank.selected = false;
+                }
+
                 //If there is at least one valid target, send to attack or wait, else only wait
                 if (atLeastOneValidTargetFromCurrent())
                 {
@@ -367,21 +399,78 @@ public class CentralGameLogic : MonoBehaviour
             {
                 if (attackOrWaitUI.menuArrow.currentPosition == 0)
                 {
+                    Vector3 north;
+                    Vector3 south;
+                    Vector3 east;
+                    Vector3 west;
+
                     if (currentInfantry != null)
                     {
                         attackingInfantry = currentInfantry;
+                        tempCursorPosition = cursor.transform.position;
+
+                        north = attackingInfantry.transform.position;
+                        south = attackingInfantry.transform.position;
+                        east = attackingInfantry.transform.position;
+                        west = attackingInfantry.transform.position;
+                        north.y += 1;
+                        south.y -= 1;
+                        east.x += 1;
+                        west.x -= 1;
+
+                        directions.Add(west);
+                        directions.Add(north);
+                        directions.Add(east);
+                        directions.Add(south);
+
+                        directions = removeFriendliesFromTargets(directions, attackingInfantry.tag);
                     }
                     else if (currentAntiTank != null)
                     {
                         attackingAntiTank = currentAntiTank;
+                        tempCursorPosition = cursor.transform.position;
+
+                        north = attackingAntiTank.transform.position;
+                        south = attackingAntiTank.transform.position;
+                        east = attackingAntiTank.transform.position;
+                        west = attackingAntiTank.transform.position;
+                        north.y += 1;
+                        south.y -= 1;
+                        east.x += 1;
+                        west.x -= 1;
+
+                        directions.Add(west);
+                        directions.Add(north);
+                        directions.Add(east);
+                        directions.Add(south);
+
+                        directions = removeFriendliesFromTargets(directions, attackingAntiTank.tag);
                     }
                     else if (currentTank != null)
                     {
                         attackingTank = currentTank;
-                    }
-                    attackOrWaitUI.menuArrow.currentPosition = 0;
-                    tempCursorPosition = cursor.transform.position;
+                        tempCursorPosition = cursor.transform.position;
 
+                        north = attackingTank.transform.position;
+                        south = attackingTank.transform.position;
+                        east = attackingTank.transform.position;
+                        west = attackingTank.transform.position;
+                        north.y += 1;
+                        south.y -= 1;
+                        east.x += 1;
+                        west.x -= 1;
+
+                        directions.Add(west);
+                        directions.Add(north);
+                        directions.Add(east);
+                        directions.Add(south);
+
+                        directions = removeFriendliesFromTargets(directions, attackingTank.tag);
+                    }
+                    storeUnitAtCursorPosition();
+
+                    attackOrWaitUI.menuArrow.currentPosition = 0;
+                    
                     state = "attack";
                 }
                 else if (attackOrWaitUI.menuArrow.currentPosition == 1)
@@ -416,71 +505,6 @@ public class CentralGameLogic : MonoBehaviour
             unitUI.reappear();
             terrainUI.reappear();
 
-            //Calculate possible locations of enemies
-            List<Vector3> directions = new List<Vector3>();
-            //Vector3[] directions = new Vector3[4];
-            Vector3 north;
-            Vector3 south;
-            Vector3 east;
-            Vector3 west;
-
-            if (attackingInfantry != null)
-            {
-                north = attackingInfantry.transform.position;
-                south = attackingInfantry.transform.position;
-                east = attackingInfantry.transform.position;
-                west = attackingInfantry.transform.position;
-                north.y += 1;
-                south.y -= 1;
-                east.x += 1;
-                west.x -= 1;
-
-                directions.Add(west);
-                directions.Add(north);
-                directions.Add(east);
-                directions.Add(south);
-
-                removeFriendliesFromTargets(ref directions, attackingInfantry.tag);
-            }
-            else if (attackingAntiTank != null)
-            {
-                north = attackingAntiTank.transform.position;
-                south = attackingAntiTank.transform.position;
-                east = attackingAntiTank.transform.position;
-                west = attackingAntiTank.transform.position;
-                north.y += 1;
-                south.y -= 1;
-                east.x += 1;
-                west.x -= 1;
-
-                directions.Add(west);
-                directions.Add(north);
-                directions.Add(east);
-                directions.Add(south);
-
-                removeFriendliesFromTargets(ref directions, attackingAntiTank.tag);
-            }
-            else if (attackingTank != null)
-            {
-                north = attackingTank.transform.position;
-                south = attackingTank.transform.position;
-                east = attackingTank.transform.position;
-                west = attackingTank.transform.position;
-                north.y += 1;
-                south.y -= 1;
-                east.x += 1;
-                west.x -= 1;
-
-                directions.Add(west);
-                directions.Add(north);
-                directions.Add(east);
-                directions.Add(south);
-
-                removeFriendliesFromTargets(ref directions, attackingTank.tag);
-            }
-
-            storeUnitAtCursorPosition();
-
             //Change Cursor to a crosshair and appear
             cursor.reappear();
 
@@ -489,13 +513,37 @@ public class CentralGameLogic : MonoBehaviour
             //Pressing A (Left on controller) - cycles to the previous unit (cycles around if at 0 index), move cursor, redo calculations
             if (Input.GetKeyDown(KeyCode.A)) //Add controller support later
             {
+                if (directionIterator > 0)
+                {
+                    directionIterator--;
+                }
+                else
+                {
+                    directionIterator = directions.Count - 1;
+                }
                 
+                Vector3 target = directions[directionIterator];
+                target.y -= 0.1f;
+                cursor.transform.position = target;
+                storeUnitAtCursorPosition();
             }
 
             //Pressing D (Right on controller) - cycles to the next unit (cycles around if at end index), move cursor, redo calculations
             if (Input.GetKeyDown(KeyCode.D)) //Add controller support later
             {
-                
+                if (directionIterator < directions.Count - 1)
+                {
+                    directionIterator++;
+                }
+                else
+                {
+                    directionIterator = 0;
+                }
+
+                Vector3 target = directions[directionIterator];
+                target.y -= 0.1f;
+                cursor.transform.position = target;
+                storeUnitAtCursorPosition();
             }
 
             //Pressing E (A on controller)
@@ -529,6 +577,7 @@ public class CentralGameLogic : MonoBehaviour
                         cursor.transform.position = tempCursorPosition;
 
                         attackingInfantry.wait();
+                        //storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
                         state = "default";
                     } 
                     else if (currentAntiTank != null)
@@ -553,6 +602,7 @@ public class CentralGameLogic : MonoBehaviour
                         cursor.transform.position = tempCursorPosition;
 
                         attackingInfantry.wait();
+                        //storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
                         state = "default";
                     }
                     else if (currentTank != null)
@@ -576,6 +626,7 @@ public class CentralGameLogic : MonoBehaviour
                         cursor.transform.position = tempCursorPosition;
 
                         attackingInfantry.wait();
+                        //storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
                         state = "default";
                     }
                     else
@@ -842,8 +893,10 @@ public class CentralGameLogic : MonoBehaviour
         return (currentInfantry != null || currentAntiTank != null || currentTank != null);
     }
 
-    public void removeFriendliesFromTargets(ref List<Vector3> toReduce, string tagToRemove)
+    public List<Vector3> removeFriendliesFromTargets(List<Vector3> toReduce, string tagToRemove)
     {
+        List<Vector3> temp = new List<Vector3>();
+
         InfantryScript potentialInfantryTarget;
         TankScript potentialTankTarget;
         AntiTankScript potentialAntiTankTarget;
@@ -854,23 +907,24 @@ public class CentralGameLogic : MonoBehaviour
             potentialTankTarget = findTankAtLocation(toReduce[i]);
             potentialAntiTankTarget = findAntiTankAtLocation(toReduce[i]);
 
-            if (potentialInfantryTarget == null || potentialInfantryTarget.tag == tagToRemove)
+            if (potentialInfantryTarget != null && potentialInfantryTarget.tag != tagToRemove && potentialInfantryTarget.alive)
             {
-                toReduce.Remove(toReduce[i]);
+                temp.Add(toReduce[i]);
             }
-            else if (potentialTankTarget == null || potentialTankTarget.tag == tagToRemove)
+            else if (potentialTankTarget != null && potentialTankTarget.tag != tagToRemove && potentialTankTarget.alive)
             {
-                toReduce.Remove(toReduce[i]);
+                temp.Add(toReduce[i]);
             }
-            else if (potentialAntiTankTarget == null || potentialAntiTankTarget.tag == tagToRemove)
+            else if (potentialAntiTankTarget != null && potentialAntiTankTarget.tag != tagToRemove && potentialAntiTankTarget.alive)
             {
-                toReduce.Remove(toReduce[i]);
+                temp.Add(toReduce[i]);
             }
         }
 
-        Vector3 target = toReduce[0];
+        Vector3 target = temp[0];
         target.y -= 0.1f;
         cursor.transform.position = target;
+        return temp;
     }
 
     public bool atLeastOneValidTargetFromCurrent()
