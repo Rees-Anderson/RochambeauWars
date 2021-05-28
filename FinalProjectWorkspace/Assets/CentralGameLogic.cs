@@ -61,6 +61,10 @@ public class CentralGameLogic : MonoBehaviour
     public List<Vector3> directions = new List<Vector3>();
     public int directionIterator = 0;
 
+    private int defenderDisadvantage = 2;
+    private int attackBonus = 2;
+    private int typeMatchBonus = 3;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -559,14 +563,14 @@ public class CentralGameLogic : MonoBehaviour
                 {
                     int damageToDealToDefender = 0;
                     damageToDealToDefender += (int) Mathf.Ceil(((float) attackingInfantry.health) / 2); //Add Base Attack : Ceiling of (Health / 2)
-                    damageToDealToDefender += 2; //Add amount for attack bonus
+                    damageToDealToDefender += attackBonus; //Add amount for attack bonus
                     if (currentInfantry != null)
                     {
                         damageToDealToDefender -= currentInfantry.currentDefenseModifier; //Subtract defense modifier
 
                         int damageToDealToAttacker = 0;
                         damageToDealToAttacker += (int) Mathf.Ceil(((float)currentInfantry.health) / 2); //Add Base Attack : Ceiling of (Health / 2)
-                        damageToDealToAttacker -= 2; //Sub amount for defense penalty
+                        damageToDealToAttacker -= defenderDisadvantage; //Sub amount for defense penalty
                         damageToDealToAttacker -= attackingInfantry.currentDefenseModifier; //Sub defense modifier
 
                         attackingInfantry.fireWeaponOffensive();
@@ -593,11 +597,11 @@ public class CentralGameLogic : MonoBehaviour
                     else if (currentAntiTank != null)
                     {
                         damageToDealToDefender -= currentAntiTank.currentDefenseModifier; //Subtract defense modifier
-                        damageToDealToDefender += 3; //Add type match bonus
+                        damageToDealToDefender += typeMatchBonus; //Add type match bonus
 
                         int damageToDealToAttacker = 0;
                         damageToDealToAttacker += (int) Mathf.Ceil(((float)currentAntiTank.health) / 2);
-                        damageToDealToAttacker -= 2;
+                        damageToDealToAttacker -= defenderDisadvantage;
                         damageToDealToAttacker -= attackingInfantry.currentDefenseModifier;
 
                         attackingInfantry.fireWeaponOffensive();
@@ -627,7 +631,7 @@ public class CentralGameLogic : MonoBehaviour
 
                         int damageToDealToAttacker = 0;
                         damageToDealToAttacker += (int)Mathf.Ceil(((float)currentTank.health) / 2);
-                        damageToDealToAttacker -= 2;
+                        damageToDealToAttacker -= defenderDisadvantage;
                         damageToDealToAttacker -= attackingInfantry.currentDefenseModifier;
 
                         attackingInfantry.fireWeaponOffensive();
@@ -658,11 +662,205 @@ public class CentralGameLogic : MonoBehaviour
                 } 
                 else if (attackingAntiTank != null)
                 {
+                    int damageToDealToDefender = 0;
+                    damageToDealToDefender += (int)Mathf.Ceil(((float)attackingAntiTank.health) / 2); //Add Base Attack : Ceiling of (Health / 2)
+                    damageToDealToDefender += attackBonus; //Add amount for attack bonus
+                    if (currentInfantry != null)
+                    {
+                        damageToDealToDefender -= currentInfantry.currentDefenseModifier; //Subtract defense modifier
 
+                        int damageToDealToAttacker = 0;
+                        damageToDealToAttacker += (int)Mathf.Ceil(((float)currentInfantry.health) / 2); //Add Base Attack : Ceiling of (Health / 2)
+                        damageToDealToAttacker -= defenderDisadvantage; //Sub amount for defense penalty
+                        damageToDealToAttacker -= attackingAntiTank.currentDefenseModifier; //Sub defense modifier
+
+                        attackingAntiTank.fireWeaponOffensive();
+                        currentInfantry.fireWeaponDefensive();
+                        attackingAntiTank.takeDamage(damageToDealToAttacker);
+                        currentInfantry.takeDamage(damageToDealToDefender);
+
+                        //Change cursor back to normal
+
+
+                        //Retore cursor position
+                        cursor.transform.position = tempCursorPosition;
+
+                        attackingAntiTank.wait();
+                        storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
+
+                        directions.Clear(); //Added 5.28.21
+                        attackingInfantry = null; //Added 5.28.21
+                        attackingAntiTank = null; //Added 5.28.21
+                        attackingTank = null; //Added 5.28.21
+
+                        state = "default";
+                    }
+                    else if (currentAntiTank != null)
+                    {
+                        damageToDealToDefender -= currentAntiTank.currentDefenseModifier; //Subtract defense modifier
+
+                        int damageToDealToAttacker = 0;
+                        damageToDealToAttacker += (int)Mathf.Ceil(((float)currentAntiTank.health) / 2);
+                        damageToDealToAttacker -= defenderDisadvantage;
+                        damageToDealToAttacker -= attackingAntiTank.currentDefenseModifier;
+
+                        attackingAntiTank.fireWeaponOffensive();
+                        currentAntiTank.fireWeaponDefensive();
+                        attackingAntiTank.takeDamage(damageToDealToAttacker);
+                        currentAntiTank.takeDamage(damageToDealToDefender);
+
+                        //Change cursor back to normal
+
+
+                        //Retore cursor position
+                        cursor.transform.position = tempCursorPosition;
+
+                        attackingAntiTank.wait();
+                        storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
+
+                        directions.Clear(); //Added 5.28.21
+                        attackingInfantry = null; //Added 5.28.21
+                        attackingAntiTank = null; //Added 5.28.21
+                        attackingTank = null; //Added 5.28.21
+
+                        state = "default";
+                    }
+                    else if (currentTank != null)
+                    {
+                        damageToDealToDefender -= currentTank.currentDefenseModifier; //Subtract defense modifier
+                        damageToDealToDefender += typeMatchBonus; //Add type match bonus
+
+                        int damageToDealToAttacker = 0;
+                        damageToDealToAttacker += (int)Mathf.Ceil(((float)currentTank.health) / 2);
+                        damageToDealToAttacker -= defenderDisadvantage;
+                        damageToDealToAttacker -= attackingAntiTank.currentDefenseModifier;
+
+                        attackingAntiTank.fireWeaponOffensive();
+                        currentTank.fireWeaponDefensive();
+                        attackingAntiTank.takeDamage(damageToDealToAttacker);
+                        currentTank.takeDamage(damageToDealToDefender);
+
+                        //Change cursor back to normal
+
+
+                        //Retore cursor position
+                        cursor.transform.position = tempCursorPosition;
+
+                        attackingAntiTank.wait();
+                        storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
+
+                        directions.Clear(); //Added 5.28.21
+                        attackingInfantry = null; //Added 5.28.21
+                        attackingAntiTank = null; //Added 5.28.21
+                        attackingTank = null; //Added 5.28.21
+
+                        state = "default";
+                    }
+                    else
+                    {
+                        Debug.Log("Critical Error - Flow should not be here");
+                    }
                 }
                 else if (attackingTank != null)
                 {
+                    int damageToDealToDefender = 0;
+                    damageToDealToDefender += (int)Mathf.Ceil(((float)attackingTank.health) / 2); //Add Base Attack : Ceiling of (Health / 2)
+                    damageToDealToDefender += attackBonus; //Add amount for attack bonus
+                    if (currentInfantry != null)
+                    {
+                        damageToDealToDefender -= currentInfantry.currentDefenseModifier; //Subtract defense modifier
+                        damageToDealToDefender += typeMatchBonus; //Add type match bonus
 
+                        int damageToDealToAttacker = 0;
+                        damageToDealToAttacker += (int)Mathf.Ceil(((float)currentInfantry.health) / 2); //Add Base Attack : Ceiling of (Health / 2)
+                        damageToDealToAttacker -= defenderDisadvantage; //Sub amount for defense penalty
+                        damageToDealToAttacker -= attackingTank.currentDefenseModifier; //Sub defense modifier
+
+                        attackingTank.fireWeaponOffensive();
+                        currentInfantry.fireWeaponDefensive();
+                        attackingTank.takeDamage(damageToDealToAttacker);
+                        currentInfantry.takeDamage(damageToDealToDefender);
+
+                        //Change cursor back to normal
+
+
+                        //Retore cursor position
+                        cursor.transform.position = tempCursorPosition;
+
+                        attackingTank.wait();
+                        storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
+
+                        directions.Clear(); //Added 5.28.21
+                        attackingInfantry = null; //Added 5.28.21
+                        attackingAntiTank = null; //Added 5.28.21
+                        attackingTank = null; //Added 5.28.21
+
+                        state = "default";
+                    }
+                    else if (currentAntiTank != null)
+                    {
+                        damageToDealToDefender -= currentAntiTank.currentDefenseModifier; //Subtract defense modifier
+
+                        int damageToDealToAttacker = 0;
+                        damageToDealToAttacker += (int)Mathf.Ceil(((float)currentAntiTank.health) / 2);
+                        damageToDealToAttacker -= defenderDisadvantage;
+                        damageToDealToAttacker -= attackingTank.currentDefenseModifier;
+
+                        attackingTank.fireWeaponOffensive();
+                        currentAntiTank.fireWeaponDefensive();
+                        attackingTank.takeDamage(damageToDealToAttacker);
+                        currentAntiTank.takeDamage(damageToDealToDefender);
+
+                        //Change cursor back to normal
+
+
+                        //Retore cursor position
+                        cursor.transform.position = tempCursorPosition;
+
+                        attackingTank.wait();
+                        storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
+
+                        directions.Clear(); //Added 5.28.21
+                        attackingInfantry = null; //Added 5.28.21
+                        attackingAntiTank = null; //Added 5.28.21
+                        attackingTank = null; //Added 5.28.21
+
+                        state = "default";
+                    }
+                    else if (currentTank != null)
+                    {
+                        damageToDealToDefender -= currentTank.currentDefenseModifier; //Subtract defense modifier
+
+                        int damageToDealToAttacker = 0;
+                        damageToDealToAttacker += (int)Mathf.Ceil(((float)currentTank.health) / 2);
+                        damageToDealToAttacker -= defenderDisadvantage;
+                        damageToDealToAttacker -= attackingTank.currentDefenseModifier;
+
+                        attackingTank.fireWeaponOffensive();
+                        currentTank.fireWeaponDefensive();
+                        attackingTank.takeDamage(damageToDealToAttacker);
+                        currentTank.takeDamage(damageToDealToDefender);
+
+                        //Change cursor back to normal
+
+
+                        //Retore cursor position
+                        cursor.transform.position = tempCursorPosition;
+
+                        attackingTank.wait();
+                        storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
+
+                        directions.Clear(); //Added 5.28.21
+                        attackingInfantry = null; //Added 5.28.21
+                        attackingAntiTank = null; //Added 5.28.21
+                        attackingTank = null; //Added 5.28.21
+
+                        state = "default";
+                    }
+                    else
+                    {
+                        Debug.Log("Critical Error - Flow should not be here");
+                    }
                 }
                 else
                 {
