@@ -61,9 +61,9 @@ public class CentralGameLogic : MonoBehaviour
     public List<Vector3> directions = new List<Vector3>();
     public int directionIterator = 0;
 
-    private int defenderDisadvantage = 2;
-    private int attackBonus = 2;
-    private int typeMatchBonus = 3;
+    public int defenderDisadvantage = 2;
+    public int attackBonus = 2;
+    public int typeMatchBonus = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -534,6 +534,9 @@ public class CentralGameLogic : MonoBehaviour
                 target.y -= 0.1f;
                 cursor.transform.position = target;
                 storeUnitAtCursorPosition();
+
+                //Update Battle Forcast
+
             }
 
             //Pressing D (Right on controller) - cycles to the next unit (cycles around if at end index), move cursor, redo calculations
@@ -552,6 +555,9 @@ public class CentralGameLogic : MonoBehaviour
                 target.y -= 0.1f;
                 cursor.transform.position = target;
                 storeUnitAtCursorPosition();
+
+                //Update Battle Forecast
+
             }
 
             //Pressing E (A on controller)
