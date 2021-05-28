@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 /*
  * Author: Rees Anderson
- * 5.23.21
+ * 5.28.21
  * Game Design Project
  */
 
@@ -127,6 +127,10 @@ public class CentralGameLogic : MonoBehaviour
             //On occupied tile with unit of different color plays an error sound
             if (Input.GetKeyDown(KeyCode.E)) //Add controller support later
             {
+
+                //storeTileAtCursorPosition(); //Added 5.28.21
+                //storeUnitAtCursorPosition(); //Added 5.28.21
+
                 if (!isCurrentTileOccupied())
                 {
                     state = "selectedUnoccupied";
@@ -577,7 +581,13 @@ public class CentralGameLogic : MonoBehaviour
                         cursor.transform.position = tempCursorPosition;
 
                         attackingInfantry.wait();
-                        //storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
+                        storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
+
+                        directions.Clear(); //Added 5.28.21
+                        attackingInfantry = null; //Added 5.28.21
+                        attackingAntiTank = null; //Added 5.28.21
+                        attackingTank = null; //Added 5.28.21
+
                         state = "default";
                     } 
                     else if (currentAntiTank != null)
@@ -602,7 +612,13 @@ public class CentralGameLogic : MonoBehaviour
                         cursor.transform.position = tempCursorPosition;
 
                         attackingInfantry.wait();
-                        //storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
+                        storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
+
+                        directions.Clear(); //Added 5.28.21
+                        attackingInfantry = null; //Added 5.28.21
+                        attackingAntiTank = null; //Added 5.28.21
+                        attackingTank = null; //Added 5.28.21
+
                         state = "default";
                     }
                     else if (currentTank != null)
@@ -626,7 +642,13 @@ public class CentralGameLogic : MonoBehaviour
                         cursor.transform.position = tempCursorPosition;
 
                         attackingInfantry.wait();
-                        //storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
+                        storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
+
+                        directions.Clear(); //Added 5.28.21
+                        attackingInfantry = null; //Added 5.28.21
+                        attackingAntiTank = null; //Added 5.28.21
+                        attackingTank = null; //Added 5.28.21
+
                         state = "default";
                     }
                     else

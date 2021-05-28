@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  * Author: Rees Anderson
- * 5.22.21
+ * 5.28.21
  * Game Design Project
  */
 
@@ -58,6 +58,8 @@ public class InfantryScript : MonoBehaviour
     public int currentDefenseModifier; //The defense modifier added to the unit due to the terrain it is on
 
     public bool alive = true;
+    public Vector3 graveSite = new Vector3(-8.5f, -4.5f, 0);
+
     private float r;
     private float g;
     private float b;
@@ -1171,6 +1173,7 @@ public class InfantryScript : MonoBehaviour
         alive = false;
         active = false;
         setCurrentTileToUnoccupied();
+        transform.position = graveSite;
 
         //Unit becomes invisible
         dissappear();
