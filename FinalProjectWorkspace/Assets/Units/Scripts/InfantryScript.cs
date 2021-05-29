@@ -1127,7 +1127,14 @@ public class InfantryScript : MonoBehaviour
         //Play firing sound effect
 
         //Reduce ammo by 1
-        ammoCount--;
+        if (ammoCount > 0)
+        {
+            ammoCount--;
+        }
+        else
+        {
+            Debug.Log("Error: A Unit Just Attacked When Out of Ammo");
+        }
     }
 
     public void fireWeaponDefensive()

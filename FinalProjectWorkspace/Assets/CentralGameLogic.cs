@@ -301,21 +301,35 @@ public class CentralGameLogic : MonoBehaviour
                 //Hide top left movement points window
                 movementRemainingUI.dissappear();
 
+                bool hasAmmoToAttack = false;
+
                 if (currentInfantry != null)
                 {
                     currentInfantry.selected = false;
+                    if (currentInfantry.ammoCount > 0)
+                    {
+                        hasAmmoToAttack = true;
+                    }
                 }
                 else if (currentAntiTank != null)
                 {
                     currentAntiTank.selected = false;
+                    if (currentAntiTank.ammoCount > 0)
+                    {
+                        hasAmmoToAttack = true;
+                    }
                 }
                 else if (currentTank != null)
                 {
                     currentTank.selected = false;
+                    if (currentTank.ammoCount > 0)
+                    {
+                        hasAmmoToAttack = true;
+                    }
                 }
 
-                //If there is at least one valid target, send to attack or wait, else only wait
-                if (atLeastOneValidTargetFromCurrent())
+                //If there is at least one valid target and current unit has ammo, send to attack or wait, else only wait
+                if (atLeastOneValidTargetFromCurrent() && hasAmmoToAttack)
                 {
                     state = "attackOrWait";
                 }
