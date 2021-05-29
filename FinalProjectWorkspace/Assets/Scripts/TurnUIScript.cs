@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  * Author: Rees Anderson
- * 5.16.21
+ * 5.29.21
  * Game Design Project
  */
 
@@ -13,12 +13,17 @@ public class TurnUIScript : MonoBehaviour
     public CentralGameLogic centralGameLogic;
     public SpriteRenderer spriteRenderer;
 
+    public GenericDisappearReappearScript[] thingsToMakeDissappear;
+
     public Sprite[] blueOrRedFrame;
     public Sprite[] integers;
+    public Sprite[] blueOrRedText;
 
     public Turn1sPlace onesPlace;
     public Turn10sPlace tensPlace;
     public Turn100sPlace hundredsPlace;
+
+    public SpriteRenderer turnTextSprite;
 
     public SpriteRenderer hundredsPlaceSprite;
     public SpriteRenderer tensPlaceSprite;
@@ -28,8 +33,8 @@ public class TurnUIScript : MonoBehaviour
     private float g;
     private float b;
     private float defaultAlpha;
-    private Vector3 leftSidePosition = new Vector3(-4.75f, 3.75f, 0f);
-    private Vector3 rightSidePosition = new Vector3(5.75f, 3.75f, 0f);
+    private Vector3 leftSidePosition = new Vector3(-4.6f, 3.815f, 0f);
+    private Vector3 rightSidePosition = new Vector3(5.54f, 3.815f, 0f);
 
     // Start is called before the first frame update
     void Start()
@@ -54,10 +59,12 @@ public class TurnUIScript : MonoBehaviour
         if (centralGameLogic.currentPlayer == "Blue")
         {
             spriteRenderer.sprite = blueOrRedFrame[0];
+            turnTextSprite.sprite = blueOrRedText[0];
         }
         else
         {
             spriteRenderer.sprite = blueOrRedFrame[1];
+            turnTextSprite.sprite = blueOrRedText[1];
         }
 
         hundredsPlaceSprite.sprite = integers[centralGameLogic.day / 100];
@@ -73,6 +80,10 @@ public class TurnUIScript : MonoBehaviour
         onesPlace.dissappear();
         tensPlace.dissappear();
         hundredsPlace.dissappear();
+        for (int i = 0; i < thingsToMakeDissappear.Length; i++)
+        {
+            thingsToMakeDissappear[i].dissappear();
+        }
     }
 
     public void reappear()
@@ -81,5 +92,9 @@ public class TurnUIScript : MonoBehaviour
         onesPlace.reappear();
         tensPlace.reappear();
         hundredsPlace.reappear();
+        for (int i = 0; i < thingsToMakeDissappear.Length; i++)
+        {
+            thingsToMakeDissappear[i].reappear();
+        }
     }
 }
