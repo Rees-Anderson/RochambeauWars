@@ -4,12 +4,18 @@ using UnityEngine;
 
 /*
  * Author: Rees Anderson
- * 5.16.21
+ * 5.28.21
  * Game Design Project
  */
 
 public class CursorScript : MonoBehaviour
 {
+    public CentralGameLogic centralGameLogic;
+
+    public Sprite[] appearances;
+
+    public SpriteRenderer theCursorRenderer;
+
     private float r;
     private float g;
     private float b;
@@ -29,7 +35,14 @@ public class CursorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (centralGameLogic.state == "attack")
+        {
+            theCursorRenderer.sprite = appearances[1];
+        }
+        else
+        {
+            theCursorRenderer.sprite = appearances[0];
+        }
     }
 
     public void goToDefaultPosition()
