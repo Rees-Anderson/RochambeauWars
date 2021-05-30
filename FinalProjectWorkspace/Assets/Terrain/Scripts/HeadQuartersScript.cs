@@ -4,13 +4,18 @@ using UnityEngine;
 
 /*
  * Author: Rees Anderson
- * 5.15.21
+ * 5.30.21
  * Game Design Project
  */
 
 public class HeadQuartersScript : MonoBehaviour
 {
     public CentralGameLogic centralGameLogic;
+
+    //public string owner = "Grey";
+
+    public Sprite[] blueRedGreyAppearance;
+    public SpriteRenderer theHQ;
 
     public int movementCost = 1;
     public int defenseModifier = 5;
@@ -49,6 +54,19 @@ public class HeadQuartersScript : MonoBehaviour
         else
         {
             GetComponent<Renderer>().material.color = new Color(r, g, b, 0);
+        }
+
+        if (tag == "Red")
+        {
+            theHQ.sprite = blueRedGreyAppearance[0];
+        }
+        else if (tag == "Blue")
+        {
+            theHQ.sprite = blueRedGreyAppearance[1];
+        }
+        else if (tag == "Grey")
+        {
+            theHQ.sprite = blueRedGreyAppearance[2];
         }
     }
 }

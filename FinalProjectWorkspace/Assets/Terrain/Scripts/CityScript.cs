@@ -4,13 +4,18 @@ using UnityEngine;
 
 /*
  * Author: Rees Anderson
- * 5.15.21
+ * 5.30.21
  * Game Design Project
  */
 
 public class CityScript : MonoBehaviour
 {
     public CentralGameLogic centralGameLogic;
+
+    //public string owner = "Grey";
+
+    public Sprite[] blueRedGreyAppearance;
+    public SpriteRenderer theCity;
 
     public int movementCost = 1;
     public int defenseModifier = 4;
@@ -49,6 +54,19 @@ public class CityScript : MonoBehaviour
         else
         {
             GetComponent<Renderer>().material.color = new Color(r, g, b, 0);
+        }
+
+        if (tag == "Red")
+        {
+            theCity.sprite = blueRedGreyAppearance[0];
+        }
+        else if (tag == "Blue")
+        {
+            theCity.sprite = blueRedGreyAppearance[1];
+        }
+        else if (tag == "Grey")
+        {
+            theCity.sprite = blueRedGreyAppearance[2];
         }
     }
 }

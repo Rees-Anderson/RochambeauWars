@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  * Author: Rees Anderson
- * 5.29.21
+ * 5.30.21
  * Game Design Project
  */
 
@@ -1068,8 +1068,8 @@ public class InfantryScript : MonoBehaviour
         //Replenish MovementPoints
         movementPoints = maxMovementPoints;
 
-        //If the current terrain tile is a city, replenish 2 health, all ammo, all fuel + show suppling UI for a second
-        if (currentCityTile != null)
+        //If the current terrain tile is an allied city or HQ, replenish 2 health, all ammo, all fuel + show suppling UI for a second
+        if (currentCityTile != null && currentCityTile.tag == tag)
         {
             int temp = health;
             temp += 2;
@@ -1087,7 +1087,7 @@ public class InfantryScript : MonoBehaviour
             //Play Supplying UI for a second?
 
         } 
-        else if (currentHeadQuartersTile != null)
+        else if (currentHeadQuartersTile != null && currentHeadQuartersTile.tag == tag)
         {
             int temp = health;
             temp += 3;
