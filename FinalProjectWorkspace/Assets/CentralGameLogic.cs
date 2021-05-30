@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 /*
  * Author: Rees Anderson
- * 5.28.21
+ * 5.29.21
  * Game Design Project
  */
 
@@ -23,6 +23,7 @@ public class CentralGameLogic : MonoBehaviour
     public MovRemUI movementRemainingUI;
     public WaitMenuScript waitMenuUI;
     public AttackOrWaitMenuScript attackOrWaitUI;
+    public VictoryUIScript victoryUI;
 
     public RiverScript currentRiverTile; //null if not on a river tile
     public GrassScript currentGrassTile; //null if not on a grass tile
@@ -83,6 +84,13 @@ public class CentralGameLogic : MonoBehaviour
 
         if (state == "default")
         {
+            //If all Red Units are dead OR The Red HQ has been captured enter Victory State
+            //If all Blue Units are dead OR The Blue HQ has been captured enter Victory State
+            if (allRedUnitsDead() || allBlueUnitsDead())
+            {
+                state = "victory";
+            }
+
             //Hide all menus but the turn counter, terrain UI, and unit UI
             endTurnUI.dissappear();
             movementRemainingUI.dissappear();
@@ -889,6 +897,46 @@ public class CentralGameLogic : MonoBehaviour
             }
 
         }
+        else if (state == "victory")
+        {
+            //Hide other menus
+            turnUI.dissappear();
+            terrainUI.dissappear();
+            unitUI.allowedToReappear = false;
+            unitUI.dissappear();
+            cursor.dissappear();
+            attackOrWaitUI.dissappear();
+            movementRemainingUI.dissappear();
+            endTurnUI.dissappear();
+
+            //Victory Menu Should Pop up on its own
+
+            //Pressing W (Up on controller) when at Pos 1 does nothing, at Pos 2 moves to Pos 1
+            if (Input.GetKeyDown(KeyCode.W) && victoryUI.menuArrow.currentPosition > 0) //Add controller support later
+            {
+                victoryUI.menuArrow.currentPosition--;
+            }
+
+            //Pressing S (Down on controller) when at Pos 1 moves to Pos 2, Pos 2 does nothing
+            if (Input.GetKeyDown(KeyCode.S) && victoryUI.menuArrow.currentPosition < 1) //Add controller support later
+            {
+                victoryUI.menuArrow.currentPosition++;
+            }
+
+            //Pressing E (A on controller)
+            if (Input.GetKeyDown(KeyCode.E)) //Add controller support later
+            {
+                if (victoryUI.menuArrow.currentPosition == 0)
+                {
+                    //Reload Scene
+                    SceneManager.LoadScene("Map-01");
+                }
+                else if (victoryUI.menuArrow.currentPosition == 1)
+                {
+                    //Go to main menu
+                }
+            }
+        }
     }
 
     public void endTurn()
@@ -1509,5 +1557,63 @@ public class CentralGameLogic : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public bool allRedUnitsDead()
+    {
+        for (int i = 0; i < redInfantry.Length; i++)
+        {
+            if (redInfantry[i].alive)
+            {
+                return false;
+            }
+        }
+
+        for (int i = 0; i < redAntiTanks.Length; i++)
+        {
+            if (redAntiTanks[i].alive)
+            {
+                return false;
+            }
+        }
+
+        for (int i = 0; i < redTanks.Length; i++)
+        {
+            if (redTanks[i].alive)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public bool allBlueUnitsDead()
+    {
+        for (int i = 0; i < blueInfantry.Length; i++)
+        {
+            if (blueInfantry[i].alive)
+            {
+                return false;
+            }
+        }
+
+        for (int i = 0; i < blueAntiTanks.Length; i++)
+        {
+            if (blueAntiTanks[i].alive)
+            {
+                return false;
+            }
+        }
+
+        for (int i = 0; i < blueTanks.Length; i++)
+        {
+            if (blueTanks[i].alive)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
