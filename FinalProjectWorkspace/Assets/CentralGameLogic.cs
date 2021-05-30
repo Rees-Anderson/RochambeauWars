@@ -28,6 +28,7 @@ public class CentralGameLogic : MonoBehaviour
     public AttackOrWaitMenuScript attackOrWaitUI;
     public VictoryUIScript victoryUI;
     public CaptureOrWaitScript captureOrWaitUI;
+    public CaptFireWaitScript captFireWaitUI;
 
     public RiverScript currentRiverTile; //null if not on a river tile
     public GrassScript currentGrassTile; //null if not on a grass tile
@@ -1034,7 +1035,150 @@ public class CentralGameLogic : MonoBehaviour
         }
         else if (state == "captureOrAttackOrWait")
         {
+            //Hide other menus
+            turnUI.dissappear();
+            terrainUI.dissappear();
+            unitUI.allowedToReappear = false;
+            unitUI.dissappear();
+            cursor.dissappear();
+            waitMenuUI.dissappear();
+            movementRemainingUI.dissappear();
+            endTurnUI.dissappear();
 
+            //CaptFireWaitUI should pop up on its own
+
+            //Pressing W (Up on controller) when at Pos 1 does nothing, at Pos 2 moves hand to Pos 1
+            if (Input.GetKeyDown(KeyCode.W) && captFireWaitUI.menuArrow.currentPosition > 0) //Add controller support later
+            {
+                captFireWaitUI.menuArrow.currentPosition--;
+            }
+
+            //Pressing S (Down on controller) when at Pos 1 moves to Pos 2, Pos 2 to 3, Pos 3 does nothing
+            if (Input.GetKeyDown(KeyCode.S) && captFireWaitUI.menuArrow.currentPosition < 2) //Add controller support later
+            {
+                captFireWaitUI.menuArrow.currentPosition++;
+            }
+
+            //Pressing E (A on controller)
+            if (Input.GetKeyDown(KeyCode.E)) //Add controller support later
+            {
+                if (captFireWaitUI.menuArrow.currentPosition == 0)
+                {
+                    //Do some capturing logic
+                    performCaptureLogic();
+
+                    //Then Wait
+                    if (currentInfantry != null)
+                    {
+                        currentInfantry.wait();
+                    }
+                    else if (currentAntiTank != null)
+                    {
+                        currentAntiTank.wait();
+                    }
+                    else if (currentTank != null)
+                    {
+                        currentTank.wait();
+                    }
+                    captFireWaitUI.menuArrow.currentPosition = 0;
+                    state = "default";
+
+                }
+                else if (captFireWaitUI.menuArrow.currentPosition == 1)
+                {
+                    Vector3 north;
+                    Vector3 south;
+                    Vector3 east;
+                    Vector3 west;
+
+                    if (currentInfantry != null)
+                    {
+                        attackingInfantry = currentInfantry;
+                        tempCursorPosition = cursor.transform.position;
+
+                        north = attackingInfantry.transform.position;
+                        south = attackingInfantry.transform.position;
+                        east = attackingInfantry.transform.position;
+                        west = attackingInfantry.transform.position;
+                        north.y += 1;
+                        south.y -= 1;
+                        east.x += 1;
+                        west.x -= 1;
+
+                        directions.Add(west);
+                        directions.Add(north);
+                        directions.Add(east);
+                        directions.Add(south);
+
+                        directions = removeFriendliesFromTargets(directions, attackingInfantry.tag);
+                    }
+                    else if (currentAntiTank != null)
+                    {
+                        attackingAntiTank = currentAntiTank;
+                        tempCursorPosition = cursor.transform.position;
+
+                        north = attackingAntiTank.transform.position;
+                        south = attackingAntiTank.transform.position;
+                        east = attackingAntiTank.transform.position;
+                        west = attackingAntiTank.transform.position;
+                        north.y += 1;
+                        south.y -= 1;
+                        east.x += 1;
+                        west.x -= 1;
+
+                        directions.Add(west);
+                        directions.Add(north);
+                        directions.Add(east);
+                        directions.Add(south);
+
+                        directions = removeFriendliesFromTargets(directions, attackingAntiTank.tag);
+                    }
+                    else if (currentTank != null)
+                    {
+                        attackingTank = currentTank;
+                        tempCursorPosition = cursor.transform.position;
+
+                        north = attackingTank.transform.position;
+                        south = attackingTank.transform.position;
+                        east = attackingTank.transform.position;
+                        west = attackingTank.transform.position;
+                        north.y += 1;
+                        south.y -= 1;
+                        east.x += 1;
+                        west.x -= 1;
+
+                        directions.Add(west);
+                        directions.Add(north);
+                        directions.Add(east);
+                        directions.Add(south);
+
+                        directions = removeFriendliesFromTargets(directions, attackingTank.tag);
+                    }
+                    storeUnitAtCursorPosition();
+
+                    captFireWaitUI.menuArrow.currentPosition = 0;
+
+                    state = "attack";
+                }
+                else if (captFireWaitUI.menuArrow.currentPosition == 2)
+                {
+                    //Wait
+                    if (currentInfantry != null)
+                    {
+                        currentInfantry.wait();
+                    }
+                    else if (currentAntiTank != null)
+                    {
+                        currentAntiTank.wait();
+                    }
+                    else if (currentTank != null)
+                    {
+                        currentTank.wait();
+                    }
+                    captFireWaitUI.menuArrow.currentPosition = 0;
+                    state = "default";
+                }
+            }
         }
     }
 
