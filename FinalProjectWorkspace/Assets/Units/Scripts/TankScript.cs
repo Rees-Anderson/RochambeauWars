@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  * Author: Rees Anderson
- * 5.16.21
+ * 5.30.21
  * Game Design Project
  */
 
@@ -26,6 +26,14 @@ public class TankScript : MonoBehaviour
     public int movementPoints; //The amount of movement points this unit has - units pay with unit points when crossing terrain - replenished at start of turn
     public int health; //The amount of HP the unit has - at zero the unit dies
     public int currentDefenseModifier; //The defense modifier added to the unit due to the terrain it is on
+
+    public RiverScript currentRiverTile; //null if not on a river tile
+    public GrassScript currentGrassTile; //null if not on a grass tile
+    public ForestScript currentForestTile; //null if not on a forest tile
+    public SmallMountainScript currentSmallMountainTile; //null if not on a small mountain tile
+    public LargeMountainScript currentLargeMountainTile; //null if not on a large mountain tile
+    public CityScript currentCityTile; //null if not on a city tile
+    public HeadQuartersScript currentHeadQuartersTile; //null if not on a headquarters tile
 
     public bool alive = true;
 

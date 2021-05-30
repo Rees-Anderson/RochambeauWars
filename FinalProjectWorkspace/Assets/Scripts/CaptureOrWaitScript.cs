@@ -8,16 +8,11 @@ using UnityEngine;
  * Game Design Project
  */
 
-public class VictoryUIScript : MonoBehaviour
+public class CaptureOrWaitScript : MonoBehaviour
 {
     public CentralGameLogic centralGameLogic;
-    public SpriteRenderer frame;
-    public SpriteRenderer text;
 
-    public Sprite[] blueOrRedFrame;
-    public Sprite[] blueOrRedText;
-
-    public VictoryUICursorScript menuArrow;
+    public CaptureOrWaitCursor menuArrow;
 
     public GenericDisappearReappearScript[] thingsToMakeDissappear;
 
@@ -38,18 +33,8 @@ public class VictoryUIScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (centralGameLogic.state == "victory")
+        if (centralGameLogic.state == "captureOrWait")
         {
-            if (centralGameLogic.allRedUnitsDead() || centralGameLogic.redHQ.tag == "Blue")
-            {
-                frame.sprite = blueOrRedFrame[0];
-                text.sprite = blueOrRedText[0];
-            }
-            else
-            {
-                frame.sprite = blueOrRedFrame[1];
-                text.sprite = blueOrRedText[1];
-            }
             reappear();
         }
         else

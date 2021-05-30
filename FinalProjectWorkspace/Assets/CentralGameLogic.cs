@@ -16,6 +16,9 @@ public class CentralGameLogic : MonoBehaviour
     public string currentPlayer = "Red";
     public int day = 1;
 
+    public HeadQuartersScript redHQ;
+    public HeadQuartersScript blueHQ;
+
     public TerrainUIScript terrainUI;
     public TurnUIScript turnUI;
     public UnitUIScript unitUI;
@@ -24,6 +27,7 @@ public class CentralGameLogic : MonoBehaviour
     public WaitMenuScript waitMenuUI;
     public AttackOrWaitMenuScript attackOrWaitUI;
     public VictoryUIScript victoryUI;
+    public CaptureOrWaitScript captureOrWaitUI;
 
     public RiverScript currentRiverTile; //null if not on a river tile
     public GrassScript currentGrassTile; //null if not on a grass tile
@@ -86,7 +90,7 @@ public class CentralGameLogic : MonoBehaviour
         {
             //If all Red Units are dead OR The Red HQ has been captured enter Victory State
             //If all Blue Units are dead OR The Blue HQ has been captured enter Victory State
-            if (allRedUnitsDead() || allBlueUnitsDead())
+            if (allRedUnitsDead() || allBlueUnitsDead() || redHQ.tag == "Blue" || blueHQ.tag == "Red")
             {
                 state = "victory";
             }
@@ -310,6 +314,7 @@ public class CentralGameLogic : MonoBehaviour
                 movementRemainingUI.dissappear();
 
                 bool hasAmmoToAttack = false;
+                bool inCapturableCityOrHQ = false;
 
                 if (currentInfantry != null)
                 {
@@ -317,6 +322,10 @@ public class CentralGameLogic : MonoBehaviour
                     if (currentInfantry.ammoCount > 0)
                     {
                         hasAmmoToAttack = true;
+                    }
+                    if ((currentInfantry.currentCityTile != null && currentInfantry.currentCityTile.tag != currentInfantry.tag) || (currentInfantry.currentHeadQuartersTile != null && currentInfantry.currentHeadQuartersTile.tag != currentInfantry.tag))
+                    {
+                        inCapturableCityOrHQ = true;
                     }
                 }
                 else if (currentAntiTank != null)
@@ -326,6 +335,10 @@ public class CentralGameLogic : MonoBehaviour
                     {
                         hasAmmoToAttack = true;
                     }
+                    if ((currentAntiTank.currentCityTile != null && currentAntiTank.currentCityTile.tag != currentAntiTank.tag) || (currentAntiTank.currentHeadQuartersTile != null && currentAntiTank.currentHeadQuartersTile.tag != currentAntiTank.tag))
+                    {
+                        inCapturableCityOrHQ = true;
+                    }
                 }
                 else if (currentTank != null)
                 {
@@ -334,12 +347,22 @@ public class CentralGameLogic : MonoBehaviour
                     {
                         hasAmmoToAttack = true;
                     }
+                    
+                    //inCapturableCityOrHQ is not changed since tanks cannot capture cities or hqs
                 }
 
-                //If there is at least one valid target and current unit has ammo, send to attack or wait, else only wait
-                if (atLeastOneValidTargetFromCurrent() && hasAmmoToAttack)
+                //Flow of control for what menu to pull up next
+                if (inCapturableCityOrHQ && atLeastOneValidTargetFromCurrent() && hasAmmoToAttack)
+                {
+                    state = "captureOrAttackOrWait";
+                }
+                else if (atLeastOneValidTargetFromCurrent() && hasAmmoToAttack)
                 {
                     state = "attackOrWait";
+                }
+                else if (inCapturableCityOrHQ)
+                {
+                    state = "captureOrWait";
                 }
                 else
                 {
@@ -937,6 +960,154 @@ public class CentralGameLogic : MonoBehaviour
                 }
             }
         }
+        else if (state == "captureOrWait")
+        {
+            //Hide other menus
+            turnUI.dissappear();
+            terrainUI.dissappear();
+            unitUI.allowedToReappear = false;
+            unitUI.dissappear();
+            cursor.dissappear();
+            waitMenuUI.dissappear();
+            movementRemainingUI.dissappear();
+            endTurnUI.dissappear();
+
+            //CaptureOrWaitUI should pop up on its own
+
+            //Pressing W (Up on controller) when at Pos 1 does nothing, at Pos 2 moves hand to Pos 1
+            if (Input.GetKeyDown(KeyCode.W) && captureOrWaitUI.menuArrow.currentPosition > 0) //Add controller support later
+            {
+                captureOrWaitUI.menuArrow.currentPosition--;
+            }
+
+            //Pressing S (Down on controller) when at Pos 1 moves to Pos 2, Pos 2 does nothing
+            if (Input.GetKeyDown(KeyCode.S) && captureOrWaitUI.menuArrow.currentPosition < 1) //Add controller support later
+            {
+                captureOrWaitUI.menuArrow.currentPosition++;
+            }
+
+            //Pressing E (A on controller)
+            if (Input.GetKeyDown(KeyCode.E)) //Add controller support later
+            {
+                if (captureOrWaitUI.menuArrow.currentPosition == 0)
+                {
+                    //Do some capturing logic
+                    performCaptureLogic();
+
+                    //Then Wait
+                    if (currentInfantry != null)
+                    {
+                        currentInfantry.wait();
+                    }
+                    else if (currentAntiTank != null)
+                    {
+                        currentAntiTank.wait();
+                    }
+                    else if (currentTank != null)
+                    {
+                        currentTank.wait();
+                    }
+                    captureOrWaitUI.menuArrow.currentPosition = 0;
+                    state = "default";
+
+                }
+                else if (captureOrWaitUI.menuArrow.currentPosition == 1)
+                {
+                    //Wait
+                    if (currentInfantry != null)
+                    {
+                        currentInfantry.wait();
+                    }
+                    else if (currentAntiTank != null)
+                    {
+                        currentAntiTank.wait();
+                    }
+                    else if (currentTank != null)
+                    {
+                        currentTank.wait();
+                    }
+                    captureOrWaitUI.menuArrow.currentPosition = 0;
+                    state = "default";
+                }
+            }
+
+        }
+        else if (state == "captureOrAttackOrWait")
+        {
+
+        }
+    }
+
+    public void performCaptureLogic()
+    {
+        if (currentInfantry != null)
+        {
+            if (currentInfantry.currentCityTile != null)
+            {
+                if (currentInfantry.currentCityTile.tag == "Red" && currentInfantry.tag == "Blue")
+                {
+                    currentInfantry.currentCityTile.tag = "Grey";
+                }
+                else if (currentInfantry.currentCityTile.tag == "Blue" && currentInfantry.tag == "Red")
+                {
+                    currentInfantry.currentCityTile.tag = "Grey";
+                }
+                else
+                {
+                    currentInfantry.currentCityTile.tag = currentInfantry.tag;
+                }
+            }
+            else if (currentInfantry.currentHeadQuartersTile != null)
+            {
+                if (currentInfantry.currentHeadQuartersTile.tag == "Red" && currentInfantry.tag == "Blue")
+                {
+                    currentInfantry.currentHeadQuartersTile.tag = "Grey";
+                }
+                else if (currentInfantry.currentHeadQuartersTile.tag == "Blue" && currentInfantry.tag == "Red")
+                {
+                    currentInfantry.currentHeadQuartersTile.tag = "Grey";
+                }
+                else
+                {
+                    currentInfantry.currentHeadQuartersTile.tag = currentInfantry.tag;
+                }
+            }
+        }
+        else if (currentAntiTank != null)
+        {
+            if (currentAntiTank.currentCityTile != null)
+            {
+                if (currentAntiTank.currentCityTile.tag == "Red" && currentAntiTank.tag == "Blue")
+                {
+                    currentAntiTank.currentCityTile.tag = "Grey";
+                }
+                else if (currentAntiTank.currentCityTile.tag == "Blue" && currentAntiTank.tag == "Red")
+                {
+                    currentAntiTank.currentCityTile.tag = "Grey";
+                }
+                else
+                {
+                    currentAntiTank.currentCityTile.tag = currentAntiTank.tag;
+                }
+            }
+            else if (currentAntiTank.currentHeadQuartersTile != null)
+            {
+                if (currentAntiTank.currentHeadQuartersTile.tag == "Red" && currentAntiTank.tag == "Blue")
+                {
+                    currentAntiTank.currentHeadQuartersTile.tag = "Grey";
+                }
+                else if (currentAntiTank.currentHeadQuartersTile.tag == "Blue" && currentAntiTank.tag == "Red")
+                {
+                    currentAntiTank.currentHeadQuartersTile.tag = "Grey";
+                }
+                else
+                {
+                    currentAntiTank.currentHeadQuartersTile.tag = currentAntiTank.tag;
+                }
+            }
+        }
+
+        //Tanks are not included since tanks cannot capture
     }
 
     public void endTurn()
