@@ -941,6 +941,62 @@ public class CentralGameLogic : MonoBehaviour
 
     public void endTurn()
     {
+        //Ready All Units for a new turn, make all unmoved units of the current player wait (To make them consume fuel)
+        for (int i = 0; i < blueTanks.Length; i++)
+        {
+            if (currentPlayer == "Blue" && blueTanks[i].active)
+            {
+                blueTanks[i].wait();
+            }
+            blueTanks[i].readyUnitForNewTurn();
+        }
+
+        for (int i = 0; i < blueInfantry.Length; i++)
+        {
+            if (currentPlayer == "Blue" && blueInfantry[i].active)
+            {
+                blueInfantry[i].wait();
+            }
+            blueInfantry[i].readyUnitForNewTurn();
+        }
+
+        for (int i = 0; i < blueAntiTanks.Length; i++)
+        {
+            if (currentPlayer == "Blue" && blueAntiTanks[i].active)
+            {
+                blueAntiTanks[i].wait();
+            }
+            blueAntiTanks[i].readyUnitForNewTurn();
+        }
+
+        for (int i = 0; i < redAntiTanks.Length; i++)
+        {
+            if (currentPlayer == "Red" && redAntiTanks[i].active)
+            {
+                redAntiTanks[i].wait();
+            }
+            redAntiTanks[i].readyUnitForNewTurn();
+        }
+
+        for (int i = 0; i < redInfantry.Length; i++)
+        {
+            if (currentPlayer == "Red" && redInfantry[i].active)
+            {
+                redInfantry[i].wait();
+            }
+            redInfantry[i].readyUnitForNewTurn();
+        }
+
+        for (int i = 0; i < redTanks.Length; i++)
+        {
+            if (currentPlayer == "Red" && redTanks[i].active)
+            {
+                redTanks[i].wait();
+            }
+            redTanks[i].readyUnitForNewTurn();
+        }
+
+        //Change Current Player and Increment Day (increment only if it was just blue's turn)
         if (currentPlayer == "Blue")
         {
             currentPlayer = "Red";
@@ -949,36 +1005,6 @@ public class CentralGameLogic : MonoBehaviour
         else
         {
             currentPlayer = "Blue";
-        }
-
-        for (int i = 0; i < blueTanks.Length; i++)
-        {
-            blueTanks[i].readyUnitForNewTurn();
-        }
-
-        for (int i = 0; i < blueInfantry.Length; i++)
-        {
-            blueInfantry[i].readyUnitForNewTurn();
-        }
-
-        for (int i = 0; i < blueAntiTanks.Length; i++)
-        {
-            blueAntiTanks[i].readyUnitForNewTurn();
-        }
-
-        for (int i = 0; i < redAntiTanks.Length; i++)
-        {
-            redAntiTanks[i].readyUnitForNewTurn();
-        }
-
-        for (int i = 0; i < redInfantry.Length; i++)
-        {
-            redInfantry[i].readyUnitForNewTurn();
-        }
-
-        for (int i = 0; i < redTanks.Length; i++)
-        {
-            redTanks[i].readyUnitForNewTurn();
         }
 
         //Maybe show a visual turn change animation here?

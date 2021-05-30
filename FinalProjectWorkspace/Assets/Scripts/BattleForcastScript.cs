@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  * Author: Rees Anderson
- * 5.28.21
+ * 5.29.21
  * Game Design Project
  */
 
@@ -61,6 +61,10 @@ public class BattleForcastScript : MonoBehaviour
                     damageToDealToDefender -= centralGameLogic.currentInfantry.currentDefenseModifier; //Subtract defense modifier
 
                     int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentInfantry.health) * 100);
+                    if (numberToDisplay < 0)
+                    {
+                        numberToDisplay = 0;
+                    }
                     hundredsPlace.sprite = integers[numberToDisplay / 100];
                     tensPlace.sprite = integers[(numberToDisplay % 100) / 10];
                     onesPlace.sprite = integers[((numberToDisplay % 100) % 10)];
@@ -71,6 +75,10 @@ public class BattleForcastScript : MonoBehaviour
                     damageToDealToDefender += centralGameLogic.typeMatchBonus; //Add type match bonus
 
                     int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentInfantry.health) * 100);
+                    if (numberToDisplay < 0)
+                    {
+                        numberToDisplay = 0;
+                    }
                     hundredsPlace.sprite = integers[numberToDisplay / 100];
                     tensPlace.sprite = integers[(numberToDisplay % 100) / 10];
                     onesPlace.sprite = integers[((numberToDisplay % 100) % 10)];
@@ -80,6 +88,10 @@ public class BattleForcastScript : MonoBehaviour
                     damageToDealToDefender -= centralGameLogic.currentTank.currentDefenseModifier; //Subtract defense modifier
 
                     int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentInfantry.health) * 100);
+                    if (numberToDisplay < 0)
+                    {
+                        numberToDisplay = 0;
+                    }
                     hundredsPlace.sprite = integers[numberToDisplay / 100];
                     tensPlace.sprite = integers[(numberToDisplay % 100) / 10];
                     onesPlace.sprite = integers[((numberToDisplay % 100) % 10)];
@@ -99,6 +111,10 @@ public class BattleForcastScript : MonoBehaviour
                     damageToDealToDefender -= centralGameLogic.currentInfantry.currentDefenseModifier; //Subtract defense modifier
 
                     int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentInfantry.health) * 100);
+                    if (numberToDisplay < 0)
+                    {
+                        numberToDisplay = 0;
+                    }
                     hundredsPlace.sprite = integers[numberToDisplay / 100];
                     tensPlace.sprite = integers[(numberToDisplay % 100) / 10];
                     onesPlace.sprite = integers[((numberToDisplay % 100) % 10)];
@@ -108,6 +124,10 @@ public class BattleForcastScript : MonoBehaviour
                     damageToDealToDefender -= centralGameLogic.currentAntiTank.currentDefenseModifier; //Subtract defense modifier
 
                     int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentInfantry.health) * 100);
+                    if (numberToDisplay < 0)
+                    {
+                        numberToDisplay = 0;
+                    }
                     hundredsPlace.sprite = integers[numberToDisplay / 100];
                     tensPlace.sprite = integers[(numberToDisplay % 100) / 10];
                     onesPlace.sprite = integers[((numberToDisplay % 100) % 10)];
@@ -118,6 +138,10 @@ public class BattleForcastScript : MonoBehaviour
                     damageToDealToDefender += centralGameLogic.typeMatchBonus; //Add type match bonus
 
                     int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentInfantry.health) * 100);
+                    if (numberToDisplay < 0)
+                    {
+                        numberToDisplay = 0;
+                    }
                     hundredsPlace.sprite = integers[numberToDisplay / 100];
                     tensPlace.sprite = integers[(numberToDisplay % 100) / 10];
                     onesPlace.sprite = integers[((numberToDisplay % 100) % 10)];
@@ -138,6 +162,10 @@ public class BattleForcastScript : MonoBehaviour
                     damageToDealToDefender += centralGameLogic.typeMatchBonus; //Add type match bonus
 
                     int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentInfantry.health) * 100);
+                    if (numberToDisplay < 0)
+                    {
+                        numberToDisplay = 0;
+                    }
                     hundredsPlace.sprite = integers[numberToDisplay / 100];
                     tensPlace.sprite = integers[(numberToDisplay % 100) / 10];
                     onesPlace.sprite = integers[((numberToDisplay % 100) % 10)];
@@ -147,6 +175,10 @@ public class BattleForcastScript : MonoBehaviour
                     damageToDealToDefender -= centralGameLogic.currentAntiTank.currentDefenseModifier; //Subtract defense modifier
 
                     int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentInfantry.health) * 100);
+                    if (numberToDisplay < 0)
+                    {
+                        numberToDisplay = 0;
+                    }
                     hundredsPlace.sprite = integers[numberToDisplay / 100];
                     tensPlace.sprite = integers[(numberToDisplay % 100) / 10];
                     onesPlace.sprite = integers[((numberToDisplay % 100) % 10)];
@@ -156,6 +188,10 @@ public class BattleForcastScript : MonoBehaviour
                     damageToDealToDefender -= centralGameLogic.currentTank.currentDefenseModifier; //Subtract defense modifier
 
                     int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentInfantry.health) * 100);
+                    if (numberToDisplay < 0)
+                    {
+                        numberToDisplay = 0;
+                    }
                     hundredsPlace.sprite = integers[numberToDisplay / 100];
                     tensPlace.sprite = integers[(numberToDisplay % 100) / 10];
                     onesPlace.sprite = integers[((numberToDisplay % 100) % 10)];
