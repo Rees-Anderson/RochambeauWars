@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  * Author: Rees Anderson
- * 5.16.21
+ * 5.30.21
  * Game Design Project
  */
 
@@ -132,10 +132,17 @@ public class TerrainUIScript : MonoBehaviour
                 DefenseValue.sprite = defenseSprites[centralGameLogic.currentCityTile.defenseModifier];
                 MovementCost.sprite = movementSprites[centralGameLogic.currentCityTile.movementCost - 1];
             }
-            else
+            else if (centralGameLogic.currentCityTile.tag == "Blue")
             {
                 terrainText.sprite = terrainTypeSprites[5];
                 terrainSprite.sprite = terrainTypeVisualSprites[6];
+                DefenseValue.sprite = defenseSprites[centralGameLogic.currentCityTile.defenseModifier];
+                MovementCost.sprite = movementSprites[centralGameLogic.currentCityTile.movementCost - 1];
+            }
+            else
+            {
+                terrainText.sprite = terrainTypeSprites[5];
+                terrainSprite.sprite = terrainTypeVisualSprites[11];
                 DefenseValue.sprite = defenseSprites[centralGameLogic.currentCityTile.defenseModifier];
                 MovementCost.sprite = movementSprites[centralGameLogic.currentCityTile.movementCost - 1];
             }
@@ -149,10 +156,24 @@ public class TerrainUIScript : MonoBehaviour
                 DefenseValue.sprite = defenseSprites[centralGameLogic.currentHeadQuartersTile.defenseModifier];
                 MovementCost.sprite = movementSprites[centralGameLogic.currentHeadQuartersTile.movementCost - 1];
             }
-            else
+            else if (centralGameLogic.currentHeadQuartersTile.tag == "Blue")
             {
                 terrainText.sprite = terrainTypeSprites[6];
                 terrainSprite.sprite = terrainTypeVisualSprites[8];
+                DefenseValue.sprite = defenseSprites[centralGameLogic.currentHeadQuartersTile.defenseModifier];
+                MovementCost.sprite = movementSprites[centralGameLogic.currentHeadQuartersTile.movementCost - 1];
+            }
+            else if (centralGameLogic.currentHeadQuartersTile.name == "HeadQuarters")
+            {
+                terrainText.sprite = terrainTypeSprites[6];
+                terrainSprite.sprite = terrainTypeVisualSprites[12];
+                DefenseValue.sprite = defenseSprites[centralGameLogic.currentHeadQuartersTile.defenseModifier];
+                MovementCost.sprite = movementSprites[centralGameLogic.currentHeadQuartersTile.movementCost - 1];
+            }
+            else
+            {
+                terrainText.sprite = terrainTypeSprites[6];
+                terrainSprite.sprite = terrainTypeVisualSprites[13];
                 DefenseValue.sprite = defenseSprites[centralGameLogic.currentHeadQuartersTile.defenseModifier];
                 MovementCost.sprite = movementSprites[centralGameLogic.currentHeadQuartersTile.movementCost - 1];
             }
