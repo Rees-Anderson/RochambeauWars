@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 /*
  * Author: Rees Anderson
- * 5.30.21
+ * 5.31.21
  * Game Design Project
  */
 
@@ -87,6 +87,8 @@ public class CentralGameLogic : MonoBehaviour
             Application.Quit();
         }
 
+        storeTileAtCursorPosition(); //Added 5.31.21 - Is it okay to constantly update the tile stored, I don't think anything really interacts with this other than the terrain UI
+
         if (state == "default")
         {
             //If all Red Units are dead OR The Red HQ has been captured enter Victory State
@@ -113,28 +115,28 @@ public class CentralGameLogic : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.W)) //Add controller support later
             {
                 cursor.moveUp();
-                storeTileAtCursorPosition();
+                //storeTileAtCursorPosition(); //Removed 5.31.21 - Redundant?
                 storeUnitAtCursorPosition();
             }
 
             if (Input.GetKeyDown(KeyCode.A)) //Add controller support later
             {
                 cursor.moveLeft();
-                storeTileAtCursorPosition();
+                //storeTileAtCursorPosition(); //Removed 5.31.21 - Redundant?
                 storeUnitAtCursorPosition();
             }
 
             if (Input.GetKeyDown(KeyCode.S)) //Add controller support later
             {
                 cursor.moveDown();
-                storeTileAtCursorPosition();
+                //storeTileAtCursorPosition(); //Removed 5.31.21 - Redundant?
                 storeUnitAtCursorPosition();
             }
 
             if (Input.GetKeyDown(KeyCode.D)) //Add controller support later
             {
                 cursor.moveRight();
-                storeTileAtCursorPosition();
+                //storeTileAtCursorPosition(); //Removed 5.31.21 - Redundant?
                 storeUnitAtCursorPosition();
             }
 
