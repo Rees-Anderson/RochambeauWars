@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  * Author: Rees Anderson
- * 5.16.21
+ * 5.30.21
  * Game Design Project
  */
 
@@ -143,7 +143,7 @@ public class UnitUIScript : MonoBehaviour
         }
         else if (centralGameLogic.currentAntiTank != null)
         {
-            if (centralGameLogic.currentInfantry.tag == "Red")
+            if (centralGameLogic.currentAntiTank.tag == "Red")
             {
                 unitSprite.sprite = unitVisualSprites[1];
             }
@@ -152,14 +152,14 @@ public class UnitUIScript : MonoBehaviour
                 unitSprite.sprite = unitVisualSprites[4];
             }
 
-            health10sPlace.sprite = smallIntegers[(centralGameLogic.currentInfantry.health / 10)];
-            health1sPlace.sprite = smallIntegers[(centralGameLogic.currentInfantry.health % 10)];
+            health10sPlace.sprite = smallIntegers[(centralGameLogic.currentAntiTank.health / 10)];
+            health1sPlace.sprite = smallIntegers[(centralGameLogic.currentAntiTank.health % 10)];
 
-            ammo10sPlace.sprite = smallIntegers[(centralGameLogic.currentInfantry.ammoCount / 10)];
-            ammo1sPlace.sprite = smallIntegers[(centralGameLogic.currentInfantry.ammoCount % 10)];
+            ammo10sPlace.sprite = smallIntegers[(centralGameLogic.currentAntiTank.ammoCount / 10)];
+            ammo1sPlace.sprite = smallIntegers[(centralGameLogic.currentAntiTank.ammoCount % 10)];
 
-            fuel10sPlace.sprite = smallIntegers[(centralGameLogic.currentInfantry.fuelLevel / 10)];
-            fuel1sPlace.sprite = smallIntegers[(centralGameLogic.currentInfantry.fuelLevel % 10)];
+            fuel10sPlace.sprite = smallIntegers[(centralGameLogic.currentAntiTank.fuelLevel / 10)];
+            fuel1sPlace.sprite = smallIntegers[(centralGameLogic.currentAntiTank.fuelLevel % 10)];
 
             unitText.sprite = unitTextSprites[1];
 
@@ -170,7 +170,7 @@ public class UnitUIScript : MonoBehaviour
         }
         else if (centralGameLogic.currentTank != null)
         {
-            if (centralGameLogic.currentInfantry.tag == "Red")
+            if (centralGameLogic.currentTank.tag == "Red")
             {
                 unitSprite.sprite = unitVisualSprites[2];
             }
@@ -179,14 +179,14 @@ public class UnitUIScript : MonoBehaviour
                 unitSprite.sprite = unitVisualSprites[5];
             }
 
-            health10sPlace.sprite = smallIntegers[(centralGameLogic.currentInfantry.health / 10)];
-            health1sPlace.sprite = smallIntegers[(centralGameLogic.currentInfantry.health % 10)];
+            health10sPlace.sprite = smallIntegers[(centralGameLogic.currentTank.health / 10)];
+            health1sPlace.sprite = smallIntegers[(centralGameLogic.currentTank.health % 10)];
 
-            ammo10sPlace.sprite = smallIntegers[(centralGameLogic.currentInfantry.ammoCount / 10)];
-            ammo1sPlace.sprite = smallIntegers[(centralGameLogic.currentInfantry.ammoCount % 10)];
+            ammo10sPlace.sprite = smallIntegers[(centralGameLogic.currentTank.ammoCount / 10)];
+            ammo1sPlace.sprite = smallIntegers[(centralGameLogic.currentTank.ammoCount % 10)];
 
-            fuel10sPlace.sprite = smallIntegers[(centralGameLogic.currentInfantry.fuelLevel / 10)];
-            fuel1sPlace.sprite = smallIntegers[(centralGameLogic.currentInfantry.fuelLevel % 10)];
+            fuel10sPlace.sprite = smallIntegers[(centralGameLogic.currentTank.fuelLevel / 10)];
+            fuel1sPlace.sprite = smallIntegers[(centralGameLogic.currentTank.fuelLevel % 10)];
 
             unitText.sprite = unitTextSprites[2];
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  * Author: Rees Anderson
- * 5.29.21
+ * 5.30.21
  * Game Design Project
  */
 
@@ -74,7 +74,7 @@ public class BattleForcastScript : MonoBehaviour
                     damageToDealToDefender -= centralGameLogic.currentAntiTank.currentDefenseModifier; //Subtract defense modifier
                     damageToDealToDefender += centralGameLogic.typeMatchBonus; //Add type match bonus
 
-                    int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentInfantry.health) * 100);
+                    int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentAntiTank.health) * 100);
                     if (numberToDisplay < 0)
                     {
                         numberToDisplay = 0;
@@ -87,7 +87,7 @@ public class BattleForcastScript : MonoBehaviour
                 {
                     damageToDealToDefender -= centralGameLogic.currentTank.currentDefenseModifier; //Subtract defense modifier
 
-                    int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentInfantry.health) * 100);
+                    int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentTank.health) * 100);
                     if (numberToDisplay < 0)
                     {
                         numberToDisplay = 0;
@@ -123,7 +123,7 @@ public class BattleForcastScript : MonoBehaviour
                 {
                     damageToDealToDefender -= centralGameLogic.currentAntiTank.currentDefenseModifier; //Subtract defense modifier
 
-                    int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentInfantry.health) * 100);
+                    int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentAntiTank.health) * 100);
                     if (numberToDisplay < 0)
                     {
                         numberToDisplay = 0;
@@ -137,7 +137,7 @@ public class BattleForcastScript : MonoBehaviour
                     damageToDealToDefender -= centralGameLogic.currentTank.currentDefenseModifier; //Subtract defense modifier
                     damageToDealToDefender += centralGameLogic.typeMatchBonus; //Add type match bonus
 
-                    int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentInfantry.health) * 100);
+                    int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentTank.health) * 100);
                     if (numberToDisplay < 0)
                     {
                         numberToDisplay = 0;
@@ -174,7 +174,7 @@ public class BattleForcastScript : MonoBehaviour
                 {
                     damageToDealToDefender -= centralGameLogic.currentAntiTank.currentDefenseModifier; //Subtract defense modifier
 
-                    int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentInfantry.health) * 100);
+                    int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentAntiTank.health) * 100);
                     if (numberToDisplay < 0)
                     {
                         numberToDisplay = 0;
@@ -187,7 +187,7 @@ public class BattleForcastScript : MonoBehaviour
                 {
                     damageToDealToDefender -= centralGameLogic.currentTank.currentDefenseModifier; //Subtract defense modifier
 
-                    int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentInfantry.health) * 100);
+                    int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentTank.health) * 100);
                     if (numberToDisplay < 0)
                     {
                         numberToDisplay = 0;
