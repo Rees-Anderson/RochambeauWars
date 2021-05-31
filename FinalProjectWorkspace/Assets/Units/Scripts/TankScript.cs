@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  * Author: Rees Anderson
- * 5.30.21
+ * 5.31.21
  * Game Design Project
  */
 
@@ -14,7 +14,7 @@ public class TankScript : MonoBehaviour
 
     public const int maxFuelLevel = 15;
     public const int maxAmmoCount = 10;
-    public const int maxMovementPoints = 5;
+    public const int maxMovementPoints = 6;
     public const int maxHealth = 10;
     public const int attackRoll = 5; //Damage dealt before taking into account type match-up and terrain defense modifiers
     //public const int team = 1;
