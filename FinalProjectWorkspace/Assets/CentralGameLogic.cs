@@ -70,6 +70,7 @@ public class CentralGameLogic : MonoBehaviour
     public int defenderDisadvantage = 2;
     public int attackBonus = 2;
     public int typeMatchBonus = 3;
+    public int typeMatchPenalty = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -651,7 +652,7 @@ public class CentralGameLogic : MonoBehaviour
                     else if (currentAntiTank != null)
                     {
                         damageToDealToDefender -= currentAntiTank.currentDefenseModifier; //Subtract defense modifier
-                        damageToDealToDefender += typeMatchBonus; //Add type match bonus
+                        damageToDealToDefender += typeMatchBonus; //Add good type match bonus
 
                         int damageToDealToAttacker = 0;
                         damageToDealToAttacker += (int) Mathf.Ceil(((float)currentAntiTank.health) / 2);
@@ -682,11 +683,13 @@ public class CentralGameLogic : MonoBehaviour
                     else if (currentTank != null)
                     {
                         damageToDealToDefender -= currentTank.currentDefenseModifier; //Subtract defense modifier
+                        damageToDealToDefender -= typeMatchPenalty; //Subtract poor type match penalty
 
                         int damageToDealToAttacker = 0;
                         damageToDealToAttacker += (int)Mathf.Ceil(((float)currentTank.health) / 2);
                         damageToDealToAttacker -= defenderDisadvantage;
                         damageToDealToAttacker -= attackingInfantry.currentDefenseModifier;
+                        damageToDealToAttacker += typeMatchBonus; //Add good type match bonus
 
                         attackingInfantry.fireWeaponOffensive();
                         currentTank.fireWeaponDefensive();
@@ -722,11 +725,13 @@ public class CentralGameLogic : MonoBehaviour
                     if (currentInfantry != null)
                     {
                         damageToDealToDefender -= currentInfantry.currentDefenseModifier; //Subtract defense modifier
+                        damageToDealToDefender -= typeMatchPenalty; //Subtract poor type match penalty
 
                         int damageToDealToAttacker = 0;
                         damageToDealToAttacker += (int)Mathf.Ceil(((float)currentInfantry.health) / 2); //Add Base Attack : Ceiling of (Health / 2)
                         damageToDealToAttacker -= defenderDisadvantage; //Sub amount for defense penalty
                         damageToDealToAttacker -= attackingAntiTank.currentDefenseModifier; //Sub defense modifier
+                        damageToDealToAttacker += typeMatchBonus; //Add good type match bonus
 
                         attackingAntiTank.fireWeaponOffensive();
                         currentInfantry.fireWeaponDefensive();
@@ -854,11 +859,13 @@ public class CentralGameLogic : MonoBehaviour
                     else if (currentAntiTank != null)
                     {
                         damageToDealToDefender -= currentAntiTank.currentDefenseModifier; //Subtract defense modifier
+                        damageToDealToDefender -= typeMatchPenalty; //Subtract poor type match penalty
 
                         int damageToDealToAttacker = 0;
                         damageToDealToAttacker += (int)Mathf.Ceil(((float)currentAntiTank.health) / 2);
                         damageToDealToAttacker -= defenderDisadvantage;
                         damageToDealToAttacker -= attackingTank.currentDefenseModifier;
+                        damageToDealToAttacker += typeMatchBonus; //Add good type match bonus
 
                         attackingTank.fireWeaponOffensive();
                         currentAntiTank.fireWeaponDefensive();

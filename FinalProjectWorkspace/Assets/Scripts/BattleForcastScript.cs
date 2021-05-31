@@ -86,6 +86,7 @@ public class BattleForcastScript : MonoBehaviour
                 else if (centralGameLogic.currentTank != null)
                 {
                     damageToDealToDefender -= centralGameLogic.currentTank.currentDefenseModifier; //Subtract defense modifier
+                    damageToDealToDefender -= centralGameLogic.typeMatchPenalty; //Subtract poor type match penalty
 
                     int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentTank.health) * 100);
                     if (numberToDisplay < 0)
@@ -109,6 +110,7 @@ public class BattleForcastScript : MonoBehaviour
                 if (centralGameLogic.currentInfantry != null)
                 {
                     damageToDealToDefender -= centralGameLogic.currentInfantry.currentDefenseModifier; //Subtract defense modifier
+                    damageToDealToDefender -= centralGameLogic.typeMatchPenalty; //Subtract poor type match penalty
 
                     int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentInfantry.health) * 100);
                     if (numberToDisplay < 0)
@@ -173,6 +175,7 @@ public class BattleForcastScript : MonoBehaviour
                 else if (centralGameLogic.currentAntiTank != null)
                 {
                     damageToDealToDefender -= centralGameLogic.currentAntiTank.currentDefenseModifier; //Subtract defense modifier
+                    damageToDealToDefender -= centralGameLogic.typeMatchPenalty; //Subtract poor type match penalty
 
                     int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentAntiTank.health) * 100);
                     if (numberToDisplay < 0)
