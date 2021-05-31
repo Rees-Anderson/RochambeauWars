@@ -87,11 +87,6 @@ public class InfantryScript : MonoBehaviour
     {
         healthSprite.sprite = healthSprites[health];
 
-        if (health <= 0)
-        {
-            die();
-        }
-
         if (fuelLevel > 10)
         {
             fuelDisappear.dissappear();
@@ -1166,6 +1161,12 @@ public class InfantryScript : MonoBehaviour
         else
         {
             health = temp;
+        }
+
+        //If health has fallen too low, die
+        if (health <= 0)
+        {
+            die();
         }
 
     }
