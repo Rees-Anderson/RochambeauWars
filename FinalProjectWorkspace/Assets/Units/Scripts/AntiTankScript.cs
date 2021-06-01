@@ -4,13 +4,15 @@ using UnityEngine;
 
 /*
  * Author: Rees Anderson
- * 5.31.21
+ * 6.1.21
  * Game Design Project
  */
 
 public class AntiTankScript : MonoBehaviour
 {
     public CentralGameLogic centralGameLogic;
+
+    public Animator animator;
 
     public const int maxFuelLevel = 15;
     public const int maxAmmoCount = 10;
@@ -80,6 +82,15 @@ public class AntiTankScript : MonoBehaviour
         currentDefenseModifier = 0;
 
         storeTileAtCurrentPosition();
+
+        animator.SetBool("isIdleActive", true);
+        animator.SetBool("isIdleGrey", false);
+        animator.SetBool("isRunningUp", false);
+        animator.SetBool("isRunningDown", false);
+        animator.SetBool("isRunningLeft", false);
+        animator.SetBool("isRunningRight", false);
+        animator.SetBool("isFiring", false);
+        animator.SetBool("isDying", false);
     }
 
     // Update is called once per frame
@@ -125,6 +136,7 @@ public class AntiTankScript : MonoBehaviour
             ammoDisappear.reappear();
         }
 
+        /*
         if (!active)
         {
             //Be grey
@@ -135,36 +147,86 @@ public class AntiTankScript : MonoBehaviour
             //Be team color
             infantrySprite.sprite = appearanceSprites[0];
         }
-
-        if (selected)
-        {
-            //Play Movement Animation
-        }
-        else
-        {
-            //Play Idle Animation
-        }
+        */
 
         if (selected && Input.GetKeyDown(KeyCode.W)) //Add controller support later
         {
+            animator.SetBool("isIdleActive", false);
+            animator.SetBool("isIdleGrey", false);
+            animator.SetBool("isRunningUp", true);
+            animator.SetBool("isRunningDown", false);
+            animator.SetBool("isRunningLeft", false);
+            animator.SetBool("isRunningRight", false);
+            animator.SetBool("isFiring", false);
+            animator.SetBool("isDying", false);
             moveUp();
         }
 
         if (selected && Input.GetKeyDown(KeyCode.A)) //Add controller support later
         {
+            animator.SetBool("isIdleActive", false);
+            animator.SetBool("isIdleGrey", false);
+            animator.SetBool("isRunningUp", false);
+            animator.SetBool("isRunningDown", false);
+            animator.SetBool("isRunningLeft", true);
+            animator.SetBool("isRunningRight", false);
+            animator.SetBool("isFiring", false);
+            animator.SetBool("isDying", false);
             moveLeft();
         }
 
         if (selected && Input.GetKeyDown(KeyCode.S)) //Add controller support later
         {
+            animator.SetBool("isIdleActive", false);
+            animator.SetBool("isIdleGrey", false);
+            animator.SetBool("isRunningUp", false);
+            animator.SetBool("isRunningDown", true);
+            animator.SetBool("isRunningLeft", false);
+            animator.SetBool("isRunningRight", false);
+            animator.SetBool("isFiring", false);
+            animator.SetBool("isDying", false);
             moveDown();
         }
 
         if (selected && Input.GetKeyDown(KeyCode.D)) //Add controller support later
         {
+            animator.SetBool("isIdleActive", false);
+            animator.SetBool("isIdleGrey", false);
+            animator.SetBool("isRunningUp", false);
+            animator.SetBool("isRunningDown", false);
+            animator.SetBool("isRunningLeft", false);
+            animator.SetBool("isRunningRight", true);
+            animator.SetBool("isFiring", false);
+            animator.SetBool("isDying", false);
             moveRight();
         }
 
+    }
+
+    public void startRunningBecauseSelected()
+    {
+        if (tag == "Red")
+        {
+            animator.SetBool("isIdleActive", false);
+            animator.SetBool("isIdleGrey", false);
+            animator.SetBool("isRunningUp", false);
+            animator.SetBool("isRunningDown", false);
+            animator.SetBool("isRunningLeft", false);
+            animator.SetBool("isRunningRight", true);
+            animator.SetBool("isFiring", false);
+            animator.SetBool("isDying", false);
+        }
+        else
+        {
+            animator.SetBool("isIdleActive", false);
+            animator.SetBool("isIdleGrey", false);
+            animator.SetBool("isRunningUp", false);
+            animator.SetBool("isRunningDown", false);
+            animator.SetBool("isRunningLeft", true);
+            animator.SetBool("isRunningRight", false);
+            animator.SetBool("isFiring", false);
+            animator.SetBool("isDying", false);
+        }
     }
 
     public void readyUnitForNewTurn()
@@ -173,6 +235,15 @@ public class AntiTankScript : MonoBehaviour
         {
             active = true;
         }
+
+        animator.SetBool("isIdleActive", true);
+        animator.SetBool("isIdleGrey", false);
+        animator.SetBool("isRunningUp", false);
+        animator.SetBool("isRunningDown", false);
+        animator.SetBool("isRunningLeft", false);
+        animator.SetBool("isRunningRight", false);
+        animator.SetBool("isFiring", false);
+        animator.SetBool("isDying", false);
 
     }
 
@@ -1060,6 +1131,15 @@ public class AntiTankScript : MonoBehaviour
         //Set unit inactive
         active = false;
 
+        animator.SetBool("isIdleActive", false);
+        animator.SetBool("isIdleGrey", true);
+        animator.SetBool("isRunningUp", false);
+        animator.SetBool("isRunningDown", false);
+        animator.SetBool("isRunningLeft", false);
+        animator.SetBool("isRunningRight", false);
+        animator.SetBool("isFiring", false);
+        animator.SetBool("isDying", false);
+
         //Replenish MovementPoints
         movementPoints = maxMovementPoints;
 
@@ -1119,8 +1199,26 @@ public class AntiTankScript : MonoBehaviour
     public void fireWeaponOffensive()
     {
         //Play firing animation
+        animator.SetBool("isIdleActive", false);
+        animator.SetBool("isIdleGrey", false);
+        animator.SetBool("isRunningUp", false);
+        animator.SetBool("isRunningDown", false);
+        animator.SetBool("isRunningLeft", false);
+        animator.SetBool("isRunningRight", false);
+        animator.SetBool("isFiring", true);
+        animator.SetBool("isDying", false);
 
         //Play firing sound effect
+
+        //Stop firing animation
+        animator.SetBool("isIdleActive", true);
+        animator.SetBool("isIdleGrey", false);
+        animator.SetBool("isRunningUp", false);
+        animator.SetBool("isRunningDown", false);
+        animator.SetBool("isRunningLeft", false);
+        animator.SetBool("isRunningRight", false);
+        animator.SetBool("isFiring", false);
+        animator.SetBool("isDying", false);
 
         //Reduce ammo by 1
         if (ammoCount > 0)
@@ -1136,8 +1234,26 @@ public class AntiTankScript : MonoBehaviour
     public void fireWeaponDefensive()
     {
         //Play firing animation
+        animator.SetBool("isIdleActive", false);
+        animator.SetBool("isIdleGrey", false);
+        animator.SetBool("isRunningUp", false);
+        animator.SetBool("isRunningDown", false);
+        animator.SetBool("isRunningLeft", false);
+        animator.SetBool("isRunningRight", false);
+        animator.SetBool("isFiring", true);
+        animator.SetBool("isDying", false);
 
         //Play firing sound effect
+
+        //Stop firing animation
+        animator.SetBool("isIdleActive", true);
+        animator.SetBool("isIdleGrey", false);
+        animator.SetBool("isRunningUp", false);
+        animator.SetBool("isRunningDown", false);
+        animator.SetBool("isRunningLeft", false);
+        animator.SetBool("isRunningRight", false);
+        animator.SetBool("isFiring", false);
+        animator.SetBool("isDying", false);
 
     }
 
@@ -1147,10 +1263,6 @@ public class AntiTankScript : MonoBehaviour
         {
             dmg = 0; //Maybe make there be a minimum damage dealt at 1 for balancing - that would be done here
         }
-
-        //Play damage animation
-
-        //Play damage sound effect
 
         //Reduce health by dmg amount
         int temp = health;
@@ -1175,6 +1287,14 @@ public class AntiTankScript : MonoBehaviour
     public void die()
     {
         //Play death animation
+        animator.SetBool("isIdleActive", false);
+        animator.SetBool("isIdleGrey", false);
+        animator.SetBool("isRunningUp", false);
+        animator.SetBool("isRunningDown", false);
+        animator.SetBool("isRunningLeft", false);
+        animator.SetBool("isRunningRight", false);
+        animator.SetBool("isFiring", false);
+        animator.SetBool("isDying", true);
 
         //Play death sound effect
 

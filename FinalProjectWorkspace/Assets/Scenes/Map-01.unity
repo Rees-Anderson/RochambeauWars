@@ -8519,6 +8519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centralGameLogic: {fileID: 1246326038}
+  animator: {fileID: 413758378}
   healthSprites:
   - {fileID: 21300000, guid: 385548cf71b94a84681a64024530801f, type: 3}
   - {fileID: 21300000, guid: 884fc361b2f13ad478f3f7b455aaae58, type: 3}
@@ -8572,6 +8573,25 @@ MonoBehaviour:
   currentDefenseModifier: 0
   alive: 1
   graveSite: {x: -8.5, y: -4.5, z: 0}
+--- !u!95 &413758378
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413758375}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 719421ea8ec2fa8448ebfb9e155300bb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &415282505
 GameObject:
   m_ObjectHideFlags: 0
@@ -22589,6 +22609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centralGameLogic: {fileID: 1246326038}
+  animator: {fileID: 1189356275}
   healthSprites:
   - {fileID: 21300000, guid: 385548cf71b94a84681a64024530801f, type: 3}
   - {fileID: 21300000, guid: 884fc361b2f13ad478f3f7b455aaae58, type: 3}
@@ -22642,6 +22663,25 @@ MonoBehaviour:
   currentDefenseModifier: 0
   alive: 1
   graveSite: {x: -8.5, y: -4.5, z: 0}
+--- !u!95 &1189356275
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189356272}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 719421ea8ec2fa8448ebfb9e155300bb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1191139075
 GameObject:
   m_ObjectHideFlags: 0
@@ -26842,6 +26882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centralGameLogic: {fileID: 1246326038}
+  animator: {fileID: 1371279014}
   healthSprites:
   - {fileID: 21300000, guid: 6274604b84ee0104583ad942062c8dc6, type: 3}
   - {fileID: 21300000, guid: cdb3d9809799ab24abbebc5b68a38cc3, type: 3}
@@ -26895,6 +26936,25 @@ MonoBehaviour:
   currentDefenseModifier: 0
   alive: 1
   graveSite: {x: -8.5, y: -4.5, z: 0}
+--- !u!95 &1371279014
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371279011}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 50082f39e6415e344b6a91f93739dcab, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1377555323
 GameObject:
   m_ObjectHideFlags: 0
@@ -38462,6 +38522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centralGameLogic: {fileID: 1246326038}
+  animator: {fileID: 2109576025}
   healthSprites:
   - {fileID: 21300000, guid: 6274604b84ee0104583ad942062c8dc6, type: 3}
   - {fileID: 21300000, guid: cdb3d9809799ab24abbebc5b68a38cc3, type: 3}
@@ -38515,6 +38576,25 @@ MonoBehaviour:
   currentDefenseModifier: 0
   alive: 1
   graveSite: {x: -8.5, y: -4.5, z: 0}
+--- !u!95 &2109576025
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2109576022}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 50082f39e6415e344b6a91f93739dcab, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2114501100
 GameObject:
   m_ObjectHideFlags: 0

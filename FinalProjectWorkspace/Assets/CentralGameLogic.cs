@@ -173,6 +173,7 @@ public class CentralGameLogic : MonoBehaviour
                     {
                         if (currentAntiTank.tag == currentPlayer && currentAntiTank.active)
                         {
+                            currentAntiTank.startRunningBecauseSelected();
                             state = "selectedUnit";
                         }
                         else
@@ -184,6 +185,7 @@ public class CentralGameLogic : MonoBehaviour
                     {
                         if (currentTank.tag == currentPlayer && currentTank.active)
                         {
+                            //currentTank.startRunningBecauseSelected();
                             state = "selectedUnit";
                         }
                         else

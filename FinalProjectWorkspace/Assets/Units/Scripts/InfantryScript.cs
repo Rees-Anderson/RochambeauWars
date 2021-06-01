@@ -1209,6 +1209,16 @@ public class InfantryScript : MonoBehaviour
 
         //Play firing sound effect
 
+        //Stop firing animation
+        animator.SetBool("isIdleActive", true);
+        animator.SetBool("isIdleGrey", false);
+        animator.SetBool("isRunningUp", false);
+        animator.SetBool("isRunningDown", false);
+        animator.SetBool("isRunningLeft", false);
+        animator.SetBool("isRunningRight", false);
+        animator.SetBool("isFiring", false);
+        animator.SetBool("isDying", false);
+
         //Reduce ammo by 1
         if (ammoCount > 0)
         {
@@ -1233,6 +1243,16 @@ public class InfantryScript : MonoBehaviour
         animator.SetBool("isDying", false);
 
         //Play firing sound effect
+
+        //Stop firing animation
+        animator.SetBool("isIdleActive", true);
+        animator.SetBool("isIdleGrey", false);
+        animator.SetBool("isRunningUp", false);
+        animator.SetBool("isRunningDown", false);
+        animator.SetBool("isRunningLeft", false);
+        animator.SetBool("isRunningRight", false);
+        animator.SetBool("isFiring", false);
+        animator.SetBool("isDying", false);
 
     }
 
