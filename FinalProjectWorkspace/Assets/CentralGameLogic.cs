@@ -141,11 +141,11 @@ public class CentralGameLogic : MonoBehaviour
                 storeUnitAtCursorPosition();
             }
 
-            //Hitting E (A on controller)
+            //Hitting Return
             //On unoccupied tile sends controller into selectedUnoccupied state
             //On occupied tile with unit of same color sends controller into selectedUnit state
             //On occupied tile with unit of different color plays an error sound
-            if (Input.GetKeyDown(KeyCode.E)) //Add controller support later
+            if (Input.GetKeyDown(KeyCode.K))
             {
 
                 //storeTileAtCursorPosition(); //Added 5.28.21
@@ -222,8 +222,8 @@ public class CentralGameLogic : MonoBehaviour
                 endTurnUI.menuArrow.currentPosition++;
             }
 
-            //Pressing E (A on controller)
-            if (Input.GetKeyDown(KeyCode.E)) //Add controller support later
+            //Pressing Return
+            if (Input.GetKeyDown(KeyCode.K))
             {
                 if (endTurnUI.menuArrow.currentPosition == 0)
                 {
@@ -248,8 +248,8 @@ public class CentralGameLogic : MonoBehaviour
                 }
             }
 
-            //Pressing F (B on controller)
-            if (Input.GetKeyDown(KeyCode.F)) //Add controller support later
+            //Pressing Backspace
+            if (Input.GetKeyDown(KeyCode.L))
             {
                 endTurnUI.menuArrow.currentPosition = 0;
                 state = "default";
@@ -288,8 +288,8 @@ public class CentralGameLogic : MonoBehaviour
             //In the top left show selected unit's movement points remaining
             movementRemainingUI.reappear();
 
-            //Pressing E (A on controller)
-            if (Input.GetKeyDown(KeyCode.E)) //Add controller support later
+            //Pressing Return
+            if (Input.GetKeyDown(KeyCode.K))
             {
                 //Update Cursor Pos
                 Vector3 whereToMoveCursor;
@@ -374,7 +374,7 @@ public class CentralGameLogic : MonoBehaviour
                 }
             }
 
-            //Pressing F (B on controller) - TODO
+            //Pressing Backspace
             //Return unit to original position
             //Restore unit's max movement points
             //Set unit as not selected
@@ -399,12 +399,12 @@ public class CentralGameLogic : MonoBehaviour
             //Draw wait only window in the top right
             waitMenuUI.reappear();
 
-            //Pressing E (A on controller)
+            //Pressing Return
             //Set Unit as not selected
             //Call unit's wait method
             //Stop drawing wait only window
             //Return to default state
-            if (Input.GetKeyDown(KeyCode.E)) //Add controller support later
+            if (Input.GetKeyDown(KeyCode.K))
             {
                 if (currentInfantry != null)
                 {
@@ -422,7 +422,7 @@ public class CentralGameLogic : MonoBehaviour
                 state = "default";
             }
 
-            //Should there be a Pressing F option, to keep moving? - TODO
+            //Should there be a Pressing Backspace option, to keep moving? - TODO
 
         } else if (state == "attackOrWait")
         {
@@ -451,8 +451,8 @@ public class CentralGameLogic : MonoBehaviour
                 attackOrWaitUI.menuArrow.currentPosition++;
             }
 
-            //Pressing E (A on controller)
-            if (Input.GetKeyDown(KeyCode.E)) //Add controller support later
+            //Pressing Return
+            if (Input.GetKeyDown(KeyCode.K))
             {
                 if (attackOrWaitUI.menuArrow.currentPosition == 0)
                 {
@@ -609,10 +609,10 @@ public class CentralGameLogic : MonoBehaviour
 
             }
 
-            //Pressing E (A on controller)
+            //Pressing Return
             //Do damage to both units
             //Return to default state
-            if (Input.GetKeyDown(KeyCode.E)) //Add controller support later
+            if (Input.GetKeyDown(KeyCode.K))
             {
                 if (attackingInfantry != null)
                 {
@@ -956,8 +956,8 @@ public class CentralGameLogic : MonoBehaviour
                 victoryUI.menuArrow.currentPosition++;
             }
 
-            //Pressing E (A on controller)
-            if (Input.GetKeyDown(KeyCode.E)) //Add controller support later
+            //Pressing Return
+            if (Input.GetKeyDown(KeyCode.K))
             {
                 if (victoryUI.menuArrow.currentPosition == 0)
                 {
@@ -996,8 +996,8 @@ public class CentralGameLogic : MonoBehaviour
                 captureOrWaitUI.menuArrow.currentPosition++;
             }
 
-            //Pressing E (A on controller)
-            if (Input.GetKeyDown(KeyCode.E)) //Add controller support later
+            //Pressing Return
+            if (Input.GetKeyDown(KeyCode.K))
             {
                 if (captureOrWaitUI.menuArrow.currentPosition == 0)
                 {
@@ -1068,8 +1068,8 @@ public class CentralGameLogic : MonoBehaviour
                 captFireWaitUI.menuArrow.currentPosition++;
             }
 
-            //Pressing E (A on controller)
-            if (Input.GetKeyDown(KeyCode.E)) //Add controller support later
+            //Pressing Return
+            if (Input.GetKeyDown(KeyCode.K))
             {
                 if (captFireWaitUI.menuArrow.currentPosition == 0)
                 {
