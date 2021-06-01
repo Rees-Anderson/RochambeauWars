@@ -5903,6 +5903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centralGameLogic: {fileID: 1246326038}
+  animator: {fileID: 309652361}
   healthSprites:
   - {fileID: 21300000, guid: 6274604b84ee0104583ad942062c8dc6, type: 3}
   - {fileID: 21300000, guid: cdb3d9809799ab24abbebc5b68a38cc3, type: 3}
@@ -5956,6 +5957,25 @@ MonoBehaviour:
   currentDefenseModifier: 0
   alive: 1
   graveSite: {x: -8.5, y: -4.5, z: 0}
+--- !u!95 &309652361
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309652358}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9b45e1010a91c8348a6da3dd0cccef5a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &313013497
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12742,6 +12762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centralGameLogic: {fileID: 1246326038}
+  animator: {fileID: 547420978}
   healthSprites:
   - {fileID: 21300000, guid: 385548cf71b94a84681a64024530801f, type: 3}
   - {fileID: 21300000, guid: 884fc361b2f13ad478f3f7b455aaae58, type: 3}
@@ -12795,6 +12816,25 @@ MonoBehaviour:
   currentDefenseModifier: 0
   alive: 1
   graveSite: {x: -8.5, y: -4.5, z: 0}
+--- !u!95 &547420978
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547420975}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 76aaf82a272d7e346bfd61f9fe3fa584, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &553277383 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4059861742366780687, guid: 7877897fe989aeb4c88a6e10106fe8b3, type: 3}
@@ -21543,6 +21583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centralGameLogic: {fileID: 1246326038}
+  animator: {fileID: 1169387134}
   healthSprites:
   - {fileID: 21300000, guid: 385548cf71b94a84681a64024530801f, type: 3}
   - {fileID: 21300000, guid: 884fc361b2f13ad478f3f7b455aaae58, type: 3}
@@ -21596,6 +21637,25 @@ MonoBehaviour:
   currentDefenseModifier: 0
   alive: 1
   graveSite: {x: -8.5, y: -4.5, z: 0}
+--- !u!95 &1169387134
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169387131}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 76aaf82a272d7e346bfd61f9fe3fa584, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1172184965
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24999,6 +25059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centralGameLogic: {fileID: 1246326038}
+  animator: {fileID: 1283097048}
   healthSprites:
   - {fileID: 21300000, guid: 6274604b84ee0104583ad942062c8dc6, type: 3}
   - {fileID: 21300000, guid: cdb3d9809799ab24abbebc5b68a38cc3, type: 3}
@@ -25052,6 +25113,25 @@ MonoBehaviour:
   currentDefenseModifier: 0
   alive: 1
   graveSite: {x: -8.5, y: -4.5, z: 0}
+--- !u!95 &1283097048
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283097045}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9b45e1010a91c8348a6da3dd0cccef5a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1286693427 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4059861742366780687, guid: 7877897fe989aeb4c88a6e10106fe8b3, type: 3}

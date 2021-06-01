@@ -185,7 +185,7 @@ public class CentralGameLogic : MonoBehaviour
                     {
                         if (currentTank.tag == currentPlayer && currentTank.active)
                         {
-                            //currentTank.startRunningBecauseSelected();
+                            currentTank.startRunningBecauseSelected();
                             state = "selectedUnit";
                         }
                         else
