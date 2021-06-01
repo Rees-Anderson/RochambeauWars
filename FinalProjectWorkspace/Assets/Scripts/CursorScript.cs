@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  * Author: Rees Anderson
- * 5.28.21
+ * 6.1.21
  * Game Design Project
  */
 
@@ -13,6 +13,8 @@ public class CursorScript : MonoBehaviour
     public CentralGameLogic centralGameLogic;
 
     public Sprite[] appearances;
+
+    public Animator animator;
 
     public SpriteRenderer theCursorRenderer;
 
@@ -37,11 +39,15 @@ public class CursorScript : MonoBehaviour
     {
         if (centralGameLogic.state == "attack")
         {
-            theCursorRenderer.sprite = appearances[1];
+            //theCursorRenderer.sprite = appearances[1];
+            animator.SetBool("isSquare", false);
+            animator.SetBool("isCrosshair", true);
         }
         else
         {
-            theCursorRenderer.sprite = appearances[0];
+            //theCursorRenderer.sprite = appearances[0];
+            animator.SetBool("isSquare", true);
+            animator.SetBool("isCrosshair", false);
         }
     }
 
