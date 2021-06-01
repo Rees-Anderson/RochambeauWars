@@ -1,5 +1,11 @@
 # CSS385 Group Project Websites
 
+Final Project Beta Build 1: 
+
+<https://rees-anderson.github.io/CSS385-GroupProjects/BetaVersionOneWebGL>
+
+------------------------------------------------------------------------------------------
+
 Final Project All Base Game Mechanics Implemented Build: 
 
 <https://rees-anderson.github.io/CSS385-GroupProjects/AllBaseFeaturesImplementedWebGL>
