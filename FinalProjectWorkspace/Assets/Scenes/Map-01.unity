@@ -807,6 +807,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 376638476}
     - target: {fileID: 7603616391881749497, guid: 6f3570f4c011e71438cf2aa19dc22fdd, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 376638477}
+    - target: {fileID: 7603616391881749497, guid: 6f3570f4c011e71438cf2aa19dc22fdd, type: 3}
       propertyPath: blueRedGreyAppearance.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -1783,6 +1787,10 @@ PrefabInstance:
       propertyPath: theCity
       value: 
       objectReference: {fileID: 1187985658}
+    - target: {fileID: 7603616391881749497, guid: 6f3570f4c011e71438cf2aa19dc22fdd, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1187985659}
     - target: {fileID: 7603616391881749497, guid: 6f3570f4c011e71438cf2aa19dc22fdd, type: 3}
       propertyPath: blueRedGreyAppearance.Array.size
       value: 3
@@ -7649,6 +7657,7 @@ GameObject:
   m_Component:
   - component: {fileID: 376638475}
   - component: {fileID: 376638476}
+  - component: {fileID: 376638477}
   m_Layer: 0
   m_Name: blue-city1
   m_TagString: Untagged
@@ -7721,6 +7730,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &376638477
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376638474}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0fbec2135f80803448c76c4a4a2bc89d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &377908967 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2918942305662854034, guid: 15c8040f2ebca61488d53679c8ef911f, type: 3}
@@ -22042,6 +22070,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1187985657}
   - component: {fileID: 1187985658}
+  - component: {fileID: 1187985659}
   m_Layer: 0
   m_Name: blue-city2
   m_TagString: Untagged
@@ -22114,6 +22143,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1187985659
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187985656}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0fbec2135f80803448c76c4a4a2bc89d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1188018975
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23922,6 +23970,7 @@ MonoBehaviour:
   defenderDisadvantage: 2
   attackBonus: 2
   typeMatchBonus: 3
+  typeMatchPenalty: 3
 --- !u!1001 &1251385953
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35691,6 +35740,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1951204710}
   - component: {fileID: 1951204711}
+  - component: {fileID: 1951204712}
   m_Layer: 0
   m_Name: red-city2
   m_TagString: Untagged
@@ -35763,6 +35813,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1951204712
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951204709}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0fbec2135f80803448c76c4a4a2bc89d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1960698918
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36503,6 +36572,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2146655244}
     - target: {fileID: 7603616391881749497, guid: 6f3570f4c011e71438cf2aa19dc22fdd, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 2146655245}
+    - target: {fileID: 7603616391881749497, guid: 6f3570f4c011e71438cf2aa19dc22fdd, type: 3}
       propertyPath: blueRedGreyAppearance.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -37010,6 +37083,10 @@ PrefabInstance:
       propertyPath: theCity
       value: 
       objectReference: {fileID: 1951204711}
+    - target: {fileID: 7603616391881749497, guid: 6f3570f4c011e71438cf2aa19dc22fdd, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1951204712}
     - target: {fileID: 7603616391881749497, guid: 6f3570f4c011e71438cf2aa19dc22fdd, type: 3}
       propertyPath: blueRedGreyAppearance.Array.size
       value: 3
@@ -38973,6 +39050,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2146655243}
   - component: {fileID: 2146655244}
+  - component: {fileID: 2146655245}
   m_Layer: 0
   m_Name: red-city1
   m_TagString: Untagged
@@ -39045,3 +39123,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2146655245
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146655242}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0fbec2135f80803448c76c4a4a2bc89d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
