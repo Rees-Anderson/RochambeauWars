@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 /*
  * Author: Rees Anderson
- * 5.31.21
+ * 6.1.21
  * Game Design Project
  */
 
@@ -161,6 +161,7 @@ public class CentralGameLogic : MonoBehaviour
                     {
                         if (currentInfantry.tag == currentPlayer && currentInfantry.active)
                         {
+                            currentInfantry.startRunningBecauseSelected();
                             state = "selectedUnit";
                         }
                         else
