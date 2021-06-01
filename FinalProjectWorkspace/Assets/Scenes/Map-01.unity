@@ -8762,6 +8762,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 477640996}
     - target: {fileID: 7066829074068029703, guid: 771feefa86490634a9c42949de2061ea, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 477640997}
+    - target: {fileID: 7066829074068029703, guid: 771feefa86490634a9c42949de2061ea, type: 3}
       propertyPath: blueRedGreyAppearance.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -9903,6 +9907,7 @@ GameObject:
   m_Component:
   - component: {fileID: 477640995}
   - component: {fileID: 477640996}
+  - component: {fileID: 477640997}
   m_Layer: 0
   m_Name: blue-HQ-round1
   m_TagString: Untagged
@@ -9975,6 +9980,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &477640997
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477640994}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a267009b97def404db6c4c99a25d4c0f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &478344139 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4059861742366780687, guid: 7877897fe989aeb4c88a6e10106fe8b3, type: 3}
@@ -27859,6 +27883,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1649291442}
     - target: {fileID: 7066829074068029703, guid: 771feefa86490634a9c42949de2061ea, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1649291443}
+    - target: {fileID: 7066829074068029703, guid: 771feefa86490634a9c42949de2061ea, type: 3}
       propertyPath: blueRedGreyAppearance.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -30962,6 +30990,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1649291441}
   - component: {fileID: 1649291442}
+  - component: {fileID: 1649291443}
   m_Layer: 0
   m_Name: red-HQ1
   m_TagString: Untagged
@@ -31034,6 +31063,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1649291443
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649291440}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 119b1558690166d408d11d7130737bef, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1653421012
 GameObject:
   m_ObjectHideFlags: 0

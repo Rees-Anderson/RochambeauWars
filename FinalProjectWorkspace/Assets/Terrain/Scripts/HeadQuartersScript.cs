@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  * Author: Rees Anderson
- * 5.30.21
+ * 6.1.21
  * Game Design Project
  */
 
@@ -13,6 +13,8 @@ public class HeadQuartersScript : MonoBehaviour
     public CentralGameLogic centralGameLogic;
 
     //public string owner = "Grey";
+
+    public Animator animator;
 
     public Sprite[] blueRedGreyAppearance;
     public SpriteRenderer theHQ;
@@ -58,15 +60,21 @@ public class HeadQuartersScript : MonoBehaviour
 
         if (tag == "Red")
         {
-            theHQ.sprite = blueRedGreyAppearance[0];
+            //theHQ.sprite = blueRedGreyAppearance[0];
+            animator.SetBool("isBlue", false);
+            animator.SetBool("isRed", true);
         }
         else if (tag == "Blue")
         {
-            theHQ.sprite = blueRedGreyAppearance[1];
+            //theHQ.sprite = blueRedGreyAppearance[1];
+            animator.SetBool("isBlue", true);
+            animator.SetBool("isRed", false);
         }
         else if (tag == "Grey")
         {
-            theHQ.sprite = blueRedGreyAppearance[2];
+            //theHQ.sprite = blueRedGreyAppearance[2];
+            animator.SetBool("isBlue", false);
+            animator.SetBool("isRed", false);
         }
     }
 }
