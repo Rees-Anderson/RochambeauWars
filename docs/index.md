@@ -1,5 +1,11 @@
 # CSS385 Group Project Websites
 
+Final Project Beta Build 2 - With Animations: 
+
+<https://rees-anderson.github.io/CSS385-GroupProjects/BetaWithAnimationsWebGL>
+
+------------------------------------------------------------------------------------------
+
 Final Project Beta Build 1: 
 
 <https://rees-anderson.github.io/CSS385-GroupProjects/BetaVersionOneWebGL>
