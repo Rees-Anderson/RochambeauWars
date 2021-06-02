@@ -67,6 +67,8 @@ public class AntiTankScript : MonoBehaviour
     private float b;
     private float defaultAlpha;
 
+    private IEnumerator coroutine;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -1210,6 +1212,15 @@ public class AntiTankScript : MonoBehaviour
 
         //Play firing sound effect
 
+        //Allow firing animation to play out, then finish this method in WaitToEndFireDefensive method
+        coroutine = WaitToEndFireOffensive(1.0f);
+        StartCoroutine(coroutine);
+    }
+
+    private IEnumerator WaitToEndFireOffensive(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
         //Stop firing animation
         animator.SetBool("isIdleActive", true);
         animator.SetBool("isIdleGrey", false);
@@ -1229,6 +1240,8 @@ public class AntiTankScript : MonoBehaviour
         {
             Debug.Log("Error: A Unit Just Attacked When Out of Ammo");
         }
+
+        wait();
     }
 
     public void fireWeaponDefensive()
@@ -1245,6 +1258,15 @@ public class AntiTankScript : MonoBehaviour
 
         //Play firing sound effect
 
+        //Allow firing animation to play out, then finish this method in WaitToEndFireDefensive method
+        coroutine = WaitToEndFireDefensive(1.0f);
+        StartCoroutine(coroutine);
+    }
+
+    private IEnumerator WaitToEndFireDefensive(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
         //Stop firing animation
         animator.SetBool("isIdleActive", true);
         animator.SetBool("isIdleGrey", false);
@@ -1254,7 +1276,6 @@ public class AntiTankScript : MonoBehaviour
         animator.SetBool("isRunningRight", false);
         animator.SetBool("isFiring", false);
         animator.SetBool("isDying", false);
-
     }
 
     public void takeDamage(int dmg)
@@ -1286,6 +1307,11 @@ public class AntiTankScript : MonoBehaviour
 
     public void die()
     {
+        //Make unit's ui stuff go away
+        healthDisappear.dissappear();
+        fuelDisappear.dissappear();
+        ammoDisappear.dissappear();
+
         //Play death animation
         animator.SetBool("isIdleActive", false);
         animator.SetBool("isIdleGrey", false);
@@ -1298,14 +1324,25 @@ public class AntiTankScript : MonoBehaviour
 
         //Play death sound effect
 
+        //Wait until animation and sound effect are done, then finish die() in Wait method
+        coroutine = WaitForDeath(1.0f);
+        StartCoroutine(coroutine);
+    }
+
+    private IEnumerator WaitForDeath(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        //Unit becomes invisible
+        dissappear();
+
         //Unit dies
         alive = false;
         active = false;
         setCurrentTileToUnoccupied();
+
         transform.position = graveSite;
 
-        //Unit becomes invisible
-        dissappear();
     }
 
     public void storeTileAtCurrentPosition()

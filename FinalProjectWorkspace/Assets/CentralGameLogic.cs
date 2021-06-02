@@ -642,7 +642,7 @@ public class CentralGameLogic : MonoBehaviour
                         //Retore cursor position
                         cursor.transform.position = tempCursorPosition;
 
-                        attackingInfantry.wait();
+                        //attackingInfantry.wait(); Removed to prevent this from stopping the firing animation, wait is now called in fireWeaponOffensive for attackers!
                         storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
 
                         directions.Clear(); //Added 5.28.21
@@ -673,7 +673,7 @@ public class CentralGameLogic : MonoBehaviour
                         //Retore cursor position
                         cursor.transform.position = tempCursorPosition;
 
-                        attackingInfantry.wait();
+                        //attackingInfantry.wait(); Removed to prevent this from stopping the firing animation, wait is now called in fireWeaponOffensive for attackers!
                         storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
 
                         directions.Clear(); //Added 5.28.21
@@ -705,7 +705,7 @@ public class CentralGameLogic : MonoBehaviour
                         //Retore cursor position
                         cursor.transform.position = tempCursorPosition;
 
-                        attackingInfantry.wait();
+                        //attackingInfantry.wait(); Removed to prevent this from stopping the firing animation, wait is now called in fireWeaponOffensive for attackers!
                         storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
 
                         directions.Clear(); //Added 5.28.21
@@ -747,7 +747,7 @@ public class CentralGameLogic : MonoBehaviour
                         //Retore cursor position
                         cursor.transform.position = tempCursorPosition;
 
-                        attackingAntiTank.wait();
+                        //attackingAntiTank.wait(); Removed to prevent this from stopping the firing animation, wait is now called in fireWeaponOffensive for attackers!
                         storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
 
                         directions.Clear(); //Added 5.28.21
@@ -777,7 +777,7 @@ public class CentralGameLogic : MonoBehaviour
                         //Retore cursor position
                         cursor.transform.position = tempCursorPosition;
 
-                        attackingAntiTank.wait();
+                        //attackingAntiTank.wait(); Removed to prevent this from stopping the firing animation, wait is now called in fireWeaponOffensive for attackers!
                         storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
 
                         directions.Clear(); //Added 5.28.21
@@ -808,7 +808,7 @@ public class CentralGameLogic : MonoBehaviour
                         //Retore cursor position
                         cursor.transform.position = tempCursorPosition;
 
-                        attackingAntiTank.wait();
+                        //attackingAntiTank.wait(); Removed to prevent this from stopping the firing animation, wait is now called in fireWeaponOffensive for attackers!
                         storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
 
                         directions.Clear(); //Added 5.28.21
@@ -849,7 +849,7 @@ public class CentralGameLogic : MonoBehaviour
                         //Retore cursor position
                         cursor.transform.position = tempCursorPosition;
 
-                        attackingTank.wait();
+                        //attackingTank.wait(); Removed to prevent this from stopping the firing animation, wait is now called in fireWeaponOffensive for attackers!
                         storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
 
                         directions.Clear(); //Added 5.28.21
@@ -881,7 +881,7 @@ public class CentralGameLogic : MonoBehaviour
                         //Retore cursor position
                         cursor.transform.position = tempCursorPosition;
 
-                        attackingTank.wait();
+                        //attackingTank.wait(); Removed to prevent this from stopping the firing animation, wait is now called in fireWeaponOffensive for attackers!
                         storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
 
                         directions.Clear(); //Added 5.28.21
@@ -911,7 +911,7 @@ public class CentralGameLogic : MonoBehaviour
                         //Retore cursor position
                         cursor.transform.position = tempCursorPosition;
 
-                        attackingTank.wait();
+                        //attackingTank.wait(); Removed to prevent this from stopping the firing animation, wait is now called in fireWeaponOffensive for attackers!
                         storeUnitAtCursorPosition(); //Disabled due to odd attacking self bug
 
                         directions.Clear(); //Added 5.28.21
