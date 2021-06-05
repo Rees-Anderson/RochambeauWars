@@ -99,6 +99,12 @@ public class CentralGameLogic : MonoBehaviour
                 state = "victory";
             }
 
+            //Auto End Turn Functionality
+            if (allCurrentPlayerUnitsMoved())
+            {
+                endTurn();
+            }
+
             //Hide all menus but the turn counter, terrain UI, and unit UI
             endTurnUI.dissappear();
             movementRemainingUI.dissappear();
@@ -1206,6 +1212,65 @@ public class CentralGameLogic : MonoBehaviour
                 }
             }
         }
+    }
+
+    public bool allCurrentPlayerUnitsMoved()
+    {
+        if (currentPlayer == "Red")
+        {
+            for (int i = 0; i < redAntiTanks.Length; i++)
+            {
+                if (redAntiTanks[i].active)
+                {
+                    return false;
+                }
+            }
+
+            for (int i = 0; i < redInfantry.Length; i++)
+            {
+                if (redInfantry[i].active)
+                {
+                    return false;
+                }
+            }
+
+            for (int i = 0; i < redTanks.Length; i++)
+            {
+                if (redTanks[i].active)
+                {
+                    return false;
+                }
+                
+            }
+        }
+        else
+        {
+            for (int i = 0; i < blueTanks.Length; i++)
+            {
+                if (blueTanks[i].active)
+                {
+                    return false;
+                }
+            }
+
+            for (int i = 0; i < blueInfantry.Length; i++)
+            {
+                if (blueInfantry[i].active)
+                {
+                    return false;
+                }
+            }
+
+            for (int i = 0; i < blueAntiTanks.Length; i++)
+            {
+                if (blueAntiTanks[i].active)
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     public string directionforDefenderToFire(string attackerDirection)
