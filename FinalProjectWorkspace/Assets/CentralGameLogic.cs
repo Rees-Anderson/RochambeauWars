@@ -529,6 +529,9 @@ public class CentralGameLogic : MonoBehaviour
                     }
                     storeUnitAtCursorPosition();
 
+                    //Change attacking unit's run animation to face defender
+                    attackingUnitFaceDefender();
+
                     attackOrWaitUI.menuArrow.currentPosition = 0;
                     
                     state = "attack";
@@ -1176,6 +1179,9 @@ public class CentralGameLogic : MonoBehaviour
                     }
                     storeUnitAtCursorPosition();
 
+                    //Change attacking unit's run animation to face defender
+                    attackingUnitFaceDefender();
+
                     captFireWaitUI.menuArrow.currentPosition = 0;
 
                     state = "attack";
@@ -1208,7 +1214,7 @@ public class CentralGameLogic : MonoBehaviour
         {
             return "DOWN";
         }
-        else if (attackerDirection == "UP")
+        else if (attackerDirection == "DOWN")
         {
             return "UP";
         }
@@ -1222,7 +1228,7 @@ public class CentralGameLogic : MonoBehaviour
         }
         else
         {
-            Debug.Log("Error: Invalid direction recieved");
+            Debug.Log("Error: Invalid direction recieved" + attackerDirection);
             return "ERROR";
         }
     }
