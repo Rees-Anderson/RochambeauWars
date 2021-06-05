@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 /*
  * Author: Rees Anderson
- * 6.1.21
+ * 6.4.21
  * Game Design Project
  */
 
@@ -587,8 +587,10 @@ public class CentralGameLogic : MonoBehaviour
                 cursor.transform.position = target;
                 storeUnitAtCursorPosition();
 
-                //Update Battle Forcast
+                //Update Battle Forcast - Automatic
 
+                //Change attacking unit's run animation to face defender
+                attackingUnitFaceDefender();
             }
 
             //Pressing D (Right on controller) - cycles to the next unit (cycles around if at end index), move cursor, redo calculations
@@ -608,8 +610,10 @@ public class CentralGameLogic : MonoBehaviour
                 cursor.transform.position = target;
                 storeUnitAtCursorPosition();
 
-                //Update Battle Forecast
+                //Update Battle Forecast - Automatic
 
+                //Change attacking unit's run animation to face defender
+                attackingUnitFaceDefender();
             }
 
             //Pressing Return
@@ -617,8 +621,12 @@ public class CentralGameLogic : MonoBehaviour
             //Return to default state
             if (Input.GetKeyDown(KeyCode.K))
             {
+                string attackerDirection = directionforAttackerToFire();
+                string defenderDirection = directionforDefenderToFire(attackerDirection);
+
                 if (attackingInfantry != null)
                 {
+
                     int damageToDealToDefender = 0;
                     damageToDealToDefender += (int) Mathf.Ceil(((float) attackingInfantry.health) / 2); //Add Base Attack : Ceiling of (Health / 2)
                     damageToDealToDefender += attackBonus; //Add amount for attack bonus
@@ -631,8 +639,8 @@ public class CentralGameLogic : MonoBehaviour
                         damageToDealToAttacker -= defenderDisadvantage; //Sub amount for defense penalty
                         damageToDealToAttacker -= attackingInfantry.currentDefenseModifier; //Sub defense modifier
 
-                        attackingInfantry.fireWeaponOffensive();
-                        currentInfantry.fireWeaponDefensive();
+                        attackingInfantry.fireWeaponOffensive(attackerDirection);
+                        currentInfantry.fireWeaponDefensive(defenderDirection);
                         attackingInfantry.takeDamage(damageToDealToAttacker);
                         currentInfantry.takeDamage(damageToDealToDefender);
 
@@ -662,8 +670,8 @@ public class CentralGameLogic : MonoBehaviour
                         damageToDealToAttacker -= defenderDisadvantage;
                         damageToDealToAttacker -= attackingInfantry.currentDefenseModifier;
 
-                        attackingInfantry.fireWeaponOffensive();
-                        currentAntiTank.fireWeaponDefensive();
+                        attackingInfantry.fireWeaponOffensive(attackerDirection);
+                        currentAntiTank.fireWeaponDefensive(defenderDirection);
                         attackingInfantry.takeDamage(damageToDealToAttacker);
                         currentAntiTank.takeDamage(damageToDealToDefender);
 
@@ -694,8 +702,8 @@ public class CentralGameLogic : MonoBehaviour
                         damageToDealToAttacker -= attackingInfantry.currentDefenseModifier;
                         damageToDealToAttacker += typeMatchBonus; //Add good type match bonus
 
-                        attackingInfantry.fireWeaponOffensive();
-                        currentTank.fireWeaponDefensive();
+                        attackingInfantry.fireWeaponOffensive(attackerDirection);
+                        currentTank.fireWeaponDefensive(defenderDirection);
                         attackingInfantry.takeDamage(damageToDealToAttacker);
                         currentTank.takeDamage(damageToDealToDefender);
 
@@ -736,8 +744,8 @@ public class CentralGameLogic : MonoBehaviour
                         damageToDealToAttacker -= attackingAntiTank.currentDefenseModifier; //Sub defense modifier
                         damageToDealToAttacker += typeMatchBonus; //Add good type match bonus
 
-                        attackingAntiTank.fireWeaponOffensive();
-                        currentInfantry.fireWeaponDefensive();
+                        attackingAntiTank.fireWeaponOffensive(attackerDirection);
+                        currentInfantry.fireWeaponDefensive(defenderDirection);
                         attackingAntiTank.takeDamage(damageToDealToAttacker);
                         currentInfantry.takeDamage(damageToDealToDefender);
 
@@ -766,8 +774,8 @@ public class CentralGameLogic : MonoBehaviour
                         damageToDealToAttacker -= defenderDisadvantage;
                         damageToDealToAttacker -= attackingAntiTank.currentDefenseModifier;
 
-                        attackingAntiTank.fireWeaponOffensive();
-                        currentAntiTank.fireWeaponDefensive();
+                        attackingAntiTank.fireWeaponOffensive(attackerDirection);
+                        currentAntiTank.fireWeaponDefensive(defenderDirection);
                         attackingAntiTank.takeDamage(damageToDealToAttacker);
                         currentAntiTank.takeDamage(damageToDealToDefender);
 
@@ -797,8 +805,8 @@ public class CentralGameLogic : MonoBehaviour
                         damageToDealToAttacker -= defenderDisadvantage;
                         damageToDealToAttacker -= attackingAntiTank.currentDefenseModifier;
 
-                        attackingAntiTank.fireWeaponOffensive();
-                        currentTank.fireWeaponDefensive();
+                        attackingAntiTank.fireWeaponOffensive(attackerDirection);
+                        currentTank.fireWeaponDefensive(defenderDirection);
                         attackingAntiTank.takeDamage(damageToDealToAttacker);
                         currentTank.takeDamage(damageToDealToDefender);
 
@@ -838,8 +846,8 @@ public class CentralGameLogic : MonoBehaviour
                         damageToDealToAttacker -= defenderDisadvantage; //Sub amount for defense penalty
                         damageToDealToAttacker -= attackingTank.currentDefenseModifier; //Sub defense modifier
 
-                        attackingTank.fireWeaponOffensive();
-                        currentInfantry.fireWeaponDefensive();
+                        attackingTank.fireWeaponOffensive(attackerDirection);
+                        currentInfantry.fireWeaponDefensive(defenderDirection);
                         attackingTank.takeDamage(damageToDealToAttacker);
                         currentInfantry.takeDamage(damageToDealToDefender);
 
@@ -870,8 +878,8 @@ public class CentralGameLogic : MonoBehaviour
                         damageToDealToAttacker -= attackingTank.currentDefenseModifier;
                         damageToDealToAttacker += typeMatchBonus; //Add good type match bonus
 
-                        attackingTank.fireWeaponOffensive();
-                        currentAntiTank.fireWeaponDefensive();
+                        attackingTank.fireWeaponOffensive(attackerDirection);
+                        currentAntiTank.fireWeaponDefensive(defenderDirection);
                         attackingTank.takeDamage(damageToDealToAttacker);
                         currentAntiTank.takeDamage(damageToDealToDefender);
 
@@ -900,8 +908,8 @@ public class CentralGameLogic : MonoBehaviour
                         damageToDealToAttacker -= defenderDisadvantage;
                         damageToDealToAttacker -= attackingTank.currentDefenseModifier;
 
-                        attackingTank.fireWeaponOffensive();
-                        currentTank.fireWeaponDefensive();
+                        attackingTank.fireWeaponOffensive(attackerDirection);
+                        currentTank.fireWeaponDefensive(defenderDirection);
                         attackingTank.takeDamage(damageToDealToAttacker);
                         currentTank.takeDamage(damageToDealToDefender);
 
@@ -1190,6 +1198,160 @@ public class CentralGameLogic : MonoBehaviour
                     captFireWaitUI.menuArrow.currentPosition = 0;
                     state = "default";
                 }
+            }
+        }
+    }
+
+    public string directionforDefenderToFire(string attackerDirection)
+    {
+        if (attackerDirection == "UP")
+        {
+            return "DOWN";
+        }
+        else if (attackerDirection == "UP")
+        {
+            return "UP";
+        }
+        else if (attackerDirection == "LEFT")
+        {
+            return "RIGHT";
+        }
+        else if (attackerDirection == "RIGHT")
+        {
+            return "LEFT";
+        }
+        else
+        {
+            Debug.Log("Error: Invalid direction recieved");
+            return "ERROR";
+        }
+    }
+
+    public string directionforAttackerToFire()
+    {
+        //Change attacking unit's run animation to face defender - used when selecting target
+        if (attackingInfantry != null)
+        {
+            if (cursor.transform.position.y > attackingInfantry.transform.position.y)
+            {
+                return "UP";
+            }
+            else if (cursor.transform.position.x > attackingInfantry.transform.position.x)
+            {
+                return "RIGHT";
+            }
+            else if (cursor.transform.position.x < attackingInfantry.transform.position.x)
+            {
+                return "LEFT";
+            }
+            else
+            {
+                return "DOWN";
+            }
+        }
+        else if (attackingAntiTank != null)
+        {
+            if (cursor.transform.position.y > attackingAntiTank.transform.position.y)
+            {
+                return "UP";
+            }
+            else if (cursor.transform.position.x > attackingAntiTank.transform.position.x)
+            {
+                return "RIGHT";
+            }
+            else if (cursor.transform.position.x < attackingAntiTank.transform.position.x)
+            {
+                return "LEFT";
+            }
+            else
+            {
+                return "DOWN";
+            }
+        }
+        else if (attackingTank != null)
+        {
+            if (cursor.transform.position.y > attackingTank.transform.position.y)
+            {
+                return "UP";
+            }
+            else if (cursor.transform.position.x > attackingTank.transform.position.x)
+            {
+                return "RIGHT";
+            }
+            else if (cursor.transform.position.x < attackingTank.transform.position.x)
+            {
+                return "LEFT";
+            }
+            else
+            {
+                return "DOWN";
+            }
+        }
+        else
+        {
+            Debug.Log("Error: Faulty Code in directionForAttackerToFire method");
+            return "ERROR";
+        }
+    }
+
+    public void attackingUnitFaceDefender()
+    {
+        //Change attacking unit's run animation to face defender - used when selecting target
+        if (attackingInfantry != null)
+        {
+            if (cursor.transform.position.y > attackingInfantry.transform.position.y)
+            {
+                attackingInfantry.animatorToRunningUp();
+            }
+            else if (cursor.transform.position.x > attackingInfantry.transform.position.x)
+            {
+                attackingInfantry.animatorToRunningRight();
+            }
+            else if (cursor.transform.position.x < attackingInfantry.transform.position.x)
+            {
+                attackingInfantry.animatorToRunningLeft();
+            }
+            else
+            {
+                attackingInfantry.animatorToRunningDown();
+            }
+        }
+        else if (attackingAntiTank != null)
+        {
+            if (cursor.transform.position.y > attackingAntiTank.transform.position.y)
+            {
+                attackingAntiTank.animatorToRunningUp();
+            }
+            else if (cursor.transform.position.x > attackingAntiTank.transform.position.x)
+            {
+                attackingAntiTank.animatorToRunningRight();
+            }
+            else if (cursor.transform.position.x < attackingAntiTank.transform.position.x)
+            {
+                attackingAntiTank.animatorToRunningLeft();
+            }
+            else
+            {
+                attackingAntiTank.animatorToRunningDown();
+            }
+        }
+        else if (attackingTank != null)
+        {
+            if (cursor.transform.position.y > attackingTank.transform.position.y)
+            {
+                attackingTank.animatorToRunningUp();
+            }
+            else if (cursor.transform.position.x > attackingTank.transform.position.x)
+            {
+                attackingTank.animatorToRunningRight();
+            }
+            else if (cursor.transform.position.x < attackingTank.transform.position.x)
+            {
+                attackingTank.animatorToRunningLeft();
+            }
+            else
+            {
+                attackingTank.animatorToRunningDown();
             }
         }
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  * Author: Rees Anderson
- * 5.30.21
+ * 6.4.21
  * Game Design Project
  */
 
@@ -60,6 +60,12 @@ public class BattleForcastScript : MonoBehaviour
                 {
                     damageToDealToDefender -= centralGameLogic.currentInfantry.currentDefenseModifier; //Subtract defense modifier
 
+                    //Added since units can now do a minimum of 1 damage - 6.4.21
+                    if (damageToDealToDefender <= 0)
+                    {
+                        damageToDealToDefender = 1;
+                    }
+
                     int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentInfantry.health) * 100);
                     if (numberToDisplay < 0)
                     {
@@ -74,6 +80,12 @@ public class BattleForcastScript : MonoBehaviour
                     damageToDealToDefender -= centralGameLogic.currentAntiTank.currentDefenseModifier; //Subtract defense modifier
                     damageToDealToDefender += centralGameLogic.typeMatchBonus; //Add type match bonus
 
+                    //Added since units can now do a minimum of 1 damage - 6.4.21
+                    if (damageToDealToDefender <= 0)
+                    {
+                        damageToDealToDefender = 1;
+                    }
+
                     int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentAntiTank.health) * 100);
                     if (numberToDisplay < 0)
                     {
@@ -87,6 +99,12 @@ public class BattleForcastScript : MonoBehaviour
                 {
                     damageToDealToDefender -= centralGameLogic.currentTank.currentDefenseModifier; //Subtract defense modifier
                     damageToDealToDefender -= centralGameLogic.typeMatchPenalty; //Subtract poor type match penalty
+
+                    //Added since units can now do a minimum of 1 damage - 6.4.21
+                    if (damageToDealToDefender <= 0)
+                    {
+                        damageToDealToDefender = 1;
+                    }
 
                     int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentTank.health) * 100);
                     if (numberToDisplay < 0)
@@ -112,6 +130,12 @@ public class BattleForcastScript : MonoBehaviour
                     damageToDealToDefender -= centralGameLogic.currentInfantry.currentDefenseModifier; //Subtract defense modifier
                     damageToDealToDefender -= centralGameLogic.typeMatchPenalty; //Subtract poor type match penalty
 
+                    //Added since units can now do a minimum of 1 damage - 6.4.21
+                    if (damageToDealToDefender <= 0)
+                    {
+                        damageToDealToDefender = 1;
+                    }
+
                     int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentInfantry.health) * 100);
                     if (numberToDisplay < 0)
                     {
@@ -124,6 +148,12 @@ public class BattleForcastScript : MonoBehaviour
                 else if (centralGameLogic.currentAntiTank != null)
                 {
                     damageToDealToDefender -= centralGameLogic.currentAntiTank.currentDefenseModifier; //Subtract defense modifier
+
+                    //Added since units can now do a minimum of 1 damage - 6.4.21
+                    if (damageToDealToDefender <= 0)
+                    {
+                        damageToDealToDefender = 1;
+                    }
 
                     int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentAntiTank.health) * 100);
                     if (numberToDisplay < 0)
@@ -138,6 +168,12 @@ public class BattleForcastScript : MonoBehaviour
                 {
                     damageToDealToDefender -= centralGameLogic.currentTank.currentDefenseModifier; //Subtract defense modifier
                     damageToDealToDefender += centralGameLogic.typeMatchBonus; //Add type match bonus
+
+                    //Added since units can now do a minimum of 1 damage - 6.4.21
+                    if (damageToDealToDefender <= 0)
+                    {
+                        damageToDealToDefender = 1;
+                    }
 
                     int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentTank.health) * 100);
                     if (numberToDisplay < 0)
@@ -163,6 +199,12 @@ public class BattleForcastScript : MonoBehaviour
                     damageToDealToDefender -= centralGameLogic.currentInfantry.currentDefenseModifier; //Subtract defense modifier
                     damageToDealToDefender += centralGameLogic.typeMatchBonus; //Add type match bonus
 
+                    //Added since units can now do a minimum of 1 damage - 6.4.21
+                    if (damageToDealToDefender <= 0)
+                    {
+                        damageToDealToDefender = 1;
+                    }
+
                     int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentInfantry.health) * 100);
                     if (numberToDisplay < 0)
                     {
@@ -177,6 +219,12 @@ public class BattleForcastScript : MonoBehaviour
                     damageToDealToDefender -= centralGameLogic.currentAntiTank.currentDefenseModifier; //Subtract defense modifier
                     damageToDealToDefender -= centralGameLogic.typeMatchPenalty; //Subtract poor type match penalty
 
+                    //Added since units can now do a minimum of 1 damage - 6.4.21
+                    if (damageToDealToDefender <= 0)
+                    {
+                        damageToDealToDefender = 1;
+                    }
+
                     int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentAntiTank.health) * 100);
                     if (numberToDisplay < 0)
                     {
@@ -189,6 +237,12 @@ public class BattleForcastScript : MonoBehaviour
                 else if (centralGameLogic.currentTank != null)
                 {
                     damageToDealToDefender -= centralGameLogic.currentTank.currentDefenseModifier; //Subtract defense modifier
+
+                    //Added since units can now do a minimum of 1 damage - 6.4.21
+                    if (damageToDealToDefender <= 0)
+                    {
+                        damageToDealToDefender = 1;
+                    }
 
                     int numberToDisplay = (int)((damageToDealToDefender / centralGameLogic.currentTank.health) * 100);
                     if (numberToDisplay < 0)
