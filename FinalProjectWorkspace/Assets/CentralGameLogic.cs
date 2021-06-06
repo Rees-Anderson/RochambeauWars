@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 /*
  * Author: Rees Anderson
- * 6.4.21
+ * 6.5.21
  * Game Design Project
  */
 
@@ -248,7 +248,8 @@ public class CentralGameLogic : MonoBehaviour
                 } 
                 else if (endTurnUI.menuArrow.currentPosition == 2)
                 {
-                    //Go to main menu (main menu does not currently exist)
+                    //Go to main menu
+                    SceneManager.LoadScene("Main-Menu");
                 } 
                 else if (endTurnUI.menuArrow.currentPosition == 3)
                 {
@@ -987,6 +988,7 @@ public class CentralGameLogic : MonoBehaviour
                 else if (victoryUI.menuArrow.currentPosition == 1)
                 {
                     //Go to main menu
+                    SceneManager.LoadScene("Main-Menu");
                 }
             }
         }
@@ -1560,7 +1562,18 @@ public class CentralGameLogic : MonoBehaviour
         if (currentPlayer == "Blue")
         {
             currentPlayer = "Red";
-            day++;
+
+            int temp = day;
+            temp++;
+            if (temp > 999)
+            {
+                day = 0;
+            }
+            else
+            {
+                day = temp;
+            }
+
         }
         else
         {
