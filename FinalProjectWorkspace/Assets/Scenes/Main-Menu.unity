@@ -6754,6 +6754,7 @@ GameObject:
   - component: {fileID: 758974339}
   - component: {fileID: 758974338}
   - component: {fileID: 758974340}
+  - component: {fileID: 758974341}
   m_Layer: 0
   m_Name: MainMenuCursor
   m_TagString: Untagged
@@ -6845,6 +6846,25 @@ MonoBehaviour:
   - {x: -3, y: -2.25, z: 0}
   - {x: -3, y: -3.125, z: 0}
   - {x: -3, y: -4, z: 0}
+--- !u!95 &758974341
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758974337}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ea5a66e901374a84389d75b6aea03610, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &771757061
 GameObject:
   m_ObjectHideFlags: 0
@@ -10676,6 +10696,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1199597743}
   - component: {fileID: 1199597742}
+  - component: {fileID: 1199597744}
   m_Layer: 0
   m_Name: MenuPlainBackground
   m_TagString: Untagged
@@ -10748,6 +10769,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1199597744
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199597741}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ea5a66e901374a84389d75b6aea03610, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1206383779
 GameObject:
   m_ObjectHideFlags: 0
@@ -16787,6 +16827,7 @@ GameObject:
   - component: {fileID: 1950677366}
   - component: {fileID: 1950677365}
   - component: {fileID: 1950677367}
+  - component: {fileID: 1950677368}
   m_Layer: 0
   m_Name: SinglePlayerMenuCursor
   m_TagString: Untagged
@@ -16876,6 +16917,25 @@ MonoBehaviour:
   - {x: -3, y: -2.25, z: 0}
   - {x: -3, y: -3.125, z: 0}
   - {x: -3, y: -4, z: 0}
+--- !u!95 &1950677368
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950677364}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ea5a66e901374a84389d75b6aea03610, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1959269968
 GameObject:
   m_ObjectHideFlags: 0
