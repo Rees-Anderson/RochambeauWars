@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 /*
  * Author: Rees Anderson
- * 6.5.21
+ * 6.6.21
  * Game Design Project
  */
 
@@ -165,7 +165,11 @@ public class MainMenuLogic : MonoBehaviour
         }
         else if (state == "Credits")
         {
-
+            //Pressing L - return to previous screen
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                state = "Default";
+            }
         }
     }
 }

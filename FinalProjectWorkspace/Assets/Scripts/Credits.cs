@@ -8,11 +8,9 @@ using UnityEngine;
  * Game Design Project
  */
 
-public class MenuChoicesUI : MonoBehaviour
+public class Credits : MonoBehaviour
 {
     public MainMenuLogic MainMenuLogic;
-
-    public MainMenuCursor menuArrow;
 
     public GenericDisappearReappearScript[] thingsToMakeDissappear;
 
@@ -33,22 +31,19 @@ public class MenuChoicesUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (MainMenuLogic.state == "Credits" || MainMenuLogic.state == "Field Manual")
-        {
-            dissappear();
-        }
-        else
+        if (MainMenuLogic.state == "Credits")
         {
             reappear();
         }
-        
+        else
+        {
+            dissappear();
+        }
     }
 
     public void dissappear()
     {
         GetComponent<Renderer>().material.color = new Color(r, g, b, 0);
-        menuArrow.dissappear();
         for (int i = 0; i < thingsToMakeDissappear.Length; i++)
         {
             thingsToMakeDissappear[i].dissappear();
@@ -58,7 +53,6 @@ public class MenuChoicesUI : MonoBehaviour
     public void reappear()
     {
         GetComponent<Renderer>().material.color = new Color(r, g, b, defaultAlpha);
-        menuArrow.reappear();
         for (int i = 0; i < thingsToMakeDissappear.Length; i++)
         {
             thingsToMakeDissappear[i].reappear();
