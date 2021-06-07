@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 /*
  * Author: Rees Anderson
- * 6.6.21
+ * 6.7.21
  * Game Design Project
  */
 
@@ -16,6 +16,7 @@ public class MainMenuLogic : MonoBehaviour
     public MenuChoicesUI menuChoicesUI;
     public MapSelector1P singlePlayerMapSelector;
     public MapSelectorMulti multiplayerMapSelector;
+    public FieldManual fieldManual;
 
     // Start is called before the first frame update
     void Start()
@@ -161,7 +162,24 @@ public class MainMenuLogic : MonoBehaviour
         }
         else if (state == "Field Manual")
         {
+            //Pressing A - go to previous page if possible
+            if (Input.GetKeyDown(KeyCode.A) && fieldManual.currentPage > 0)
+            {
+                fieldManual.currentPage--;
+            }
 
+            //Pressing D - go to next page if possible
+            if (Input.GetKeyDown(KeyCode.D) && fieldManual.currentPage < 13)
+            {
+                fieldManual.currentPage++;
+            }
+
+            //Pressing L - return to previous screen
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                fieldManual.currentPage = 0;
+                state = "Default";
+            }
         }
         else if (state == "Credits")
         {
