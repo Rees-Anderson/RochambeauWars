@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  * Author: Rees Anderson
- * 6.4.21
+ * 6.6.21
  * Game Design Project
  */
 
@@ -14,7 +14,7 @@ public class AntiTankScript : MonoBehaviour
 
     public Animator animator;
 
-    public const int maxFuelLevel = 15;
+    public const int maxFuelLevel = 35;
     public const int maxAmmoCount = 10;
     public const int maxMovementPoints = 4;
     public const int maxHealth = 10;
