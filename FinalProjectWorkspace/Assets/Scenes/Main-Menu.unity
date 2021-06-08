@@ -15716,7 +15716,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 16
-  m_Sprite: {fileID: 21300000, guid: 8dab1e10b32f4e245a9475d1000425c0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a1fc099c58b0e6d43bb64a0e59b9fb20, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -15741,9 +15741,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapSelector: {fileID: 2128704994}
   mapPreviews:
-  - {fileID: 21300000, guid: 8dab1e10b32f4e245a9475d1000425c0, type: 3}
-  - {fileID: 21300000, guid: 47b837d86f9d17644a382fb233f7a973, type: 3}
-  - {fileID: 21300000, guid: 256ccc8b2d605c348912d710f39b6922, type: 3}
+  - {fileID: 21300000, guid: a1fc099c58b0e6d43bb64a0e59b9fb20, type: 3}
+  - {fileID: 21300000, guid: a1fc099c58b0e6d43bb64a0e59b9fb20, type: 3}
+  - {fileID: 21300000, guid: a1fc099c58b0e6d43bb64a0e59b9fb20, type: 3}
   mapSprite: {fileID: 498528796}
 --- !u!1 &503510839
 GameObject:
@@ -54136,7 +54136,7 @@ MonoBehaviour:
   mapPreviews:
   - {fileID: 21300000, guid: 8dab1e10b32f4e245a9475d1000425c0, type: 3}
   - {fileID: 21300000, guid: 47b837d86f9d17644a382fb233f7a973, type: 3}
-  - {fileID: 21300000, guid: 256ccc8b2d605c348912d710f39b6922, type: 3}
+  - {fileID: 21300000, guid: 6b4438b1dc578b84888f5cc75acd63ac, type: 3}
   mapSprite: {fileID: 1791662778}
 --- !u!1 &1799582146
 GameObject:
