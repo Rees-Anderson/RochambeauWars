@@ -569,6 +569,13 @@ public class CentralGameLogic : MonoBehaviour
                 }
             }
 
+            //Pressing L
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                attackOrWaitUI.menuArrow.currentPosition = 0;
+                state = "selectedUnit";
+            }
+
         } else if (state == "attack")
         {
             //Hide Other Menu Elements
