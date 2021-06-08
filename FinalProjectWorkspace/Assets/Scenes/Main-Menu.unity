@@ -15716,7 +15716,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 16
-  m_Sprite: {fileID: 21300000, guid: c0b61962935062444a15750efe13c641, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8dab1e10b32f4e245a9475d1000425c0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -15741,8 +15741,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapSelector: {fileID: 2128704994}
   mapPreviews:
-  - {fileID: 21300000, guid: c0b61962935062444a15750efe13c641, type: 3}
-  - {fileID: 21300000, guid: 256ccc8b2d605c348912d710f39b6922, type: 3}
+  - {fileID: 21300000, guid: 8dab1e10b32f4e245a9475d1000425c0, type: 3}
+  - {fileID: 21300000, guid: 47b837d86f9d17644a382fb233f7a973, type: 3}
   - {fileID: 21300000, guid: 256ccc8b2d605c348912d710f39b6922, type: 3}
   mapSprite: {fileID: 498528796}
 --- !u!1 &503510839
@@ -54109,7 +54109,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 20
-  m_Sprite: {fileID: 21300000, guid: c0b61962935062444a15750efe13c641, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8dab1e10b32f4e245a9475d1000425c0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -54134,8 +54134,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapSelector: {fileID: 906149309}
   mapPreviews:
-  - {fileID: 21300000, guid: c0b61962935062444a15750efe13c641, type: 3}
-  - {fileID: 21300000, guid: 256ccc8b2d605c348912d710f39b6922, type: 3}
+  - {fileID: 21300000, guid: 8dab1e10b32f4e245a9475d1000425c0, type: 3}
+  - {fileID: 21300000, guid: 47b837d86f9d17644a382fb233f7a973, type: 3}
   - {fileID: 21300000, guid: 256ccc8b2d605c348912d710f39b6922, type: 3}
   mapSprite: {fileID: 1791662778}
 --- !u!1 &1799582146
