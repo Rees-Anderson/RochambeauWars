@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: The Orange Star Army
-  productName: EarlyMainMenuDemo
+  productName: AllMultiplayerMapsDemo
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -267,7 +267,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 0fa32375eee6df347be3f7ff4dd6dae0, type: 3}
+      m_Icon: {fileID: 2800000, guid: 7e1a6d8114c8b7b4582c4cbe898482fb, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
