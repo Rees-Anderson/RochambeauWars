@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 /*
  * Author: Rees Anderson
- * 6.5.21
+ * 6.7.21
  * Game Design Project
  */
 
@@ -244,7 +244,8 @@ public class CentralGameLogic : MonoBehaviour
                 else if (endTurnUI.menuArrow.currentPosition == 1)
                 {
                     //Reload Level
-                    SceneManager.LoadScene("Map-01");
+                    //SceneManager.LoadScene("Map-01"); -- Replaced by the line below that will work on any level.
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 } 
                 else if (endTurnUI.menuArrow.currentPosition == 2)
                 {
@@ -983,7 +984,8 @@ public class CentralGameLogic : MonoBehaviour
                 if (victoryUI.menuArrow.currentPosition == 0)
                 {
                     //Reload Scene
-                    SceneManager.LoadScene("Map-01");
+                    //SceneManager.LoadScene("Map-01"); -- Replaced by the line below that will work on any level.
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }
                 else if (victoryUI.menuArrow.currentPosition == 1)
                 {

@@ -146,6 +146,7 @@ public class MainMenuLogic : MonoBehaviour
                 else if (multiplayerMapSelector.menuArrow.currentPosition == 1)
                 {
                     //Load Multiplayer Map-02
+                    SceneManager.LoadScene("Map-02");
                 }
                 else if (multiplayerMapSelector.menuArrow.currentPosition == 2)
                 {
