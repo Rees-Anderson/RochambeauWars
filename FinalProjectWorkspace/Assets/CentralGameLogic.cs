@@ -301,8 +301,6 @@ public class CentralGameLogic : MonoBehaviour
                 currentTank.selected = true;
             }
 
-            //Store unit's original position - if allowing for F button - TODO
-
             //In the top left show selected unit's movement points remaining
             movementRemainingUI.reappear();
 
@@ -437,7 +435,11 @@ public class CentralGameLogic : MonoBehaviour
                 state = "default";
             }
 
-            //Should there be a Pressing Backspace option, to keep moving? - TODO
+            //Pressing L
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                state = "selectedUnit";
+            }
 
         } else if (state == "attackOrWait")
         {
@@ -2278,6 +2280,25 @@ public class CentralGameLogic : MonoBehaviour
             currentTank.setCurrentTileToOccupied();
             currentTank.setDefenseModifierToCurrentTileValue();
             cursor.transform.position = cursorPositionBeforeMoving;
+        }
+    }
+
+    public void storeEndOfMovementInfo()
+    {
+        if (currentInfantry != null)
+        {
+            unitPositionBeforeMoving = currentInfantry.transform.position;
+            cursorPositionBeforeMoving = cursor.transform.position;
+        }
+        else if (currentAntiTank != null)
+        {
+            unitPositionBeforeMoving = currentAntiTank.transform.position;
+            cursorPositionBeforeMoving = cursor.transform.position;
+        }
+        else if (currentTank != null)
+        {
+            unitPositionBeforeMoving = currentTank.transform.position;
+            cursorPositionBeforeMoving = cursor.transform.position;
         }
     }
 }
