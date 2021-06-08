@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  * Author: Rees Anderson
- * 6.6.21
+ * 6.8.21
  * Game Design Project
  */
 
@@ -14,11 +14,11 @@ public class TankScript : MonoBehaviour
 
     public Animator animator;
 
-    public const int maxFuelLevel = 50;
-    public const int maxAmmoCount = 10;
-    public const int maxMovementPoints = 6;
-    public const int maxHealth = 10;
-    public const int attackRoll = 5; //Damage dealt before taking into account type match-up and terrain defense modifiers
+    public int maxFuelLevel = 50;
+    public int maxAmmoCount = 10;
+    public int maxMovementPoints = 6;
+    public int maxHealth = 10;
+    public int attackRoll = 5; //Damage dealt before taking into account type match-up and terrain defense modifiers
     //public const int team = 1;
 
     public Sprite[] healthSprites;
@@ -1466,6 +1466,70 @@ public class TankScript : MonoBehaviour
         else if (currentHeadQuartersTile != null)
         {
             currentHeadQuartersTile.occupied = false;
+        }
+    }
+
+    public void setCurrentTileToOccupied()
+    {
+        if (currentRiverTile != null)
+        {
+            currentRiverTile.occupied = true;
+        }
+        else if (currentGrassTile != null)
+        {
+            currentGrassTile.occupied = true;
+        }
+        else if (currentForestTile != null)
+        {
+            currentForestTile.occupied = true;
+        }
+        else if (currentSmallMountainTile != null)
+        {
+            currentSmallMountainTile.occupied = true;
+        }
+        else if (currentLargeMountainTile != null)
+        {
+            currentLargeMountainTile.occupied = true;
+        }
+        else if (currentCityTile != null)
+        {
+            currentCityTile.occupied = true;
+        }
+        else if (currentHeadQuartersTile != null)
+        {
+            currentHeadQuartersTile.occupied = true;
+        }
+    }
+
+    public void setDefenseModifierToCurrentTileValue()
+    {
+        if (currentRiverTile != null)
+        {
+            currentDefenseModifier = currentRiverTile.defenseModifier;
+        }
+        else if (currentGrassTile != null)
+        {
+            currentDefenseModifier = currentGrassTile.defenseModifier;
+        }
+        else if (currentForestTile != null)
+        {
+            currentDefenseModifier = currentForestTile.defenseModifier;
+        }
+        else if (currentSmallMountainTile != null)
+        {
+            currentDefenseModifier = currentSmallMountainTile.defenseModifier;
+        }
+        else if (currentLargeMountainTile != null)
+        {
+            currentDefenseModifier = currentLargeMountainTile.defenseModifier;
+        }
+        else if (currentCityTile != null)
+        {
+            currentDefenseModifier = currentCityTile.defenseModifier;
+        }
+        else if (currentHeadQuartersTile != null)
+        {
+            currentDefenseModifier = currentHeadQuartersTile.defenseModifier;
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 /*
  * Author: Rees Anderson
- * 6.7.21
+ * 6.8.21
  * Game Design Project
  */
 
@@ -71,6 +71,10 @@ public class CentralGameLogic : MonoBehaviour
     public int attackBonus = 2;
     public int typeMatchBonus = 3;
     public int typeMatchPenalty = 3;
+
+    //Beginning of Movement Stored Variables
+    Vector3 unitPositionBeforeMoving;
+    Vector3 cursorPositionBeforeMoving;
 
     // Start is called before the first frame update
     void Start()
@@ -168,6 +172,7 @@ public class CentralGameLogic : MonoBehaviour
                         if (currentInfantry.tag == currentPlayer && currentInfantry.active)
                         {
                             currentInfantry.startRunningBecauseSelected();
+                            storeBeginningOfSelectedUnitInfo();
                             state = "selectedUnit";
                         }
                         else
@@ -180,6 +185,7 @@ public class CentralGameLogic : MonoBehaviour
                         if (currentAntiTank.tag == currentPlayer && currentAntiTank.active)
                         {
                             currentAntiTank.startRunningBecauseSelected();
+                            storeBeginningOfSelectedUnitInfo();
                             state = "selectedUnit";
                         }
                         else
@@ -192,6 +198,7 @@ public class CentralGameLogic : MonoBehaviour
                         if (currentTank.tag == currentPlayer && currentTank.active)
                         {
                             currentTank.startRunningBecauseSelected();
+                            storeBeginningOfSelectedUnitInfo();
                             state = "selectedUnit";
                         }
                         else
@@ -299,7 +306,7 @@ public class CentralGameLogic : MonoBehaviour
             //In the top left show selected unit's movement points remaining
             movementRemainingUI.reappear();
 
-            //Pressing Return
+            //Pressing K
             if (Input.GetKeyDown(KeyCode.K))
             {
                 //Update Cursor Pos
@@ -385,15 +392,12 @@ public class CentralGameLogic : MonoBehaviour
                 }
             }
 
-            //Pressing Backspace
-            //Return unit to original position
-            //Restore unit's max movement points
-            //Set unit as not selected
-            //Hide terrain movement costs
-            //Hide top left movement points window
-            //Unhide defaultUI
-            //Return state to default
-
+            //Pressing L
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                revertToBeforeMovingUnit();
+                state = "default";
+            }
 
         } else if (state == "onlyWait")
         {
@@ -2216,5 +2220,64 @@ public class CentralGameLogic : MonoBehaviour
         }
 
         return true;
+    }
+
+    public void storeBeginningOfSelectedUnitInfo()
+    {
+        if (currentInfantry != null)
+        {
+            unitPositionBeforeMoving = currentInfantry.transform.position;
+            cursorPositionBeforeMoving = cursor.transform.position;
+        }
+        else if (currentAntiTank != null)
+        {
+            unitPositionBeforeMoving = currentAntiTank.transform.position;
+            cursorPositionBeforeMoving = cursor.transform.position;
+        }
+        else if (currentTank != null)
+        {
+            unitPositionBeforeMoving = currentTank.transform.position;
+            cursorPositionBeforeMoving = cursor.transform.position;
+        }
+    }
+
+    public void revertToBeforeMovingUnit()
+    {
+        if (currentInfantry != null)
+        {
+            currentInfantry.animatorToIdleActive();
+            currentInfantry.selected = false;
+            currentInfantry.movementPoints = currentInfantry.maxMovementPoints;
+            currentInfantry.setCurrentTileToUnoccupied();
+            currentInfantry.transform.position = unitPositionBeforeMoving;
+            currentInfantry.storeTileAtCurrentPosition();
+            currentInfantry.setCurrentTileToOccupied();
+            currentInfantry.setDefenseModifierToCurrentTileValue();
+            cursor.transform.position = cursorPositionBeforeMoving;
+        }
+        else if (currentAntiTank != null)
+        {
+            currentAntiTank.animatorToIdleActive();
+            currentAntiTank.selected = false;
+            currentAntiTank.movementPoints = currentAntiTank.maxMovementPoints;
+            currentAntiTank.setCurrentTileToUnoccupied();
+            currentAntiTank.transform.position = unitPositionBeforeMoving;
+            currentAntiTank.storeTileAtCurrentPosition();
+            currentAntiTank.setCurrentTileToOccupied();
+            currentAntiTank.setDefenseModifierToCurrentTileValue();
+            cursor.transform.position = cursorPositionBeforeMoving;
+        }
+        else if (currentTank != null)
+        {
+            currentTank.animatorToIdleActive();
+            currentTank.selected = false;
+            currentTank.movementPoints = currentTank.maxMovementPoints;
+            currentTank.setCurrentTileToUnoccupied();
+            currentTank.transform.position = unitPositionBeforeMoving;
+            currentTank.storeTileAtCurrentPosition();
+            currentTank.setCurrentTileToOccupied();
+            currentTank.setDefenseModifierToCurrentTileValue();
+            cursor.transform.position = cursorPositionBeforeMoving;
+        }
     }
 }
