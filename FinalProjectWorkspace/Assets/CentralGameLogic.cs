@@ -76,6 +76,9 @@ public class CentralGameLogic : MonoBehaviour
     Vector3 unitPositionBeforeMoving;
     Vector3 cursorPositionBeforeMoving;
 
+    //Helps attack state determine if it came from captureAttackWait or just AttackWait
+    string justCameFrom = "";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -547,7 +550,7 @@ public class CentralGameLogic : MonoBehaviour
                     attackingUnitFaceDefender();
 
                     attackOrWaitUI.menuArrow.currentPosition = 0;
-                    
+                    justCameFrom = "attackOrWait";
                     state = "attack";
                 }
                 else if (attackOrWaitUI.menuArrow.currentPosition == 1)
@@ -682,6 +685,8 @@ public class CentralGameLogic : MonoBehaviour
                         attackingAntiTank = null; //Added 5.28.21
                         attackingTank = null; //Added 5.28.21
 
+                        directionIterator = 0; //Added 6.8.21
+
                         state = "default";
                     } 
                     else if (currentAntiTank != null)
@@ -712,6 +717,8 @@ public class CentralGameLogic : MonoBehaviour
                         attackingInfantry = null; //Added 5.28.21
                         attackingAntiTank = null; //Added 5.28.21
                         attackingTank = null; //Added 5.28.21
+
+                        directionIterator = 0; //Added 6.8.21
 
                         state = "default";
                     }
@@ -744,6 +751,8 @@ public class CentralGameLogic : MonoBehaviour
                         attackingInfantry = null; //Added 5.28.21
                         attackingAntiTank = null; //Added 5.28.21
                         attackingTank = null; //Added 5.28.21
+
+                        directionIterator = 0; //Added 6.8.21
 
                         state = "default";
                     }
@@ -787,6 +796,8 @@ public class CentralGameLogic : MonoBehaviour
                         attackingAntiTank = null; //Added 5.28.21
                         attackingTank = null; //Added 5.28.21
 
+                        directionIterator = 0; //Added 6.8.21
+
                         state = "default";
                     }
                     else if (currentAntiTank != null)
@@ -816,6 +827,8 @@ public class CentralGameLogic : MonoBehaviour
                         attackingInfantry = null; //Added 5.28.21
                         attackingAntiTank = null; //Added 5.28.21
                         attackingTank = null; //Added 5.28.21
+
+                        directionIterator = 0; //Added 6.8.21
 
                         state = "default";
                     }
@@ -847,6 +860,8 @@ public class CentralGameLogic : MonoBehaviour
                         attackingInfantry = null; //Added 5.28.21
                         attackingAntiTank = null; //Added 5.28.21
                         attackingTank = null; //Added 5.28.21
+
+                        directionIterator = 0; //Added 6.8.21
 
                         state = "default";
                     }
@@ -889,6 +904,8 @@ public class CentralGameLogic : MonoBehaviour
                         attackingAntiTank = null; //Added 5.28.21
                         attackingTank = null; //Added 5.28.21
 
+                        directionIterator = 0; //Added 6.8.21
+
                         state = "default";
                     }
                     else if (currentAntiTank != null)
@@ -921,6 +938,8 @@ public class CentralGameLogic : MonoBehaviour
                         attackingAntiTank = null; //Added 5.28.21
                         attackingTank = null; //Added 5.28.21
 
+                        directionIterator = 0; //Added 6.8.21
+
                         state = "default";
                     }
                     else if (currentTank != null)
@@ -951,6 +970,8 @@ public class CentralGameLogic : MonoBehaviour
                         attackingAntiTank = null; //Added 5.28.21
                         attackingTank = null; //Added 5.28.21
 
+                        directionIterator = 0; //Added 6.8.21
+
                         state = "default";
                     }
                     else
@@ -961,6 +982,21 @@ public class CentralGameLogic : MonoBehaviour
                 else
                 {
                     Debug.Log("Critical Error - Flow should not be here");
+                }
+            }
+
+            //Pressing L
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                revertToBeforeFiring();
+
+                if (justCameFrom == "captureOrAttackOrWait")
+                {
+                    state = "captureOrAttackOrWait";
+                }
+                else
+                {
+                    state = "attackOrWait";
                 }
             }
 
@@ -1076,6 +1112,13 @@ public class CentralGameLogic : MonoBehaviour
                     captureOrWaitUI.menuArrow.currentPosition = 0;
                     state = "default";
                 }
+            }
+
+            //Pressing L
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                captureOrWaitUI.menuArrow.currentPosition = 0;
+                state = "selectedUnit";
             }
 
         }
@@ -1206,7 +1249,7 @@ public class CentralGameLogic : MonoBehaviour
                     attackingUnitFaceDefender();
 
                     captFireWaitUI.menuArrow.currentPosition = 0;
-
+                    justCameFrom = "captureOrAttackOrWait";
                     state = "attack";
                 }
                 else if (captFireWaitUI.menuArrow.currentPosition == 2)
@@ -1227,6 +1270,13 @@ public class CentralGameLogic : MonoBehaviour
                     captFireWaitUI.menuArrow.currentPosition = 0;
                     state = "default";
                 }
+            }
+
+            //Pressing L
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                captFireWaitUI.menuArrow.currentPosition = 0;
+                state = "selectedUnit";
             }
         }
     }
@@ -2290,22 +2340,49 @@ public class CentralGameLogic : MonoBehaviour
         }
     }
 
-    public void storeEndOfMovementInfo()
+    public void revertToBeforeFiring()
     {
-        if (currentInfantry != null)
+        if (attackingInfantry != null)
         {
-            unitPositionBeforeMoving = currentInfantry.transform.position;
-            cursorPositionBeforeMoving = cursor.transform.position;
+            directionIterator = 0;
+            cursor.transform.position = tempCursorPosition;
+
+            storeUnitAtCursorPosition();
+
+            directions.Clear();
+            attackingInfantry = null;
+            attackingAntiTank = null;
+            attackingTank = null;
+
+            currentInfantry.startRunningBecauseSelected();
         }
-        else if (currentAntiTank != null)
+        else if (attackingAntiTank != null)
         {
-            unitPositionBeforeMoving = currentAntiTank.transform.position;
-            cursorPositionBeforeMoving = cursor.transform.position;
+            directionIterator = 0;
+            cursor.transform.position = tempCursorPosition;
+
+            storeUnitAtCursorPosition();
+
+            directions.Clear();
+            attackingInfantry = null;
+            attackingAntiTank = null;
+            attackingTank = null;
+
+            currentAntiTank.startRunningBecauseSelected();
         }
-        else if (currentTank != null)
+        else if (attackingTank != null)
         {
-            unitPositionBeforeMoving = currentTank.transform.position;
-            cursorPositionBeforeMoving = cursor.transform.position;
+            directionIterator = 0;
+            cursor.transform.position = tempCursorPosition;
+
+            storeUnitAtCursorPosition();
+
+            directions.Clear();
+            attackingInfantry = null;
+            attackingAntiTank = null;
+            attackingTank = null;
+
+            currentTank.startRunningBecauseSelected();
         }
     }
 }
