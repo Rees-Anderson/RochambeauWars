@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 /*
  * Author: Rees Anderson
- * 6.7.21
+ * 6.9.21
  * Game Design Project
  */
 
@@ -49,26 +49,26 @@ public class MainMenuLogic : MonoBehaviour
                 if (menuChoicesUI.menuArrow.currentPosition == 0)
                 {
                     //Go to Single Player Selector
-                    menuChoicesUI.menuArrow.currentPosition = 0;
+                    //menuChoicesUI.menuArrow.currentPosition = 0;
                     state = "Single Player Selector";
 
                 }
                 else if (menuChoicesUI.menuArrow.currentPosition == 1)
                 {
                     //Go to Mulitplayer Selector
-                    menuChoicesUI.menuArrow.currentPosition = 0;
+                    //menuChoicesUI.menuArrow.currentPosition = 0;
                     state = "Multiplayer Selector";
                 }
                 else if (menuChoicesUI.menuArrow.currentPosition == 2)
                 {
                     //Go to Field Manual
-                    menuChoicesUI.menuArrow.currentPosition = 0;
+                    //menuChoicesUI.menuArrow.currentPosition = 0;
                     state = "Field Manual";
                 }
                 else if (menuChoicesUI.menuArrow.currentPosition == 3)
                 {
                     //Go to Credits
-                    menuChoicesUI.menuArrow.currentPosition = 0;
+                    //menuChoicesUI.menuArrow.currentPosition = 0;
                     state = "Credits";
                 }
                 else if (menuChoicesUI.menuArrow.currentPosition == 4)
