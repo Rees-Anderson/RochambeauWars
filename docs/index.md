@@ -1,4 +1,4 @@
-# CSS385 Group Project Websites
+# Rochambeau Wars - Iteration History
 
 Rochambeau Wars! Version - 1.2: 
 
@@ -63,11 +63,5 @@ Final Project Infantry Combat Tech Demo:
 Final Project Movement & UI Tech Demo: 
 
 <https://rees-anderson.github.io/CSS385-GroupProjects/FinalProjectMovementAndUIDemoWebGL>
-
-------------------------------------------------------------------------------------------
-
-Hero With Camera WebGL Build: 
-
-<https://rees-anderson.github.io/CSS385-GroupProjects/HeroWithCameraWebGL/>
 
 ------------------------------------------------------------------------------------------
