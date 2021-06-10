@@ -2,7 +2,7 @@
 
 *History is listed in reverse chronological order*
 
-6/9/21 • "Rochambeau Wars Version" - 1.2: 
+6/9/21 • "Rochambeau Wars!" Version - 1.2: 
 
 <https://rees-anderson.github.io/RochambeauWars/RochambeauWars_V3>
 
