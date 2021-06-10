@@ -1,67 +1,69 @@
-# Rochambeau Wars - Iteration History
+# Rochambeau Wars - History
 
-Rochambeau Wars! Version - 1.2: 
+*History is listed in reverse chronological order*
 
-<https://rees-anderson.github.io/CSS385-GroupProjects/RochambeauWars_V3>
+6/9/21 • "Rochambeau Wars Version" - 1.2: 
 
-------------------------------------------------------------------------------------------
-
-Rochambeau Wars! Version - 1.1: 
-
-<https://rees-anderson.github.io/CSS385-GroupProjects/RochambeauWars_V2>
+<https://rees-anderson.github.io/RochambeauWars/RochambeauWars_V3>
 
 ------------------------------------------------------------------------------------------
 
-Rochambeau Wars! Version - 1.0: 
+6/8/21 • "Rochambeau Wars!" Version - 1.1: 
 
-<https://rees-anderson.github.io/CSS385-GroupProjects/RochambeauWars_V1>
-
-------------------------------------------------------------------------------------------
-
-Final Project All Multiplayer Maps Added: 
-
-<https://rees-anderson.github.io/CSS385-GroupProjects/AllMultiplayerMapsDemo>
+<https://rees-anderson.github.io/RochambeauWars/RochambeauWars_V2>
 
 ------------------------------------------------------------------------------------------
 
-Final Project Early Main Menu Demo: 
+6/8/21 • "Rochambeau Wars!" Version - 1.0: 
 
-<https://rees-anderson.github.io/CSS385-GroupProjects/EarlyMainMenuDemoWebGL>
-
-------------------------------------------------------------------------------------------
-
-Final Project Beta Build 2 - With Animations: 
-
-<https://rees-anderson.github.io/CSS385-GroupProjects/BetaWithAnimationsWebGL>
+<https://rees-anderson.github.io/RochambeauWars/RochambeauWars_V1>
 
 ------------------------------------------------------------------------------------------
 
-Final Project Beta Build 1: 
+6/7/21 • All Multiplayer Maps Tech Demo: 
 
-<https://rees-anderson.github.io/CSS385-GroupProjects/BetaVersionOneWebGL>
-
-------------------------------------------------------------------------------------------
-
-Final Project All Base Game Mechanics Implemented Build: 
-
-<https://rees-anderson.github.io/CSS385-GroupProjects/AllBaseFeaturesImplementedWebGL>
+<https://rees-anderson.github.io/RochambeauWars/AllMultiplayerMapsDemo>
 
 ------------------------------------------------------------------------------------------
 
-Final Project Alpha Test: 
+6/6/21 • Early Main Menu Tech Demo: 
 
-<https://rees-anderson.github.io/CSS385-GroupProjects/AlphaWebGL>
-
-------------------------------------------------------------------------------------------
-
-Final Project Infantry Combat Tech Demo: 
-
-<https://rees-anderson.github.io/CSS385-GroupProjects/InfantryCombatDemoWebGL>
+<https://rees-anderson.github.io/RochambeauWars/EarlyMainMenuDemoWebGL>
 
 ------------------------------------------------------------------------------------------
 
-Final Project Movement & UI Tech Demo: 
+6/1/21 • Beta - With Animations: 
 
-<https://rees-anderson.github.io/CSS385-GroupProjects/FinalProjectMovementAndUIDemoWebGL>
+<https://rees-anderson.github.io/RochambeauWars/BetaWithAnimationsWebGL>
+
+------------------------------------------------------------------------------------------
+
+5/31/21 • Beta - Without Animations: 
+
+<https://rees-anderson.github.io/RochambeauWars/BetaVersionOneWebGL>
+
+------------------------------------------------------------------------------------------
+
+5/30/21 • All Base Game Mechanics Implemented: 
+
+<https://rees-anderson.github.io/RochambeauWars/AllBaseFeaturesImplementedWebGL>
+
+------------------------------------------------------------------------------------------
+
+5/23/21 • Alpha: 
+
+<https://rees-anderson.github.io/RochambeauWars/AlphaWebGL>
+
+------------------------------------------------------------------------------------------
+
+5/22/21 • Infantry Combat Tech Demo: 
+
+<https://rees-anderson.github.io/RochambeauWars/InfantryCombatDemoWebGL>
+
+------------------------------------------------------------------------------------------
+
+5/16/21 • Movement & UI Tech Demo: 
+
+<https://rees-anderson.github.io/RochambeauWars/FinalProjectMovementAndUIDemoWebGL>
 
 ------------------------------------------------------------------------------------------
